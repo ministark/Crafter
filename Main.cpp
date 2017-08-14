@@ -12,7 +12,9 @@ int main()
 {
   // Setting up the window
   GLFWwindow *window;
-  glfwSetErrorCallback(cft::error_callback);
+  glfwSetErrorCallback(cft::Crafter::ErrorHandler);
+
+     
   if (!glfwInit())  return -1;
 
   // Setting up OpenGL
@@ -44,12 +46,11 @@ int main()
   cout<<"Version: "<<glGetString (GL_VERSION)<<endl;
   cout<<"GLSL Version: "<<glGetString (GL_SHADING_LANGUAGE_VERSION)<<endl;
 
-  glfwSetKeyCallback(window, cft::key_callback);
-  glfwSetFramebufferSizeCallback(window, cft::framebuffer_size_callback);
-  glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+  
 
   cft::Crafter *craft = new cft::Crafter();
   craft->Init(window);
+
   
   while(glfwWindowShouldClose(window) == 0)
   {

@@ -8,14 +8,22 @@ namespace cft
 
 	}
 
-	void Crafter::Init(GLFWwindow *window)
+	void Crafter::Init(GLFWwindow *win)
 	{	
-		//Set framebuffer clear color
+		// Saving reference to window
+		window = win;
+
+		// Set framebuffer clear color
     	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
    		glClearDepth(1.0);
     	glDepthFunc(GL_LESS);
     	glEnable(GL_DEPTH_TEST); 
     	glShadeModel(GL_SMOOTH);
+
+    	// Setting the callbacks
+  		glfwSetFramebufferSizeCallback(window, cft::Crafter::ResizeHandler);
+    	glfwSetKeyCallback(window, cft::Crafter::InputHandler);
+  		glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 		// Setting up the shaders
 		std::vector<GLuint> shaderList;
@@ -39,5 +47,21 @@ namespace cft
   		glUseProgram(shaderProgram);
   		glBindVertexArray (vao);
   		glDrawArrays(GL_TRIANGLES, 0, 3);
+	}
+
+	void Crafter::InputHandler(GLFWwindow* window, int key, int scancode, int action, int mods) 
+	{
+		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GL_TRUE);
+	}
+	 
+	void Crafter::ResizeHandler(GLFWwindow* window, int width, int height)
+	{
+		glViewport(0, 0, width, height);
+	}
+
+	void Crafter::ErrorHandler(int error, const char* description)
+	{
+		 std::cerr<<description<<std::endl;
 	}
 }

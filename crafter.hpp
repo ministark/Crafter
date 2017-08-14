@@ -18,8 +18,15 @@ namespace cft
 	
 	public:
 		Crafter();
+
+		// Rendering
 		void Init(GLFWwindow *window); // Initializes the Engine for rendering
 		void Render();
+		
+		// Handlers are static as non static member functions couldn't be passed as arguments
+		static void InputHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
+		static void ResizeHandler(GLFWwindow* window, int width, int height);
+		static void ErrorHandler(int error, const char* description);
 	};
 
 }
