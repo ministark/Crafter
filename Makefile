@@ -12,7 +12,7 @@ INCLUDES	=	gl_framework.hpp shader_util.hpp crafter.hpp
 all: $(BIN1)
 
 $(BIN1): $(SRCS1) $(INCLUDES)
-	g++ $(CPPFLAGS) $(SRCS1) -o $(BIN1) $(LDFLAGS) $(LIBS)
+	g++ -std=c++11 $(CPPFLAGS) $(SRCS1) -o $(BIN1) $(LDFLAGS) $(LIBS)
 
 clean:
 	rm -f *~ *.o $(BIN1) 
