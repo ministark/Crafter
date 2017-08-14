@@ -9,8 +9,8 @@ namespace cft
 	const int screen_height = 480;
 
 	// Shaders 
-	const string vertex_shader = "vertex_shader.glsl";
-	const string fragment_shader = "fragment_shader.glsl"
+	const std::string vertex_shader = "vertex_shader.glsl";
+	const std::string fragment_shader = "fragment_shader.glsl";
 
 }
 #endif

@@ -3,6 +3,7 @@
 #include <iostream>
 #include "config.hpp"
 #include "crafter.hpp"
+#include "gl_framework.hpp"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ int main()
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
   // Creating the window with the opengl and checks for an error
-  window = glfwCreateWindow(cft::screen_width, cft::screen_height, cft, NULL, NULL);
+  window = glfwCreateWindow(cft::screen_width, cft::screen_height, "Crafter", NULL, NULL);
   if (!window)
   {
     glfwTerminate();
@@ -43,19 +44,19 @@ int main()
   cout<<"Version: "<<glGetString (GL_VERSION)<<endl;
   cout<<"GLSL Version: "<<glGetString (GL_SHADING_LANGUAGE_VERSION)<<endl;
 
-  glfwSetKeyCallBack(window, cft::key_callback);
-  glfwSetFramebufferSizeCallBack(window, cft::framebuffer_size_callback);
+  glfwSetKeyCallback(window, cft::key_callback);
+  glfwSetFramebufferSizeCallback(window, cft::framebuffer_size_callback);
   glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
-  cft::Crafter craft = new Crafter();
-  craft.Init();
+  cft::Crafter *craft = new cft::Crafter();
+  craft->Init(window);
   
   while(glfwWindowShouldClose(window) == 0)
   {
-    craft.Render();
+    craft->Render();
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
 
-  gflwTerminate();
+  glfwTerminate();
 }

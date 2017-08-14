@@ -8,7 +8,6 @@
 
 namespace cft
 {
-
   //!GLFW Error Callback
   void error_callback(int error, const char* description);
   //!GLFW framebuffer resize callback

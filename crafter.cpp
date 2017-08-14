@@ -2,8 +2,13 @@
 #include "shader_util.hpp"
 #include "config.hpp"
 namespace cft
-{
-	crafter::Init(GLFWwindow *window)
+{	
+	Crafter::Crafter()
+	{
+
+	}
+
+	void Crafter::Init(GLFWwindow *window)
 	{	
 		//Set framebuffer clear color
     	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -14,8 +19,8 @@ namespace cft
 
 		// Setting up the shaders
 		std::vector<GLuint> shaderList;
- 		shaderList.push_back(cft::LoadShaderGL(GL_VERTEX_SHADER, ctf::vertex_shader));
-  		shaderList.push_back(cft::LoadShaderGL(GL_FRAGMENT_SHADER, ctf::fragment_shader));
+ 		shaderList.push_back(cft::LoadShaderGL(GL_VERTEX_SHADER, cft::vertex_shader));
+  		shaderList.push_back(cft::LoadShaderGL(GL_FRAGMENT_SHADER, cft::fragment_shader));
   		shaderProgram = cft::CreateProgramGL(shaderList);
 		
 		// Setting up the vertex buffers
@@ -28,7 +33,7 @@ namespace cft
   		glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	}
 
-	crafter::Render()
+	void Crafter::Render()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   		glUseProgram(shaderProgram);
