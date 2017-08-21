@@ -54,6 +54,7 @@ int main()
   
   while(glfwWindowShouldClose(window) == 0)
   {
+    craft->Update();
     craft->Render();
     glfwSwapBuffers(window);
     glfwPollEvents();

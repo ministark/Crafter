@@ -16,7 +16,7 @@ namespace cft
 		GLFWwindow *window;	// Holds the reference to the window
 		GLuint shaderProgram;	// Reference to the shader 
 		GLuint vbo, vao;	// Buffer objects
-
+		int state;
 		float points [9] =  { 0.0f,  0.5f,  0.0f, 0.5f, -0.5f,  0.0f, -0.5f, -0.5f,  0.0f };
 	
 	public:
@@ -25,12 +25,13 @@ namespace cft
 		// Rendering
 		void Init(GLFWwindow *window); // Initializes the Engine for rendering
 		void Render();
+		void Update();
 		
 		// Handlers are static as non static member functions couldn't be passed as arguments
 		static void InputHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 		static void ResizeHandler(GLFWwindow* window, int width, int height);
 		static void ErrorHandler(int error, const char* description);
-		static int state;
+		static bool key_up,key_down,key_left,key_right,key_M,key_I,key_L,key_K;
 
 	};
 }

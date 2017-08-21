@@ -10,7 +10,7 @@ namespace cft
 	{	
 		// Saving reference to window
 		window = win;
-
+		state = MODELLING;
 		// Set framebuffer clear color
     	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
    		glClearDepth(1.0);
@@ -38,7 +38,35 @@ namespace cft
   		glEnableVertexAttribArray (0);
   		glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	}
-
+	void Crafter::Update()
+	{
+		if (key_M)
+		{
+			key_M = false;
+			if (state != MODELLING)
+			{
+				state = MODELLING;
+				std::cout << "Modelling Mode" << std::endl;
+			}
+		}
+		else if (key_I)
+		{
+			key_I = false;
+			if (state != INSPECTION)
+			{
+				state = INSPECTION;
+				std::cout << "Inspection Mode" << std::endl;
+			}
+		}
+		else if (key_L)
+		{
+			key_L = false;
+			string filename;
+			std::cout << "File: " << std::endl;
+			std::cin >> filename;
+			
+		}
+	}
 	void Crafter::Render()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -52,21 +80,21 @@ namespace cft
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, GL_TRUE);
 		else if (key == GLFW_KEY_M && action == GLFW_PRESS)
-		{
-			state = MODELLING;
-			std::cout << "Modelling Mode" << std::endl;
-		}
+			key_M = true;
 		else if (key == GLFW_KEY_I && action == GLFW_PRESS)
-		{
-			state = INSPECTION;
-			std::cout << "Inspection Mode" << std::endl;
-		}
+			key_I = true;
 		else if (key == GLFW_KEY_L && action == GLFW_PRESS)
-		{
-			std::string filename;
-			std::cout << "Enter File Name: " << std::endl;
-			std::cin >> filename;
-		}
+			key_L = true;
+		else if (key == GLFW_KEY_K && action == GLFW_PRESS)
+			key_K = true;
+		else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
+			key_up = true;
+		else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
+			key_down = true;
+		else if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
+			key_left = true;
+		else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
+			key_right = true;
 	}
 	 
 	void Crafter::ResizeHandler(GLFWwindow* window, int width, int height)
@@ -79,5 +107,13 @@ namespace cft
 		 std::cerr<<description<<std::endl;
 	}
 
-	int Crafter::state = MODELLING;
+	bool Crafter::key_up = false;
+	bool Crafter::key_down = false;
+	bool Crafter::key_left = false;
+	bool Crafter::key_right = false;
+	bool Crafter::key_M = false;
+	bool Crafter::key_I = false;
+	bool Crafter::key_L = false;
+	bool Crafter::key_K = false;
+
 }
