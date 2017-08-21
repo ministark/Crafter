@@ -17,8 +17,7 @@ namespace cft
 		GLFWwindow *window;	// Holds the reference to the window
 		GLuint shaderProgram;	// Reference to the shader 
 		int state;
-		//cft::Model *model;
-
+		Model *model;
 	public:
 		Crafter();
 
@@ -31,7 +30,7 @@ namespace cft
 		static void InputHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 		static void ResizeHandler(GLFWwindow* window, int width, int height);
 		static void ErrorHandler(int error, const char* description);
-		static bool key_up,key_down,key_left,key_right,key_M,key_I,key_L,key_K;
+		static bool key_up,key_down,key_left,key_right,key_M,key_I,key_L,key_K,key_R;
 
 	};
 }

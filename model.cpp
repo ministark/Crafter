@@ -14,7 +14,7 @@ namespace cft
   		glBindVertexArray (vao);
 		glGenBuffers (1, &vbo);
   		glBindBuffer (GL_ARRAY_BUFFER, vbo);
-  		glBufferData (GL_ARRAY_BUFFER, sizeof(colors)+sizeof(vertices), NULL, GL_DYNAMIC_DRAW);
+  		glBufferData (GL_ARRAY_BUFFER, sizeof(colors)+sizeof(vertices), NULL, GL_STATIC_DRAW);
 
 	}
 	void Model::LoadModel(std::string file)
@@ -31,11 +31,18 @@ namespace cft
 		}
 		afile.close();
 
+		std::cout << total_vertices << std::endl;
+		std::cout << sizeof(vertices) << std::endl;
+		std::cout << sizeof(colors) << std::endl;
+		for (int i=0; i<vertices.size(); i++)
+			std::cout << glm::to_string(vertices[i]) << std::endl;
+		for (int i=0; i<colors.size(); i++)
+			std::cout << glm::to_string(colors[i]) << std::endl;
 		//Load the model into the vbo
   		glBindBuffer (GL_ARRAY_BUFFER, vbo);
-  		glBufferData (GL_ARRAY_BUFFER, sizeof(colors)+sizeof(vertices), NULL, GL_DYNAMIC_DRAW);
-	  	glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(vertices), &vertices );
-  		glBufferSubData( GL_ARRAY_BUFFER, sizeof(vertices), sizeof(colors), &colors);
+  		glBufferData (GL_ARRAY_BUFFER, (colors.size()+vertices.size())*sizeof(glm::vec4), NULL, GL_STATIC_DRAW);
+	  	glBufferSubData( GL_ARRAY_BUFFER, 0, vertices.size()*sizeof(glm::vec4), &vertices );
+  		glBufferSubData( GL_ARRAY_BUFFER, vertices.size()*sizeof(glm::vec4), colors.size()*sizeof(glm::vec4), &colors);
 	  	
 	  	// Set up vertex arrays
 		GLuint vPosition = glGetAttribLocation( shader, "vPosition" );
