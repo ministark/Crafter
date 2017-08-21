@@ -7,6 +7,7 @@
 #include <string>
 #include "shader_util.hpp"
 #include "config.hpp"
+#include "model.hpp"
 
 namespace cft
 {
@@ -15,10 +16,9 @@ namespace cft
 	private:
 		GLFWwindow *window;	// Holds the reference to the window
 		GLuint shaderProgram;	// Reference to the shader 
-		GLuint vbo, vao;	// Buffer objects
 		int state;
-		float points [9] =  { 0.0f,  0.5f,  0.0f, 0.5f, -0.5f,  0.0f, -0.5f, -0.5f,  0.0f };
-	
+		cft::Model *model;
+
 	public:
 		Crafter();
 

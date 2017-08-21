@@ -24,10 +24,11 @@ namespace cft
 		// Holding references to various matrices in the shader
 		glm::mat4 ortho_matrix;
 		glm::mat4 modelview_matrix;
-		GLuint uModelViewMatrix;	
+		GLuint uModelViewMatrix;
 
+		GLuint shader;	// Handle to the shaders
 	public:
-		Model();
+		Model(GLuint shaderProgram);
 		void LoadModel(std::string file);
 		void SaveModel(std::string file);	// Setting the default argument to be the name of the file unless specified
 		void Render();

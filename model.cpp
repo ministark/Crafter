@@ -3,9 +3,17 @@
 
 namespace ctf
 {
-	Model::Model(shafer)
+	Model::Model(GLuint shaderProgram)
 	{
 		total_vertices = 0;
+		shader = shaderProgram;
+		uModelViewMatrix = glGetUniformLocation( shader, "uModelViewMatrix");
+		glGenVertexArrays (1, &vao);
+  		glBindVertexArray (vao);
+		glGenBuffers (1, &vbo);
+  		glBindBuffer (GL_ARRAY_BUFFER, vbo);
+  		glBufferData (GL_ARRAY_BUFFER, sizeof(colors)+sizeof(vertices), NULL, GL_DYANAMIC_DRAW);
+  		
 	}
 	void Model::LoadModel(std::string file)
 	{
@@ -22,11 +30,8 @@ namespace ctf
 		afile.close();
 
 		//Load the model into the vbo
-		glGenVertexArrays (1, &vao);
-  		glBindVertexArray (vao);
-		glGenBuffers (1, &vbo);
   		glBindBuffer (GL_ARRAY_BUFFER, vbo);
-  		glBufferData (GL_ARRAY_BUFFER, sizeof(colors)+sizeof(vertices), NULL, GL_STATIC_DRAW);
+  		glBufferData (GL_ARRAY_BUFFER, sizeof(colors)+sizeof(vertices), NULL, GL_DYANAMIC_DRAW);
 	  	glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices );
   		glBufferSubData( GL_ARRAY_BUFFER, sizeof(vertices), sizeof(colors), colors);
 	  	
@@ -34,10 +39,10 @@ namespace ctf
 		GLuint vPosition = glGetAttribLocation( shaderProgram, "vPosition" );
 		glEnableVertexAttribArray( vPosition );
 		glVertexAttribPointer( vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0) );
-		GLuint vColor = glGetAttribLocation( shaderProgram, "vColor" ); 
+		GLuint vColor = glGetAttribLocation( shader, "vColor" ); 
 		glEnableVertexAttribArray( vColor );
 		glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(vertices)) );
-		uModelViewMatrix = glGetUniformLocation( shaderProgram, "uModelViewMatrix");
+		
 	}
 	void Model::SaveModel(std::string file = model_name)
 	{
