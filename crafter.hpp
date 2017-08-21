@@ -4,6 +4,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <string>
+#include "shader_util.hpp"
+#include "config.hpp"
 
 namespace cft
 {
@@ -27,7 +30,8 @@ namespace cft
 		static void InputHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 		static void ResizeHandler(GLFWwindow* window, int width, int height);
 		static void ErrorHandler(int error, const char* description);
-	};
+		static int state;
 
+	};
 }
 #endif

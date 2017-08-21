@@ -1,6 +1,9 @@
 #ifndef _CONFIG_HPP_
 #define _CONFIG_HPP_
 
+#define MODELLING 0
+#define INSPECTION 1
+
 #include <string>
 namespace cft
 {

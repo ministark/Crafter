@@ -1,6 +1,4 @@
 #include "crafter.hpp"
-#include "shader_util.hpp"
-#include "config.hpp"
 namespace cft
 {	
 	Crafter::Crafter()
@@ -52,7 +50,23 @@ namespace cft
 	void Crafter::InputHandler(GLFWwindow* window, int key, int scancode, int action, int mods) 
 	{
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
+			glfwSetWindowShouldClose(window, GL_TRUE);
+		else if (key == GLFW_KEY_M && action == GLFW_PRESS)
+		{
+			state = MODELLING;
+			std::cout << "Modelling Mode" << std::endl;
+		}
+		else if (key == GLFW_KEY_I && action == GLFW_PRESS)
+		{
+			state = INSPECTION;
+			std::cout << "Inspection Mode" << std::endl;
+		}
+		else if (key == GLFW_KEY_L && action == GLFW_PRESS)
+		{
+			std::string filename;
+			std::cout << "Enter File Name: " << std::endl;
+			std::cin >> filename;
+		}
 	}
 	 
 	void Crafter::ResizeHandler(GLFWwindow* window, int width, int height)
@@ -64,4 +78,6 @@ namespace cft
 	{
 		 std::cerr<<description<<std::endl;
 	}
+
+	int Crafter::state = MODELLING;
 }
