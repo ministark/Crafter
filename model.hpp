@@ -28,6 +28,8 @@ namespace cft
 		glm::mat4 ortho_matrix;
 		glm::mat4 modelview_matrix;
 		GLuint uModelViewMatrix;
+		glm::mat4 rotation_matrix;
+
 
 		GLuint shader;	// Handle to the shaders
 	public:
