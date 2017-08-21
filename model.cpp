@@ -10,14 +10,25 @@ namespace ctf
 	void Model::LoadModel(std::string file)
 	{
 		//Code to load model from a file
-
+		fstream afile;
+		afile.open(file,ios::out | ios::in);
+		float x, y, z, r, g, b;
+		while(afile >> x >> y >> z >> r >> g >> b)
+		{	
+			vertices.push_back(glm::vec4(x, y, z, 1.0f));
+			colors.push_back(glm::vec4(r,g,b,1.0f));
+			++total_vertices;
+		}
+		afile.close();
 
 		//Load the model into the vbo
 		glGenVertexArrays (1, &vao);
   		glBindVertexArray (vao);
 		glGenBuffers (1, &vbo);
   		glBindBuffer (GL_ARRAY_BUFFER, vbo);
-  		glBufferData (GL_ARRAY_BUFFER, vertices.size() * sizeof (float), &vertices, GL_STATIC_DRAW);
+  		glBufferData (GL_ARRAY_BUFFER, sizeof(colors)+sizeof(vertices), NULL, GL_STATIC_DRAW);
+	  	glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices );
+  		glBufferSubData( GL_ARRAY_BUFFER, sizeof(vertices), sizeof(colors), colors);
 	  	
 	  	// Set up vertex arrays
 		GLuint vPosition = glGetAttribLocation( shaderProgram, "vPosition" );

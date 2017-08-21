@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <ifstream>
+#include <fstream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "glm/vec3.hpp"
@@ -25,10 +25,6 @@ namespace cft
 		glm::mat4 ortho_matrix;
 		glm::mat4 modelview_matrix;
 		GLuint uModelViewMatrix;	
-
-		// For testing purpose	
-		float points [9] =  { 0.0f,  0.5f,  0.0f, 0.5f, -0.5f,  0.0f, -0.5f, -0.5f,  0.0f };
-
 
 	public:
 		Model();
