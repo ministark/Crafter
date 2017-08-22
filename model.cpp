@@ -9,6 +9,7 @@ namespace cft
 	{
 		total_vertices = 0;
 		shader = shaderProgram;
+		rotation_matrix = glm::mat4(1.0f);
 		uModelViewMatrix = glGetUniformLocation( shader, "uModelViewMatrix");
 		glGenVertexArrays (1, &vao);
   		glBindVertexArray (vao);
@@ -55,10 +56,29 @@ namespace cft
 		}
 		afile.close();
 	}
+	void Model::AddTriangle(glm::vec4 *v, glm::vec4 *c)
+	{
+		vertices.push_back(v[0]); vertices.push_back(v[1]); vertices.push_back(v[2]);
+		colors.push_back(c[0]); colors.push_back(c[1]); colors.push_back(c[2]);
+		total_vertices += 3;
+		// Copying the Data
+		glBufferSubData( GL_ARRAY_BUFFER, 0, vertices.size()*sizeof(glm::vec4), &vertices[0] );
+  		glBufferSubData( GL_ARRAY_BUFFER, vertices.size()*sizeof(glm::vec4), colors.size()*sizeof(glm::vec4), &colors[0] );
+
+	}
+	void Model::RemoveTriangle(glm::vec4 *v, glm::vec4 *c)
+	{
+		v[2] = vertices.back(); vertices.pop_back();
+		v[1] = vertices.back(); vertices.pop_back();
+		v[0] = vertices.back(); vertices.pop_back();
+		c[2] = colors.back(); colors.pop_back();
+		c[1] = colors.back(); colors.pop_back();
+		c[0] = colors.back(); colors.pop_back();
+		total_vertices -= 3;
+	}
 	void Model::Render()
 	{
-		GLfloat xrot=1.0,yrot=0.0,zrot=0.0;
-		rotation_matrix = glm::rotate(glm::mat4(1.0f), xrot, glm::vec3(1.0f,0.0f,0.0f));
+		rotation_matrix = glm::rotate(rotation_matrix, xrot, glm::vec3(1.0f,0.0f,0.0f));
 	    rotation_matrix = glm::rotate(rotation_matrix, yrot, glm::vec3(0.0f,1.0f,0.0f));
 	    rotation_matrix = glm::rotate(rotation_matrix, zrot, glm::vec3(0.0f,0.0f,1.0f));
 		ortho_matrix = glm::ortho(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);

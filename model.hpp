@@ -30,13 +30,15 @@ namespace cft
 		GLuint uModelViewMatrix;
 		glm::mat4 rotation_matrix;
 
-
 		GLuint shader;	// Handle to the shaders
 	public:
+		GLfloat xrot=0.0,yrot=0.0,zrot=0.0;
 		Model();
 		Model(GLuint shaderProgram);
 		void LoadModel(std::string file);
-		void SaveModel(std::string file);	// Setting the default argument to be the name of the file unless specified
+		void SaveModel(std::string file);
+		void AddTriangle(glm::vec4 *v, glm::vec4 *c);	// Creates a triangle in the order 0 1 2 anti clockwise
+		void RemoveTriangle(glm::vec4 *v, glm::vec4 *c);	// Removes the most  recently added traingle and stores it in the array
 		void Render();
 	};
 }
