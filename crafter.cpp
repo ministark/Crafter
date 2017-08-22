@@ -30,7 +30,7 @@ namespace cft
   		shaderProgram = cft::CreateProgramGL(shaderList);
 		
 		// Setting the model
-		model = new cft::Model(shaderProgram);
+		//model = new cft::Model(shaderProgram);
 	}
 	void Crafter::Update()
 	{
@@ -55,7 +55,7 @@ namespace cft
 		else if (key_L)
 		{
 			key_L = false;
-			string filename;
+			std::string filename;
 			std::cout << "File: " << std::endl;
 			std::cin >> filename;
 			
@@ -65,7 +65,7 @@ namespace cft
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   		glUseProgram(shaderProgram);
-  		model->Render();
+  		//model->Render();
 	}
 
 	void Crafter::InputHandler(GLFWwindow* window, int key, int scancode, int action, int mods) 

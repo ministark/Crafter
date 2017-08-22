@@ -17,7 +17,7 @@ namespace cft
 		GLFWwindow *window;	// Holds the reference to the window
 		GLuint shaderProgram;	// Reference to the shader 
 		int state;
-		cft::Model *model;
+		//cft::Model *model;
 
 	public:
 		Crafter();

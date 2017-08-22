@@ -1,6 +1,6 @@
-#ifdef _MODEL_HPP_
+#ifndef _MODEL_HPP_
 #define _MODEL_HPP_
-
+#include <iostream>
 #include <string>
 #include <vector>
 #include <fstream>
@@ -11,11 +11,13 @@
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "config.hpp"
 
 namespace cft
 {
 	class Model // This class store the vertice and color of a model
 	{	
+	private:
 		int total_vertices;
 		std::vector<glm::vec4> vertices;	// Stores the list of the vertices
 		std::vector<glm::vec4> colors;		// Stores the color of the corresponding vertices
@@ -28,10 +30,11 @@ namespace cft
 
 		GLuint shader;	// Handle to the shaders
 	public:
-		Model(GLuint shaderProgram);
-		void LoadModel(std::string file);
-		void SaveModel(std::string file);	// Setting the default argument to be the name of the file unless specified
-		void Render();
-	}
+		Model();
+		// Model(GLuint shaderProgram);
+		// void LoadModel(std::string file);
+		// void SaveModel(std::string file);	// Setting the default argument to be the name of the file unless specified
+		// void Render();
+	};
 }
-
+#endif
