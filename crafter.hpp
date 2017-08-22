@@ -16,7 +16,9 @@ namespace cft
 	private:
 		GLFWwindow *window;	// Holds the reference to the window
 		GLuint shaderProgram;	// Reference to the shader 
-		int state;
+		glm::vec4 vertices[3];
+		glm::vec4 color[3];
+		int state,index;
 		Model *model;
 	public:
 		Crafter();
@@ -35,7 +37,7 @@ namespace cft
 		static bool key_up,key_down,key_left,key_right,key_M,key_I,key_L,key_K;
 		static bool key_R,key_W,key_A,key_S,key_D,key_Z,key_X,key_PgUp,key_PgDown,key_shift;
 		static bool button_left;
-		static double posx,posy;
+		static double posx,posy,posz;
 
 	};
 }

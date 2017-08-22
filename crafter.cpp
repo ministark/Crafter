@@ -11,6 +11,7 @@ namespace cft
 		// Saving reference to window
 		window = win;
 		state = MODELLING;
+		index = 0;
 		// Set framebuffer clear color
     	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
    		glClearDepth(1.0);
@@ -74,6 +75,40 @@ namespace cft
 			model->SaveModel(filename);
 			std::cout << "saved file" << std::endl;
 		}
+		else if (key_W)
+		{
+
+		}
+		else if (key_A)
+		{
+			
+		}
+		else if (key_S)
+		{
+			
+		}
+		else if (key_D)
+		{
+			
+		}
+		else if (key_Z)
+		{
+			if (state == MODELLING)
+				posz = posz == screen_depth ? screen_depth : posz + 1;
+			else
+			{
+
+			}
+		}
+		else if (key_X)
+		{
+			if (state == MODELLING)
+				posz = posz == 0 ? 0 : posz - 1;
+			else
+			{
+
+			}
+		}
 		else if (key_up)
 		{
 			model->xrot += delta_rot;
@@ -103,15 +138,35 @@ namespace cft
 			button_left = false;
 			if (state == MODELLING)
 			{
+				if (index == 0)
+				{
+					index = 2;
+					model->RemoveTriangle(vertices,color);
+				}
+				else
+					index--;
 				std::cout <<"rp - " << posx << " , " << posy << std::endl;
 			}
 		}
 		else if (button_left)
 		{
+			button_left = false;
 			if (state == MODELLING)
 			{
-				button_left = false;
-				std::cout <<"ap - " << posx << " , " << posy << std::endl;
+				std::cout << "enter rgb" << std::endl;
+				float x = posx*(2.0/screen_width) - 1,y = posy*(2.0/screen_height) - 1, z = posz*(2.0/screen_depth) - 1,r,g,b;
+				std::cin >> r >> g >> b;
+				std::cout << x << " " << y << " " << z << std::endl;
+				std::cout << r << " " << g << " " << b << std::endl;
+				vertices[index] = glm::vec4(x,y,z,1.0);
+				color[index] = glm::vec4(r,g,b,1.0);
+				index++;
+				if (index == 3)
+				{
+					index = 0;
+					model->AddTriangle(vertices,color);
+					std::cout << "add called" << std::endl;
+				}
 			}
 		}
 	}
@@ -138,6 +193,8 @@ namespace cft
 			key_R = true;
 		else if (key == GLFW_KEY_W && action == GLFW_PRESS)
 			key_W = true;
+		else if (key == GLFW_KEY_W && action == GLFW_RELEASE)
+			key_W = false;
 		else if (key == GLFW_KEY_A && action == GLFW_PRESS)
 			key_A = true;
 		else if (key == GLFW_KEY_S && action == GLFW_PRESS)
@@ -220,4 +277,5 @@ namespace cft
 	bool Crafter::button_left = false;
 	double Crafter::posx = 0;
 	double Crafter::posy = 0;
+	double Crafter::posz = screen_depth/2;
 }

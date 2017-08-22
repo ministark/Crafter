@@ -13,7 +13,7 @@ namespace cft
 	// Screen Size
 	const int screen_width = 640;
 	const int screen_height = 480;
-
+	const int screen_depth = 640;
 	// Shaders 
 	const std::string vertex_shader = "vertex_shader.glsl";
 	const std::string fragment_shader = "fragment_shader.glsl";
