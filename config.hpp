@@ -21,5 +21,7 @@ namespace cft
 	// Maximum vertices in the model
 	const int max_vertices = 100;
 
+	//Rotation and Translation
+	const float delta_rot = 0.01;
 }
 #endif

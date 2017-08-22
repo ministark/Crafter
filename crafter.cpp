@@ -22,6 +22,7 @@ namespace cft
   		glfwSetFramebufferSizeCallback(window, cft::Crafter::ResizeHandler);
     	glfwSetKeyCallback(window, cft::Crafter::KeyboardHandler);
     	glfwSetMouseButtonCallback(window, cft::Crafter::MouseHandler);
+    	glfwSetCursorPosCallback(window, cft::Crafter::CursorHandler);
   		glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 		// Setting up the shaders
@@ -35,6 +36,9 @@ namespace cft
 	}
 	void Crafter::Update()
 	{
+		model->xrot = 0;
+		model->yrot = 0;
+		model->zrot = 0;
 		if (key_M)
 		{
 			key_M = false;
@@ -68,6 +72,46 @@ namespace cft
 			std::cout << "File: " << std::endl;
 			std::cin >> filename;
 			model->SaveModel(filename);
+		}
+		else if (key_up)
+		{
+			model->xrot += delta_rot;
+		}
+		else if (key_down)
+		{
+			model->xrot += -delta_rot;	
+		}
+		else if (key_left)
+		{
+			model->yrot += delta_rot;	
+		}
+		else if (key_right)
+		{
+			model->yrot += -delta_rot;
+		}
+		else if (key_PgUp)
+		{
+			model->zrot += delta_rot;
+		}
+		else if (key_PgDown)
+		{
+			model->zrot += -delta_rot;
+		}
+		else if (button_left && key_shift)
+		{
+			button_left = false;
+			if (state == MODELLING)
+			{
+				std::cout <<"rp - " << posx << " , " << posy << std::endl;
+			}
+		}
+		else if (button_left)
+		{
+			if (state == MODELLING)
+			{
+				button_left = false;
+				std::cout <<"ap - " << posx << " , " << posy << std::endl;
+			}
 		}
 	}
 	void Crafter::Render()
@@ -105,24 +149,39 @@ namespace cft
 			key_X = true;
 		else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
 			key_up = true;
+		else if (key == GLFW_KEY_UP && action == GLFW_RELEASE)
+			key_up = false;
 		else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
 			key_down = true;
+		else if (key == GLFW_KEY_DOWN && action == GLFW_RELEASE)
+			key_down = false;
 		else if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
 			key_left = true;
+		else if (key == GLFW_KEY_LEFT && action == GLFW_RELEASE)
+			key_left = false;
 		else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
 			key_right = true;
+		else if (key == GLFW_KEY_RIGHT && action == GLFW_RELEASE)
+			key_right = false;
 		else if (key == GLFW_KEY_PAGE_UP && action == GLFW_PRESS)
 			key_PgUp = true;
 		else if (key == GLFW_KEY_PAGE_DOWN && action == GLFW_PRESS)
 			key_PgDown= true;
 		else if (key == GLFW_KEY_LEFT_SHIFT && action == GLFW_PRESS)
 			key_shift = true;
+		else if (key == GLFW_KEY_LEFT_SHIFT && action == GLFW_RELEASE)
+			key_shift = false;
 	}
 	
 	void Crafter::MouseHandler(GLFWwindow* window, int button, int action, int mods)
 	{
 		if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
 			button_left = true;
+	}
+	void Crafter::CursorHandler(GLFWwindow* window, double x, double y)
+	{
+		posx = x;
+		posy = y;
 	}
 
 	void Crafter::ResizeHandler(GLFWwindow* window, int width, int height)
@@ -154,4 +213,6 @@ namespace cft
 	bool Crafter::key_PgDown = false;
 	bool Crafter::key_shift = false;
 	bool Crafter::button_left = false;
+	double Crafter::posx = 0;
+	double Crafter::posy = 0;
 }
