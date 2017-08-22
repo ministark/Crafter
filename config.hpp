@@ -4,6 +4,9 @@
 #define MODELLING 0
 #define INSPECTION 1
 
+#define BUFFER_OFFSET( offset )   ((GLvoid*) (offset))
+
+
 #include <string>
 namespace cft
 {

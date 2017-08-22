@@ -31,10 +31,10 @@ namespace cft
 		GLuint shader;	// Handle to the shaders
 	public:
 		Model();
-		// Model(GLuint shaderProgram);
-		// void LoadModel(std::string file);
-		// void SaveModel(std::string file);	// Setting the default argument to be the name of the file unless specified
-		// void Render();
+		Model(GLuint shaderProgram);
+		void LoadModel(std::string file);
+		void SaveModel(std::string file);	// Setting the default argument to be the name of the file unless specified
+		void Render();
 	};
 }
 #endif
