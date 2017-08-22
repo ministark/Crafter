@@ -10,8 +10,7 @@ namespace cft
 	{	
 		// Saving reference to window
 		window = win;
-		state = MODELLING;
-		index = 0;
+
 		// Set framebuffer clear color
     	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
    		glClearDepth(1.0);
@@ -32,6 +31,11 @@ namespace cft
   		shaderList.push_back(cft::LoadShaderGL(GL_FRAGMENT_SHADER, cft::fragment_shader));
   		shaderProgram = cft::CreateProgramGL(shaderList);
 		
+
+		//Initialize Variables
+		state = MODELLING;
+		index = 0;
+		r = g = b = 0.5f;
 		// Setting the model
 		model = new cft::Model(shaderProgram);
 	}
@@ -77,25 +81,29 @@ namespace cft
 		}
 		else if (key_W)
 		{
-			model->translate.y += delta_trans;
+			if (state == INSPECTION)
+				model->translate.y += delta_trans;
 		}
 		else if (key_A)
 		{
-			model->translate.x -= delta_trans;
+			if (state == INSPECTION)
+				model->translate.x -= delta_trans;
 		}
 		else if (key_S)
 		{
+			if (state == INSPECTION)
 			model->translate.y -= delta_trans;
 		}
 		else if (key_D)
 		{
-			model->translate.x += delta_trans;
+			if (state == INSPECTION)
+				model->translate.x += delta_trans;
 		}
 		else if (key_Z)
 		{
 			if (state == MODELLING)
 				posz = posz == screen_depth ? screen_depth : posz + 1;
-			else
+			else if (state == INSPECTION)
 			{
 				model->translate.z += delta_trans;
 			}
@@ -104,21 +112,24 @@ namespace cft
 		{
 			if (state == MODELLING)
 				posz = posz == 0 ? 0 : posz - 1;
-			else
+			else if (state == INSPECTION)
 			{
 				model->translate.z -= delta_trans;
 			}
 		}
 		else if (key_up)
 		{
-			model->xrot += delta_rot;
+			if (state == INSPECTION)
+				model->xrot += delta_rot;
 		}
 		else if (key_down)
 		{
-			model->xrot += -delta_rot;	
+			if (state == INSPECTION)
+				model->xrot += -delta_rot;	
 		}
 		else if (key_left)
 		{
+			if (state == INSPECTION)
 			model->yrot += delta_rot;	
 		}
 		else if (key_right)
@@ -127,11 +138,13 @@ namespace cft
 		}
 		else if (key_PgUp)
 		{
-			model->zrot += delta_rot;
+			if (state == INSPECTION)
+				model->zrot += delta_rot;
 		}
 		else if (key_PgDown)
 		{
-			model->zrot += -delta_rot;
+			if (state == INSPECTION)
+				model->zrot += -delta_rot;
 		}
 		else if (button_left && key_shift)
 		{
@@ -153,9 +166,11 @@ namespace cft
 			button_left = false;
 			if (state == MODELLING)
 			{
-				std::cout << "enter rgb" << std::endl;
-				float x = posx*(2.0/screen_width) - 1,y = -(posy*(2.0/screen_height) - 1), z = posz*(2.0/screen_depth) - 1,r,g,b;
-				std::cin >> r >> g >> b;
+				int snapx = (int)posx - (int)posx%20;
+				int snapy = (int)posy - (int)posy%20;
+				int snapz = (int)posz - (int)posz%20;
+				float x = (float)snapx*(2.0/screen_width) - 1,y = -((float)snapy*(2.0/screen_height) - 1), z = (float)snapz*(2.0/screen_depth) - 1,r,g,b;
+				std::cout << snapx << " " << snapy << " " << snapz << std::endl;
 				std::cout << x << " " << y << " " << z << std::endl;
 				std::cout << r << " " << g << " " << b << std::endl;
 				vertices[index] = glm::vec4(x,y,z,1.0);
@@ -209,8 +224,12 @@ namespace cft
 			key_D = false;
 		else if (key == GLFW_KEY_Z && action == GLFW_PRESS)
 			key_Z = true;
+		else if (key == GLFW_KEY_Z && action == GLFW_RELEASE)
+			key_Z = false;
 		else if (key == GLFW_KEY_X && action == GLFW_PRESS)
 			key_X = true;
+		else if (key == GLFW_KEY_X && action == GLFW_RELEASE)
+			key_X = false;
 		else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
 			key_up = true;
 		else if (key == GLFW_KEY_UP && action == GLFW_RELEASE)

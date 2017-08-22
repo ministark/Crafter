@@ -18,6 +18,7 @@ namespace cft
 		GLuint shaderProgram;	// Reference to the shader 
 		glm::vec4 vertices[3];
 		glm::vec4 color[3];
+		float r,g,b;
 		int state,index;
 		Model *model;
 	public:
