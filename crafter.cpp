@@ -77,19 +77,19 @@ namespace cft
 		}
 		else if (key_W)
 		{
-
+			model->translate.y += delta_trans;
 		}
 		else if (key_A)
 		{
-			
+			model->translate.x -= delta_trans;
 		}
 		else if (key_S)
 		{
-			
+			model->translate.y -= delta_trans;
 		}
 		else if (key_D)
 		{
-			
+			model->translate.x += delta_trans;
 		}
 		else if (key_Z)
 		{
@@ -97,7 +97,7 @@ namespace cft
 				posz = posz == screen_depth ? screen_depth : posz + 1;
 			else
 			{
-
+				model->translate.z += delta_trans;
 			}
 		}
 		else if (key_X)
@@ -106,7 +106,7 @@ namespace cft
 				posz = posz == 0 ? 0 : posz - 1;
 			else
 			{
-
+				model->translate.z -= delta_trans;
 			}
 		}
 		else if (key_up)
@@ -154,7 +154,7 @@ namespace cft
 			if (state == MODELLING)
 			{
 				std::cout << "enter rgb" << std::endl;
-				float x = posx*(2.0/screen_width) - 1,y = posy*(2.0/screen_height) - 1, z = posz*(2.0/screen_depth) - 1,r,g,b;
+				float x = posx*(2.0/screen_width) - 1,y = -(posy*(2.0/screen_height) - 1), z = posz*(2.0/screen_depth) - 1,r,g,b;
 				std::cin >> r >> g >> b;
 				std::cout << x << " " << y << " " << z << std::endl;
 				std::cout << r << " " << g << " " << b << std::endl;
@@ -197,10 +197,16 @@ namespace cft
 			key_W = false;
 		else if (key == GLFW_KEY_A && action == GLFW_PRESS)
 			key_A = true;
+		else if (key == GLFW_KEY_A && action == GLFW_RELEASE)
+			key_A = false;
 		else if (key == GLFW_KEY_S && action == GLFW_PRESS)
 			key_S = true;
+		else if (key == GLFW_KEY_S && action == GLFW_RELEASE)
+			key_S = false;
 		else if (key == GLFW_KEY_D && action == GLFW_PRESS)
 			key_D = true;
+		else if (key == GLFW_KEY_D && action == GLFW_RELEASE)
+			key_D = false;
 		else if (key == GLFW_KEY_Z && action == GLFW_PRESS)
 			key_Z = true;
 		else if (key == GLFW_KEY_X && action == GLFW_PRESS)

@@ -23,5 +23,6 @@ namespace cft
 
 	//Rotation and Translation
 	const float delta_rot = 0.01;
+	const float delta_trans = 0.01;
 }
 #endif
