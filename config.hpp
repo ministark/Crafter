@@ -18,5 +18,8 @@ namespace cft
 	const std::string vertex_shader = "vertex_shader.glsl";
 	const std::string fragment_shader = "fragment_shader.glsl";
 
+	// Maximum vertices in the model
+	const int max_vertices = 100;
+
 }
 #endif

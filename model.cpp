@@ -14,7 +14,7 @@ namespace cft
   		glBindVertexArray (vao);
 		glGenBuffers (1, &vbo);
   		glBindBuffer (GL_ARRAY_BUFFER, vbo);
-  		glBufferData (GL_ARRAY_BUFFER, (colors.size()+vertices.size())*sizeof(glm::vec4), NULL, GL_DYNAMIC_DRAW);
+  		glBufferData (GL_ARRAY_BUFFER, 2*max_vertices*sizeof(glm::vec4), NULL, GL_DYNAMIC_DRAW);
 
 	}
 	void Model::LoadModel(std::string file)
@@ -33,7 +33,6 @@ namespace cft
 		afile.close();
 
 		// Copy the data to the VBO
-  		glBufferData (GL_ARRAY_BUFFER, (colors.size()+vertices.size())*sizeof(glm::vec4), NULL, GL_DYNAMIC_DRAW);
 	  	glBufferSubData( GL_ARRAY_BUFFER, 0, vertices.size()*sizeof(glm::vec4), &vertices[0] );
   		glBufferSubData( GL_ARRAY_BUFFER, vertices.size()*sizeof(glm::vec4), colors.size()*sizeof(glm::vec4), &colors[0] );
 	  	
@@ -48,7 +47,13 @@ namespace cft
 	}
 	void Model::SaveModel(std::string file)
 	{
-
+		stf::fstream afile;
+		afile.open(file, std::fstream::in | std::fstream::out);
+		for(int i = 0; i < total_vertices; ++i)
+		{
+			afile << vertices[i].x << " " << vertices[i].y << " " << vertices[i].z << " " << vertices[i].w << " " << colors[i].x << " " << colors[i].y << " " << colors[i].z << " " << colors[i].w << " \n";
+		}
+		fstream.close();
 	}
 	void Model::Render()
 	{
