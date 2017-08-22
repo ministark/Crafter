@@ -48,11 +48,12 @@ namespace cft
 	}
 	void Model::SaveModel(std::string file)
 	{
-		std::fstream afile;
-		afile.open(file, std::fstream::in | std::fstream::out);
+		std::ofstream afile;
+		afile.open(file, std::ofstream::out);
 		for(int i = 0; i < total_vertices; ++i)
 		{
-			afile << vertices[i].x << " " << vertices[i].y << " " << vertices[i].z << " " << vertices[i].w << " " << colors[i].x << " " << colors[i].y << " " << colors[i].z << " " << colors[i].w << " \n";
+			std::cout << "printing\n";
+			afile << vertices[i].x << " " << vertices[i].y << " " << vertices[i].z << " " << vertices[i].w << " " << colors[i].x << " " << colors[i].y << " " << colors[i].z << " " << colors[i].w << std::endl;
 		}
 		afile.close();
 	}
@@ -78,9 +79,11 @@ namespace cft
 	}
 	void Model::Render()
 	{
-		rotation_matrix = glm::rotate(rotation_matrix, xrot, glm::vec3(1.0f,0.0f,0.0f));
-	    rotation_matrix = glm::rotate(rotation_matrix, yrot, glm::vec3(0.0f,1.0f,0.0f));
-	    rotation_matrix = glm::rotate(rotation_matrix, zrot, glm::vec3(0.0f,0.0f,1.0f));
+		glm::mat4 rotation_matrix1;
+		rotation_matrix1 = glm::rotate(glm::mat4(1.0f), xrot, glm::vec3(1.0f,0.0f,0.0f));
+	    rotation_matrix1 = glm::rotate(rotation_matrix1, yrot, glm::vec3(0.0f,1.0f,0.0f));
+	    rotation_matrix1 = glm::rotate(rotation_matrix1, zrot, glm::vec3(0.0f,0.0f,1.0f));
+	    rotation_matrix = rotation_matrix1*rotation_matrix;
 		ortho_matrix = glm::ortho(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
   		modelview_matrix = ortho_matrix*rotation_matrix;
   		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));

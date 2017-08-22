@@ -69,9 +69,10 @@ namespace cft
 		{
 			key_K = false;
 			std::string filename;
-			std::cout << "File: " << std::endl;
+			std::cout << "File: ";
 			std::cin >> filename;
 			model->SaveModel(filename);
+			std::cout << "saved file" << std::endl;
 		}
 		else if (key_up)
 		{
@@ -165,8 +166,12 @@ namespace cft
 			key_right = false;
 		else if (key == GLFW_KEY_PAGE_UP && action == GLFW_PRESS)
 			key_PgUp = true;
+		else if (key == GLFW_KEY_PAGE_UP && action == GLFW_RELEASE)
+			key_PgUp = false;
 		else if (key == GLFW_KEY_PAGE_DOWN && action == GLFW_PRESS)
 			key_PgDown= true;
+		else if (key == GLFW_KEY_PAGE_DOWN && action == GLFW_RELEASE)
+			key_PgDown = false;
 		else if (key == GLFW_KEY_LEFT_SHIFT && action == GLFW_PRESS)
 			key_shift = true;
 		else if (key == GLFW_KEY_LEFT_SHIFT && action == GLFW_RELEASE)
