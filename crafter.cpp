@@ -20,7 +20,8 @@ namespace cft
 
     	// Setting the callbacks
   		glfwSetFramebufferSizeCallback(window, cft::Crafter::ResizeHandler);
-    	glfwSetKeyCallback(window, cft::Crafter::InputHandler);
+    	glfwSetKeyCallback(window, cft::Crafter::KeyboardHandler);
+    	glfwSetMouseButtonCallback(window, cft::Crafter::MouseHandler);
   		glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 		// Setting up the shaders
@@ -59,7 +60,6 @@ namespace cft
 			std::cout << "File: ";
 			std::cin >> filename;
 			model->LoadModel(filename);
-			std::cout << "loaded the model" << std::endl;
 		}
 		else if (key_K)
 		{
@@ -67,6 +67,7 @@ namespace cft
 			std::string filename;
 			std::cout << "File: " << std::endl;
 			std::cin >> filename;
+			model->SaveModel(filename);
 		}
 	}
 	void Crafter::Render()
@@ -76,7 +77,7 @@ namespace cft
   		model->Render();
 	}
 
-	void Crafter::InputHandler(GLFWwindow* window, int key, int scancode, int action, int mods) 
+	void Crafter::KeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods) 
 	{
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, GL_TRUE);
@@ -88,6 +89,20 @@ namespace cft
 			key_L = true;
 		else if (key == GLFW_KEY_K && action == GLFW_PRESS)
 			key_K = true;
+		else if (key == GLFW_KEY_R && action == GLFW_PRESS)
+			key_R = true;
+		else if (key == GLFW_KEY_W && action == GLFW_PRESS)
+			key_W = true;
+		else if (key == GLFW_KEY_A && action == GLFW_PRESS)
+			key_A = true;
+		else if (key == GLFW_KEY_S && action == GLFW_PRESS)
+			key_S = true;
+		else if (key == GLFW_KEY_D && action == GLFW_PRESS)
+			key_D = true;
+		else if (key == GLFW_KEY_Z && action == GLFW_PRESS)
+			key_Z = true;
+		else if (key == GLFW_KEY_X && action == GLFW_PRESS)
+			key_X = true;
 		else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
 			key_up = true;
 		else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
@@ -96,8 +111,20 @@ namespace cft
 			key_left = true;
 		else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
 			key_right = true;
+		else if (key == GLFW_KEY_PAGE_UP && action == GLFW_PRESS)
+			key_PgUp = true;
+		else if (key == GLFW_KEY_PAGE_DOWN && action == GLFW_PRESS)
+			key_PgDown= true;
+		else if (key == GLFW_KEY_LEFT_SHIFT && action == GLFW_PRESS)
+			key_shift = true;
 	}
-	 
+	
+	void Crafter::MouseHandler(GLFWwindow* window, int button, int action, int mods)
+	{
+		if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+			button_left = true;
+	}
+
 	void Crafter::ResizeHandler(GLFWwindow* window, int width, int height)
 	{
 		glViewport(0, 0, width, height);
@@ -117,5 +144,14 @@ namespace cft
 	bool Crafter::key_L = false;
 	bool Crafter::key_K = false;
 	bool Crafter::key_R = false;
-
+	bool Crafter::key_W = false;
+	bool Crafter::key_A = false;
+	bool Crafter::key_S = false;
+	bool Crafter::key_D = false;
+	bool Crafter::key_Z = false;
+	bool Crafter::key_X = false;
+	bool Crafter::key_PgUp = false;
+	bool Crafter::key_PgDown = false;
+	bool Crafter::key_shift = false;
+	bool Crafter::button_left = false;
 }
