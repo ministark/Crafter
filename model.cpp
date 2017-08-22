@@ -47,17 +47,17 @@ namespace cft
 	}
 	void Model::SaveModel(std::string file)
 	{
-		stf::fstream afile;
+		std::fstream afile;
 		afile.open(file, std::fstream::in | std::fstream::out);
 		for(int i = 0; i < total_vertices; ++i)
 		{
 			afile << vertices[i].x << " " << vertices[i].y << " " << vertices[i].z << " " << vertices[i].w << " " << colors[i].x << " " << colors[i].y << " " << colors[i].z << " " << colors[i].w << " \n";
 		}
-		fstream.close();
+		afile.close();
 	}
 	void Model::Render()
 	{
-		GLfloat xrot=0.0,yrot=0.0,zrot=0.0;
+		GLfloat xrot=1.0,yrot=0.0,zrot=0.0;
 		rotation_matrix = glm::rotate(glm::mat4(1.0f), xrot, glm::vec3(1.0f,0.0f,0.0f));
 	    rotation_matrix = glm::rotate(rotation_matrix, yrot, glm::vec3(0.0f,1.0f,0.0f));
 	    rotation_matrix = glm::rotate(rotation_matrix, zrot, glm::vec3(0.0f,0.0f,1.0f));
