@@ -18,7 +18,6 @@ namespace cft
 		GLuint shaderProgram;	// Reference to the shader 
 		glm::vec4 vertices[3];
 		glm::vec4 color[3];
-		float r,g,b;
 		int state,index;
 		Model *model;
 	public:
@@ -37,8 +36,10 @@ namespace cft
 		static void ErrorHandler(int error, const char* description);
 		static bool key_up,key_down,key_left,key_right,key_M,key_I,key_L,key_K;
 		static bool key_R,key_W,key_A,key_S,key_D,key_Z,key_X,key_PgUp,key_PgDown,key_shift;
+		static bool key_1,key_2,key_3,key_4,key_5,key_6;
 		static bool button_left;
 		static double posx,posy,posz;
+		static int col_r,col_g,col_b;
 
 	};
 }

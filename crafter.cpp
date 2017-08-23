@@ -11,7 +11,7 @@ namespace cft
 		// Saving reference to window
 		window = win;
 
-		// Set framebuffer clear color
+		// Set framebuffecol_r cleacol_r color
     	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
    		glClearDepth(1.0);
     	glDepthFunc(GL_LESS);
@@ -35,7 +35,6 @@ namespace cft
 		//Initialize Variables
 		state = MODELLING;
 		index = 0;
-		r = g = b = 0.5f;
 		// Setting the model
 		model = new cft::Model(shaderProgram);
 	}
@@ -78,6 +77,14 @@ namespace cft
 			std::cin >> filename;
 			model->SaveModel(filename);
 			std::cout << "saved file" << std::endl;
+		}
+		else if (key_R)
+		{
+			key_R = false;
+			if (state == INSPECTION)
+			{
+				//Move the origin
+			}
 		}
 		else if (key_W)
 		{
@@ -169,10 +176,11 @@ namespace cft
 				int snapx = (int)posx - (int)posx%20;
 				int snapy = (int)posy - (int)posy%20;
 				int snapz = (int)posz - (int)posz%20;
-				float x = (float)snapx*(2.0/screen_width) - 1,y = -((float)snapy*(2.0/screen_height) - 1), z = (float)snapz*(2.0/screen_depth) - 1,r,g,b;
+				float x = (float)snapx*(2.0/screen_width) - 1,y = -((float)snapy*(2.0/screen_height) - 1), z = (float)snapz*(2.0/screen_depth) - 1;
+				float r = (float)col_r/255.0,g = (float)col_g/255.0,b = (float)col_b/255.0;
 				std::cout << snapx << " " << snapy << " " << snapz << std::endl;
 				std::cout << x << " " << y << " " << z << std::endl;
-				std::cout << r << " " << g << " " << b << std::endl;
+				std::cout << col_r << " " << col_g << " " << col_b << std::endl;
 				vertices[index] = glm::vec4(x,y,z,1.0);
 				color[index] = glm::vec4(r,g,b,1.0);
 				index++;
@@ -184,6 +192,37 @@ namespace cft
 				}
 			}
 		}
+		else if (key_1)
+		{
+			if (state == MODELLING)
+				col_r = col_r == 255 ? 255 : col_r + 1;
+		}
+		else if (key_2)
+		{
+			if (state == MODELLING)
+				col_g = col_g == 255 ? 255 : col_g + 1;
+		}
+		else if (key_3)
+		{
+			if (state == MODELLING)
+				col_b = col_b == 255 ? 255 : col_b + 1;
+		}
+		else if (key_4)
+		{
+			if (state == MODELLING)
+				col_r = col_r == 0 ? 0 : col_r - 1;
+		}
+		else if (key_5)
+		{
+			if (state == MODELLING)
+				col_g = col_g == 0 ? 0 : col_g - 1;
+		}
+		else if (key_6)
+		{
+			if (state == MODELLING)
+				col_b = col_b == 0 ? 0 : col_b - 1;
+		}
+
 	}
 	void Crafter::Render()
 	{
@@ -196,6 +235,8 @@ namespace cft
 	{
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, GL_TRUE);
+		else if (key_L || key_K)
+			return;
 		else if (key == GLFW_KEY_M && action == GLFW_PRESS)
 			key_M = true;
 		else if (key == GLFW_KEY_I && action == GLFW_PRESS)
@@ -258,6 +299,54 @@ namespace cft
 			key_shift = true;
 		else if (key == GLFW_KEY_LEFT_SHIFT && action == GLFW_RELEASE)
 			key_shift = false;
+		else if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+			key_1 = true;
+		else if (key == GLFW_KEY_1 && action == GLFW_RELEASE)
+		{
+			if (key_1)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_1 = false;
+		}
+		else if (key == GLFW_KEY_2 && action == GLFW_PRESS)
+			key_2 = true;
+		else if (key == GLFW_KEY_2 && action == GLFW_RELEASE)
+		{
+			if (key_2)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_2 = false;
+		}
+		else if (key == GLFW_KEY_3 && action == GLFW_PRESS)
+			key_3 = true;
+		else if (key == GLFW_KEY_3 && action == GLFW_RELEASE)
+		{
+			if (key_3)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_3 = false;
+		}
+		else if (key == GLFW_KEY_4 && action == GLFW_PRESS)
+			key_4 = true;
+		else if (key == GLFW_KEY_4 && action == GLFW_RELEASE)
+		{
+			if (key_4)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_4 = false;
+		}
+		else if (key == GLFW_KEY_5 && action == GLFW_PRESS)
+			key_5 = true;
+		else if (key == GLFW_KEY_5 && action == GLFW_RELEASE)
+		{
+			if (key_5)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_5 = false;
+		}
+		else if (key == GLFW_KEY_6 && action == GLFW_PRESS)
+			key_6 = true;
+		else if (key == GLFW_KEY_6 && action == GLFW_RELEASE)
+		{
+			if (key_6)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_6 = false;
+		}
 	}
 	
 	void Crafter::MouseHandler(GLFWwindow* window, int button, int action, int mods)
@@ -299,8 +388,17 @@ namespace cft
 	bool Crafter::key_PgUp = false;
 	bool Crafter::key_PgDown = false;
 	bool Crafter::key_shift = false;
+	bool Crafter::key_1 = false;
+	bool Crafter::key_2 = false;
+	bool Crafter::key_3 = false;
+	bool Crafter::key_4 = false;
+	bool Crafter::key_5 = false;
+	bool Crafter::key_6 = false;
 	bool Crafter::button_left = false;
 	double Crafter::posx = 0;
 	double Crafter::posy = 0;
 	double Crafter::posz = screen_depth/2;
+	int Crafter::col_r = 128;
+	int Crafter::col_g = 128;
+	int Crafter::col_b = 128;
 }
