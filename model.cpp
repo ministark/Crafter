@@ -74,6 +74,15 @@ namespace cft
 		}
 		afile.close();
 	}
+	void Model::InitModellingMode()
+	{
+		rotation_matrix = glm::mat4(1.0f);
+		translate = glm::vec3(0.0f,0.0f,0.0f);
+	}
+	void Model::InitInspectionMode()
+	{
+
+	}
 	void Model::RecenterModel()
 	{
 		glm::vec4 h_centroid = glm::vec4(centroid.x,centroid.y,centroid.z,1.0f);

@@ -86,6 +86,7 @@ namespace cft
 			{
 				state = MODELLING;
 				std::cout << "Modelling Mode" << std::endl;
+				model->InitModellingMode();
 			}
 		}
 		else if (key_I)
@@ -95,6 +96,7 @@ namespace cft
 			{
 				state = INSPECTION;
 				std::cout << "Inspection Mode" << std::endl;
+				model->InitInspectionMode();
 			}
 		}
 		else if (key_L)
