@@ -82,14 +82,15 @@ namespace cft
 	}
 	void Model::InitInspectionMode()
 	{
-		view_matrix = glm::perspective(glm::radians(45.0f), 4.0f/3.0f, 0.1f, 100.0f);
+		view_matrix = glm::perspective(glm::radians(45.0f), 4.0f/3.0f, 0.01f, 50.0f);
+		translate = glm::vec3(0.0f,0.0f,-0.3f);
 	}
 	void Model::RecenterModel()
 	{
 		glm::vec4 h_centroid = glm::vec4(centroid.x,centroid.y,centroid.z,1.0f);
 		glm::vec4 h_recenter = view_matrix*rotation_matrix*h_centroid;
 		glm::vec3 recenter = glm::vec3(h_recenter.x/h_recenter.w,h_recenter.y/h_recenter.w,h_recenter.z/h_recenter.w); 
-		translate = -recenter;// For Now
+		translate = -recenter;// Works in orthographic mode for now
 	}
 	void Model::AddTriangle(glm::vec4 *v, glm::vec4 *c)
 	{
@@ -146,7 +147,6 @@ namespace cft
 	    rotation_matrix1 = glm::rotate(rotation_matrix1, yrot, glm::vec3(0.0f,1.0f,0.0f));
 	    rotation_matrix1 = glm::rotate(rotation_matrix1, zrot, glm::vec3(0.0f,0.0f,1.0f));
 	    rotation_matrix = rotation_matrix1*rotation_matrix;
-		//view_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 		transform = glm::translate(glm::mat4(1.0f),translate);
   		modelview_matrix = view_matrix*transform*rotation_matrix;
   		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));

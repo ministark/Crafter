@@ -33,23 +33,26 @@ namespace cft
 		
   		//Setup for lines in Modelling View
   		total_lines = screen_width/line_gap + screen_height/line_gap + 2;
-  		total_points = 2*total_lines;
+  		total_points = 2*total_lines + 3;
   		points = new glm::vec4[total_points];
-  		line_color = new glm::vec4[total_points];
+  		point_color = new glm::vec4[total_points];
   		int cpoint = 0;
   		for (int py = 0; py <= screen_height; py += line_gap)
   		{
   			float y = -((float)py*(2.0/screen_height) - 1.0f);
-  			line_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(1.0,y,1.0f,1.0f);
-  			line_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(-1.0,y,1.0f,1.0f);
+  			point_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(1.0,y,1.0f,1.0f);
+  			point_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(-1.0,y,1.0f,1.0f);
   		}
   		for (int px = 0; px <= screen_width; px += line_gap)
   		{
   			float x = (float)px*(2.0/screen_width) - 1.0f;
-  			line_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(x,1.0f,1.0f,1.0f);
-  			line_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(x,-1.0f,1.0f,1.0f);
+  			point_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(x,1.0f,1.0f,1.0f);
+  			point_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(x,-1.0f,1.0f,1.0f);
   		}
-
+  		for (int i = 0; i < 3; i ++)
+  		{
+  			point_color[cpoint++] = glm::vec4(0.0f,1.0f,0.0f,1.0f);
+  		}
   		uModelViewMatrix = glGetUniformLocation( shaderProgram, "uModelViewMatrix");
 		glGenVertexArrays (1, &vao);
   		glBindVertexArray (vao);
@@ -57,7 +60,7 @@ namespace cft
   		glBindBuffer (GL_ARRAY_BUFFER, vbo);
   		glBufferData (GL_ARRAY_BUFFER, 2*total_points*sizeof(glm::vec4), 0, GL_STATIC_DRAW);
   		glBufferSubData( GL_ARRAY_BUFFER, 0, total_points*sizeof(glm::vec4), points );
-  		glBufferSubData( GL_ARRAY_BUFFER, total_points*sizeof(glm::vec4), total_points*sizeof(glm::vec4), line_color );
+  		glBufferSubData( GL_ARRAY_BUFFER, total_points*sizeof(glm::vec4), total_points*sizeof(glm::vec4), point_color );
   		GLuint vPosition = glGetAttribLocation( shaderProgram, "vPosition" );
 		glEnableVertexAttribArray( vPosition );
 		glVertexAttribPointer( vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0) );
@@ -209,6 +212,12 @@ namespace cft
 				{
 					index = 2;
 					model->RemoveTriangle(vertices,color);
+					glBindBuffer(GL_ARRAY_BUFFER, vbo);
+					glBindVertexArray(vao);
+					glBufferSubData( GL_ARRAY_BUFFER, (total_points-3)*sizeof(glm::vec4), 3*sizeof(glm::vec4), &vertices[0]);
+	  				glBufferSubData( GL_ARRAY_BUFFER, total_points*sizeof(glm::vec4), total_points*sizeof(glm::vec4), point_color );
+	  				glBindVertexArray(0);
+	  				glBindBuffer(GL_ARRAY_BUFFER, 0);
 				}
 				else
 					index--;
@@ -232,6 +241,12 @@ namespace cft
 					index = 0;
 					model->AddTriangle(vertices,color);
 				}
+				glBindBuffer(GL_ARRAY_BUFFER, vbo);
+				glBindVertexArray(vao);
+				glBufferSubData( GL_ARRAY_BUFFER, (total_points-3)*sizeof(glm::vec4), 3*sizeof(glm::vec4), &vertices[0]);
+  				glBufferSubData( GL_ARRAY_BUFFER, total_points*sizeof(glm::vec4), total_points*sizeof(glm::vec4), point_color );
+  				glBindVertexArray(0);
+  				glBindBuffer(GL_ARRAY_BUFFER, 0);
 			}
 		}
 		else if (key_1)
@@ -274,9 +289,11 @@ namespace cft
   		{
   			glBindBuffer(GL_ARRAY_BUFFER, vbo);
   			glBindVertexArray(vao);
+  			glPointSize(4.0);
   			glm::mat4 ortho_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
   			glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(ortho_matrix));
-  			glDrawArrays(GL_LINES, 0, total_points);
+  			glDrawArrays(GL_LINES, 0, total_points - 3);
+  			glDrawArrays(GL_POINTS, total_points - 3, index);
   			glBindVertexArray(0);
   			glBindBuffer(GL_ARRAY_BUFFER, 0);
   		}

@@ -23,7 +23,7 @@ namespace cft
 		glm::vec4 vertices[3];
 		glm::vec4 color[3];
 		glm::vec4 *points;
-		glm::vec4 *line_color;
+		glm::vec4 *point_color;
 		
 		int state,index,total_lines,total_points;
 		
