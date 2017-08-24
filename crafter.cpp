@@ -228,9 +228,12 @@ namespace cft
 			button_left = false;
 			if (state == MODELLING)
 			{
-				int snapx = (int)posx - (int)posx%line_gap;
-				int snapy = (int)posy - (int)posy%line_gap;
-				int snapz = (int)posz - (int)posz%line_gap;
+				int modx = (int)posx%line_gap;
+				int mody = (int)posy%line_gap;
+				int modz = (int)posz%line_gap;
+				int snapx = (int)posx + (modx < line_gap - modx ? -modx : line_gap - modx);
+				int snapy = (int)posy + (mody < line_gap - mody ? -mody : line_gap - mody);
+				int snapz = (int)posz + (modz < line_gap - modz ? -modz : line_gap - modz);
 				float x = (float)snapx*(2.0/screen_width) - 1,y = -((float)snapy*(2.0/screen_height) - 1), z = (float)snapz*(2.0/screen_depth) - 1;
 				float r = (float)col_r/255.0,g = (float)col_g/255.0,b = (float)col_b/255.0;
 				vertices[index] = glm::vec4(x,y,z,1.0);

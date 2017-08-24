@@ -84,14 +84,13 @@ namespace cft
 	{
 		view_matrix = glm::lookAt(glm::vec3(0.0f,0.0f,10.0f),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.0f,1.0f,0.0f));	
 		projection_matrix = glm::perspective(glm::radians(45.0f), 4.0f/3.0f, 0.01f, 50.0f)*view_matrix;
-		translate = glm::vec3(0.0f,0.0f,-0.3f);
 	}
 	void Model::RecenterModel()
 	{
 		glm::vec4 h_centroid = glm::vec4(centroid.x,centroid.y,centroid.z,1.0f);
 		glm::vec4 h_recenter = projection_matrix*rotation_matrix*h_centroid;
 		glm::vec3 recenter = glm::vec3(h_recenter.x/h_recenter.w,h_recenter.y/h_recenter.w,h_recenter.z/h_recenter.w); 
-		translate = -recenter;// Works in orthographic mode for now
+		translate = -recenter;
 	}
 	void Model::AddTriangle(glm::vec4 *v, glm::vec4 *c)
 	{
