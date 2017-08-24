@@ -26,6 +26,7 @@ namespace cft
 
 		// Holding references to various matrices in the shader
 		glm::mat4 view_matrix;
+		glm::mat4 projection_matrix;
 		glm::mat4 modelview_matrix;
 		glm::mat4 rotation_matrix;
 		glm::mat4 transform;
@@ -48,7 +49,6 @@ namespace cft
 		void AddTriangle(glm::vec4 *v, glm::vec4 *c);	// Creates a triangle in the order 0 1 2 anti clockwise
 		void RemoveTriangle(glm::vec4 *v, glm::vec4 *c);	// Removes the most  recently added traingle and stores it in the array
 		void Render();
-		void PerspectiveRender();
 	};
 }
 #endif
