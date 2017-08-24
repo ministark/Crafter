@@ -8,6 +8,7 @@
 #include "shader_util.hpp"
 #include "config.hpp"
 #include "model.hpp"
+#include "palette.hpp"
 
 namespace cft
 {
@@ -28,6 +29,7 @@ namespace cft
 		int state,index,total_lines,total_points;
 		
 		Model *model;
+		Palette *palette;
 	public:
 		Crafter();
 

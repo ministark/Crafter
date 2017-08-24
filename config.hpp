@@ -11,8 +11,8 @@
 namespace cft
 {
 	// Screen Size
-	const int screen_width = 640;
-	const int screen_height = 480;
+	const int screen_width = 1920;
+	const int screen_height = 1080;
 	const int screen_depth = 640;
 	// Shaders 
 	const std::string vertex_shader = "vertex_shader.glsl";
@@ -32,6 +32,13 @@ namespace cft
 	const float camera_x = 0.0f;
 	const float camera_y = 0.0f;
 	const float camera_z = 3.0f;
+
+	//Palette position
+	const float xmin = screen_width - 200.0f;
+	const float ymin = 0.0f;
+	const float xmax = screen_width;
+	const float ymax = 200.0f;
+
 
 }
 #endif

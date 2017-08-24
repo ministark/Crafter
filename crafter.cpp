@@ -76,6 +76,7 @@ namespace cft
 		
 		// Setting the model
 		model = new cft::Model(shaderProgram);
+		palette = new cft::Palette(shaderProgram);
 	}
 	void Crafter::Update()
 	{
@@ -235,7 +236,15 @@ namespace cft
 		{
 			button_left = false;
 			if (state == MODELLING)
-			{
+			{	
+				glm::vec4 tcol;
+				if (palette->PickColor(posx,posy,&tcol))
+				{
+					col_r = tcol.x*255;
+					col_g = tcol.y*255;
+					col_b = tcol.z*255;
+					return;
+				}
 				int modx = (int)posx%line_gap;
 				int mody = (int)posy%line_gap;
 				int modz = (int)posz%line_gap;
@@ -307,6 +316,7 @@ namespace cft
   			glDrawArrays(GL_POINTS, total_points - 3, index);
   			glBindVertexArray(0);
   			glBindBuffer(GL_ARRAY_BUFFER, 0);
+  			palette->Render();
   		}
   		model->Render();
 	}
@@ -431,7 +441,7 @@ namespace cft
 	
 	void Crafter::MouseHandler(GLFWwindow* window, int button, int action, int mods)
 	{
-		if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+		if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) 
 			button_left = true;
 	}
 	void Crafter::CursorHandler(GLFWwindow* window, double x, double y)

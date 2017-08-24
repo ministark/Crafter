@@ -6,8 +6,8 @@ LDFLAGS		=	-L/usr/local/lib
 CPPFLAGS	=	-I/usr/local/include
 
 BIN1		=	crafter
-SRCS1		=	Main.cpp shader_util.cpp model.cpp crafter.cpp
-INCLUDES	=	shader_util.hpp model.hpp crafter.hpp config.hpp
+SRCS1		=	Main.cpp shader_util.cpp model.cpp crafter.cpp palette.cpp 
+INCLUDES	=	shader_util.hpp model.hpp crafter.hpp config.hpp palette.hpp
 
 all: $(BIN1)
 
