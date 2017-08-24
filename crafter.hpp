@@ -15,10 +15,18 @@ namespace cft
 	{
 	private:
 		GLFWwindow *window;	// Holds the reference to the window
-		GLuint shaderProgram;	// Reference to the shader 
+		
+		GLuint shaderProgram;// Reference to the shader
+		GLuint vbo, vao; 
+		GLuint uModelViewMatrix;
+
 		glm::vec4 vertices[3];
 		glm::vec4 color[3];
-		int state,index;
+		glm::vec4 *points;
+		glm::vec4 *line_color;
+		
+		int state,index,total_lines,total_points;
+		
 		Model *model;
 	public:
 		Crafter();

@@ -18,6 +18,8 @@ namespace cft
 		glGenBuffers (1, &vbo);
   		glBindBuffer (GL_ARRAY_BUFFER, vbo);
   		glBufferData (GL_ARRAY_BUFFER, 2*max_vertices*sizeof(glm::vec4), NULL, GL_DYNAMIC_DRAW);
+  		glBindBuffer (GL_ARRAY_BUFFER, 0);
+  		glBindVertexArray(0);
 
 	}
 	void Model::LoadModel(std::string file)
@@ -38,6 +40,8 @@ namespace cft
 		afile.close();
 
 		// Copy the data to the VBO
+		glBindBuffer(GL_ARRAY_BUFFER,vbo);
+		glBindVertexArray(vao);
   		glBufferData (GL_ARRAY_BUFFER, 2*max_vertices*sizeof(glm::vec4), NULL, GL_DYNAMIC_DRAW);
 	  	glBufferSubData( GL_ARRAY_BUFFER, 0, vertices.size()*sizeof(glm::vec4), &vertices[0] );
   		glBufferSubData( GL_ARRAY_BUFFER, vertices.size()*sizeof(glm::vec4), colors.size()*sizeof(glm::vec4), &colors[0] );
@@ -49,6 +53,8 @@ namespace cft
 		GLuint vColor = glGetAttribLocation( shader, "vColor" ); 
 		glEnableVertexAttribArray( vColor );
 		glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(vertices.size()*sizeof(glm::vec4)) );
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER,0);
 		
 	}
 	void Model::SaveModel(std::string file)
@@ -68,6 +74,8 @@ namespace cft
 		colors.push_back(c[0]); colors.push_back(c[1]); colors.push_back(c[2]);
 		total_vertices += 3;
 		// Copying the Data
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBindVertexArray(vao);
 		glBufferSubData( GL_ARRAY_BUFFER, 0, vertices.size()*sizeof(glm::vec4), &vertices[0] );
   		glBufferSubData( GL_ARRAY_BUFFER, vertices.size()*sizeof(glm::vec4), colors.size()*sizeof(glm::vec4), &colors[0] );
 
@@ -78,6 +86,8 @@ namespace cft
 		GLuint vColor = glGetAttribLocation( shader, "vColor" ); 
 		glEnableVertexAttribArray( vColor );
 		glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(vertices.size()*sizeof(glm::vec4)) );
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	}
 	void Model::RemoveTriangle(glm::vec4 *v, glm::vec4 *c)
@@ -92,6 +102,8 @@ namespace cft
 	}
 	void Model::Render()
 	{
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBindVertexArray(vao);
 		glm::mat4 rotation_matrix1;
 		rotation_matrix1 = glm::rotate(glm::mat4(1.0f), xrot, glm::vec3(1.0f,0.0f,0.0f));
 	    rotation_matrix1 = glm::rotate(rotation_matrix1, yrot, glm::vec3(0.0f,1.0f,0.0f));
@@ -102,5 +114,7 @@ namespace cft
   		modelview_matrix = ortho_matrix*transform*rotation_matrix;
   		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
   		glDrawArrays(GL_TRIANGLES, 0, total_vertices);
+  		glBindVertexArray(0);
+  		glBindBuffer(GL_ARRAY_BUFFER,0);
 	}
 }

@@ -31,7 +31,44 @@ namespace cft
   		shaderList.push_back(cft::LoadShaderGL(GL_FRAGMENT_SHADER, cft::fragment_shader));
   		shaderProgram = cft::CreateProgramGL(shaderList);
 		
+  		//Setup for lines in Modelling View
+  		total_lines = screen_width/line_gap + screen_height/line_gap + 2;
+  		total_points = 2*total_lines;
+  		points = new glm::vec4[total_points];
+  		line_color = new glm::vec4[total_points];
+  		int cpoint = 0;
+  		for (int py = 0; py <= screen_height; py += line_gap)
+  		{
+  			float y = -((float)py*(2.0/screen_height) - 1.0f);
+  			line_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(1.0,y,1.0f,1.0f);
+  			line_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(-1.0,y,1.0f,1.0f);
+  		}
+  		for (int px = 0; px <= screen_width; px += line_gap)
+  		{
+  			float x = (float)px*(2.0/screen_width) - 1.0f;
+  			line_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(x,1.0f,1.0f,1.0f);
+  			line_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(x,-1.0f,1.0f,1.0f);
+  		}
 
+  		uModelViewMatrix = glGetUniformLocation( shaderProgram, "uModelViewMatrix");
+		glGenVertexArrays (1, &vao);
+  		glBindVertexArray (vao);
+		glGenBuffers (1, &vbo);
+  		glBindBuffer (GL_ARRAY_BUFFER, vbo);
+  		glBufferData (GL_ARRAY_BUFFER, 2*total_points*sizeof(glm::vec4), 0, GL_STATIC_DRAW);
+  		glBufferSubData( GL_ARRAY_BUFFER, 0, total_points*sizeof(glm::vec4), points );
+  		glBufferSubData( GL_ARRAY_BUFFER, total_points*sizeof(glm::vec4), total_points*sizeof(glm::vec4), line_color );
+  		GLuint vPosition = glGetAttribLocation( shaderProgram, "vPosition" );
+		glEnableVertexAttribArray( vPosition );
+		glVertexAttribPointer( vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0) );
+		GLuint vColor = glGetAttribLocation( shaderProgram, "vColor" ); 
+		glEnableVertexAttribArray( vColor );
+		glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(total_points*sizeof(glm::vec4)) );
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
+
+
+		
 		//Initialize Variables
 		state = MODELLING;
 		index = 0;
@@ -84,6 +121,9 @@ namespace cft
 			if (state == INSPECTION)
 			{
 				//Move the origin
+				model->translate.x = 0;
+				model->translate.y = 0;
+				model->translate.z = 0;
 			}
 		}
 		else if (key_W)
@@ -99,7 +139,7 @@ namespace cft
 		else if (key_S)
 		{
 			if (state == INSPECTION)
-			model->translate.y -= delta_trans;
+				model->translate.y -= delta_trans;
 		}
 		else if (key_D)
 		{
@@ -165,7 +205,6 @@ namespace cft
 				}
 				else
 					index--;
-				std::cout <<"rp - " << posx << " , " << posy << std::endl;
 			}
 		}
 		else if (button_left)
@@ -173,14 +212,11 @@ namespace cft
 			button_left = false;
 			if (state == MODELLING)
 			{
-				int snapx = (int)posx - (int)posx%20;
-				int snapy = (int)posy - (int)posy%20;
-				int snapz = (int)posz - (int)posz%20;
+				int snapx = (int)posx - (int)posx%line_gap;
+				int snapy = (int)posy - (int)posy%line_gap;
+				int snapz = (int)posz - (int)posz%line_gap;
 				float x = (float)snapx*(2.0/screen_width) - 1,y = -((float)snapy*(2.0/screen_height) - 1), z = (float)snapz*(2.0/screen_depth) - 1;
 				float r = (float)col_r/255.0,g = (float)col_g/255.0,b = (float)col_b/255.0;
-				std::cout << snapx << " " << snapy << " " << snapz << std::endl;
-				std::cout << x << " " << y << " " << z << std::endl;
-				std::cout << col_r << " " << col_g << " " << col_b << std::endl;
 				vertices[index] = glm::vec4(x,y,z,1.0);
 				color[index] = glm::vec4(r,g,b,1.0);
 				index++;
@@ -188,7 +224,6 @@ namespace cft
 				{
 					index = 0;
 					model->AddTriangle(vertices,color);
-					std::cout << "add called" << std::endl;
 				}
 			}
 		}
@@ -228,6 +263,16 @@ namespace cft
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   		glUseProgram(shaderProgram);
+  		if (state == MODELLING)
+  		{
+  			glBindBuffer(GL_ARRAY_BUFFER, vbo);
+  			glBindVertexArray(vao);
+  			glm::mat4 ortho_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+  			glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(ortho_matrix));
+  			glDrawArrays(GL_LINES, 0, total_points);
+  			glBindVertexArray(0);
+  			glBindBuffer(GL_ARRAY_BUFFER, 0);
+  		}
   		model->Render();
 	}
 
