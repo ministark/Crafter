@@ -157,8 +157,12 @@ namespace cft
 		}
 		else if (key_Z)
 		{
-			if (state == MODELLING)
-				posz = posz == screen_depth ? screen_depth : posz + 1;
+			if (state == MODELLING) 
+			{
+				key_Z = false;
+				posz = posz == screen_depth ? screen_depth : posz + line_gap;
+				std::cout << "Drawing plane Z = " << (float)posz*(2.0/screen_depth) - 1 << std::endl;
+			}
 			else if (state == INSPECTION)
 			{
 				model->translate.z += delta_trans;
@@ -167,7 +171,11 @@ namespace cft
 		else if (key_X)
 		{
 			if (state == MODELLING)
-				posz = posz == 0 ? 0 : posz - 1;
+			{
+				key_X = false;
+				posz = posz == 0 ? 0 : posz - line_gap;
+				std::cout << "Drawing plane Z = " << (float)posz*(2.0/screen_depth) - 1 << std::endl;
+			}
 			else if (state == INSPECTION)
 			{
 				model->translate.z -= delta_trans;
