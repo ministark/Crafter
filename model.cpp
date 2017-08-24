@@ -82,7 +82,7 @@ namespace cft
 	}
 	void Model::InitInspectionMode()
 	{
-		view_matrix = glm::lookAt(glm::vec3(0.0f,0.0f,10.0f),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.0f,1.0f,0.0f));	
+		view_matrix = glm::lookAt(glm::vec3(camera_x,cft::camera_y,cft::camera_z),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.0f,1.0f,0.0f));	
 		projection_matrix = glm::perspective(glm::radians(45.0f), 4.0f/3.0f, 0.01f, 50.0f)*view_matrix;
 	}
 	void Model::RecenterModel()

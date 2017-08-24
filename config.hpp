@@ -27,5 +27,11 @@ namespace cft
 	//Rotation and Translation
 	const float delta_rot = 0.01;
 	const float delta_trans = 0.01;
+
+	//Camera position
+	const float camera_x = 0.0f;
+	const float camera_y = 0.0f;
+	const float camera_z = 3.0f;
+
 }
 #endif
