@@ -25,7 +25,7 @@ namespace cft
 		GLuint vbo, vao;	// The vertex buffer size initilize to max and sub buffer is used
 
 		// Holding references to various matrices in the shader
-		glm::mat4 ortho_matrix;
+		glm::mat4 view_matrix;
 		glm::mat4 modelview_matrix;
 		glm::mat4 rotation_matrix;
 		glm::mat4 transform;
@@ -36,11 +36,15 @@ namespace cft
 	public:
 		GLfloat xrot,yrot,zrot;
 		glm::vec3 translate;
+		glm::vec3 centroid;
 
 		Model();
 		Model(GLuint shaderProgram);
 		void LoadModel(std::string file);
 		void SaveModel(std::string file);
+		void InitModellingMode();
+		void InitInspectionMode();
+		void RecenterModel();
 		void AddTriangle(glm::vec4 *v, glm::vec4 *c);	// Creates a triangle in the order 0 1 2 anti clockwise
 		void RemoveTriangle(glm::vec4 *v, glm::vec4 *c);	// Removes the most  recently added traingle and stores it in the array
 		void Render();

@@ -10,9 +10,8 @@ namespace cft
 	{	
 		// Saving reference to window
 		window = win;
-		state = MODELLING;
-		index = 0;
-		// Set framebuffer clear color
+
+		// Set framebuffecol_r cleacol_r color
     	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
    		glClearDepth(1.0);
     	glDepthFunc(GL_LESS);
@@ -32,6 +31,49 @@ namespace cft
   		shaderList.push_back(cft::LoadShaderGL(GL_FRAGMENT_SHADER, cft::fragment_shader));
   		shaderProgram = cft::CreateProgramGL(shaderList);
 		
+  		//Setup for lines in Modelling View
+  		total_lines = screen_width/line_gap + screen_height/line_gap + 2;
+  		total_points = 2*total_lines + 3;
+  		points = new glm::vec4[total_points];
+  		point_color = new glm::vec4[total_points];
+  		int cpoint = 0;
+  		for (int py = 0; py <= screen_height; py += line_gap)
+  		{
+  			float y = -((float)py*(2.0/screen_height) - 1.0f);
+  			point_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(1.0,y,1.0f,1.0f);
+  			point_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(-1.0,y,1.0f,1.0f);
+  		}
+  		for (int px = 0; px <= screen_width; px += line_gap)
+  		{
+  			float x = (float)px*(2.0/screen_width) - 1.0f;
+  			point_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(x,1.0f,1.0f,1.0f);
+  			point_color[cpoint] = glm::vec4(0.5f,0.5f,0.5f,1.0f);points[cpoint++] = glm::vec4(x,-1.0f,1.0f,1.0f);
+  		}
+  		for (int i = 0; i < 3; i ++)
+  		{
+  			point_color[cpoint++] = glm::vec4(0.0f,1.0f,0.0f,1.0f);
+  		}
+  		uModelViewMatrix = glGetUniformLocation( shaderProgram, "uModelViewMatrix");
+		glGenVertexArrays (1, &vao);
+  		glBindVertexArray (vao);
+		glGenBuffers (1, &vbo);
+  		glBindBuffer (GL_ARRAY_BUFFER, vbo);
+  		glBufferData (GL_ARRAY_BUFFER, 2*total_points*sizeof(glm::vec4), 0, GL_STATIC_DRAW);
+  		glBufferSubData( GL_ARRAY_BUFFER, 0, total_points*sizeof(glm::vec4), points );
+  		glBufferSubData( GL_ARRAY_BUFFER, total_points*sizeof(glm::vec4), total_points*sizeof(glm::vec4), point_color );
+  		GLuint vPosition = glGetAttribLocation( shaderProgram, "vPosition" );
+		glEnableVertexAttribArray( vPosition );
+		glVertexAttribPointer( vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0) );
+		GLuint vColor = glGetAttribLocation( shaderProgram, "vColor" ); 
+		glEnableVertexAttribArray( vColor );
+		glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(total_points*sizeof(glm::vec4)) );
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
+		
+		//Initialize Variables
+		state = MODELLING;
+		index = 0;
+		
 		// Setting the model
 		model = new cft::Model(shaderProgram);
 	}
@@ -47,6 +89,7 @@ namespace cft
 			{
 				state = MODELLING;
 				std::cout << "Modelling Mode" << std::endl;
+				model->InitModellingMode();
 			}
 		}
 		else if (key_I)
@@ -56,6 +99,7 @@ namespace cft
 			{
 				state = INSPECTION;
 				std::cout << "Inspection Mode" << std::endl;
+				model->InitInspectionMode();
 			}
 		}
 		else if (key_L)
@@ -75,27 +119,47 @@ namespace cft
 			model->SaveModel(filename);
 			std::cout << "saved file" << std::endl;
 		}
+		else if (key_R)
+		{
+			key_R = false;
+			if (state == INSPECTION)
+			{
+				model->RecenterModel();
+			}
+		}
 		else if (key_W)
 		{
-			model->translate.y += delta_trans;
+			if (state == INSPECTION)
+			{
+				model->translate.y += delta_trans;
+			}
 		}
 		else if (key_A)
 		{
-			model->translate.x -= delta_trans;
+			if (state == INSPECTION)
+			{
+				model->translate.x -= delta_trans;
+			}
 		}
 		else if (key_S)
 		{
-			model->translate.y -= delta_trans;
+			if (state == INSPECTION)
+			{
+				model->translate.y -= delta_trans;
+			}
 		}
 		else if (key_D)
 		{
-			model->translate.x += delta_trans;
+			if (state == INSPECTION)
+			{
+				model->translate.x += delta_trans;
+			}
 		}
 		else if (key_Z)
 		{
 			if (state == MODELLING)
 				posz = posz == screen_depth ? screen_depth : posz + 1;
-			else
+			else if (state == INSPECTION)
 			{
 				model->translate.z += delta_trans;
 			}
@@ -104,21 +168,25 @@ namespace cft
 		{
 			if (state == MODELLING)
 				posz = posz == 0 ? 0 : posz - 1;
-			else
+			else if (state == INSPECTION)
 			{
 				model->translate.z -= delta_trans;
+				
 			}
 		}
 		else if (key_up)
 		{
-			model->xrot += delta_rot;
+			if (state == INSPECTION)
+				model->xrot += delta_rot;
 		}
 		else if (key_down)
 		{
-			model->xrot += -delta_rot;	
+			if (state == INSPECTION)
+				model->xrot += -delta_rot;	
 		}
 		else if (key_left)
 		{
+			if (state == INSPECTION)
 			model->yrot += delta_rot;	
 		}
 		else if (key_right)
@@ -127,11 +195,13 @@ namespace cft
 		}
 		else if (key_PgUp)
 		{
-			model->zrot += delta_rot;
+			if (state == INSPECTION)
+				model->zrot += delta_rot;
 		}
 		else if (key_PgDown)
 		{
-			model->zrot += -delta_rot;
+			if (state == INSPECTION)
+				model->zrot += -delta_rot;
 		}
 		else if (button_left && key_shift)
 		{
@@ -142,10 +212,15 @@ namespace cft
 				{
 					index = 2;
 					model->RemoveTriangle(vertices,color);
+					glBindBuffer(GL_ARRAY_BUFFER, vbo);
+					glBindVertexArray(vao);
+					glBufferSubData( GL_ARRAY_BUFFER, (total_points-3)*sizeof(glm::vec4), 3*sizeof(glm::vec4), &vertices[0]);
+	  				glBufferSubData( GL_ARRAY_BUFFER, total_points*sizeof(glm::vec4), total_points*sizeof(glm::vec4), point_color );
+	  				glBindVertexArray(0);
+	  				glBindBuffer(GL_ARRAY_BUFFER, 0);
 				}
 				else
 					index--;
-				std::cout <<"rp - " << posx << " , " << posy << std::endl;
 			}
 		}
 		else if (button_left)
@@ -153,11 +228,11 @@ namespace cft
 			button_left = false;
 			if (state == MODELLING)
 			{
-				std::cout << "enter rgb" << std::endl;
-				float x = posx*(2.0/screen_width) - 1,y = -(posy*(2.0/screen_height) - 1), z = posz*(2.0/screen_depth) - 1,r,g,b;
-				std::cin >> r >> g >> b;
-				std::cout << x << " " << y << " " << z << std::endl;
-				std::cout << r << " " << g << " " << b << std::endl;
+				int snapx = (int)posx - (int)posx%line_gap;
+				int snapy = (int)posy - (int)posy%line_gap;
+				int snapz = (int)posz - (int)posz%line_gap;
+				float x = (float)snapx*(2.0/screen_width) - 1,y = -((float)snapy*(2.0/screen_height) - 1), z = (float)snapz*(2.0/screen_depth) - 1;
+				float r = (float)col_r/255.0,g = (float)col_g/255.0,b = (float)col_b/255.0;
 				vertices[index] = glm::vec4(x,y,z,1.0);
 				color[index] = glm::vec4(r,g,b,1.0);
 				index++;
@@ -165,15 +240,63 @@ namespace cft
 				{
 					index = 0;
 					model->AddTriangle(vertices,color);
-					std::cout << "add called" << std::endl;
 				}
+				glBindBuffer(GL_ARRAY_BUFFER, vbo);
+				glBindVertexArray(vao);
+				glBufferSubData( GL_ARRAY_BUFFER, (total_points-3)*sizeof(glm::vec4), 3*sizeof(glm::vec4), &vertices[0]);
+  				glBufferSubData( GL_ARRAY_BUFFER, total_points*sizeof(glm::vec4), total_points*sizeof(glm::vec4), point_color );
+  				glBindVertexArray(0);
+  				glBindBuffer(GL_ARRAY_BUFFER, 0);
 			}
 		}
+		else if (key_1)
+		{
+			if (state == MODELLING)
+				col_r = col_r == 255 ? 255 : col_r + 1;
+		}
+		else if (key_2)
+		{
+			if (state == MODELLING)
+				col_g = col_g == 255 ? 255 : col_g + 1;
+		}
+		else if (key_3)
+		{
+			if (state == MODELLING)
+				col_b = col_b == 255 ? 255 : col_b + 1;
+		}
+		else if (key_4)
+		{
+			if (state == MODELLING)
+				col_r = col_r == 0 ? 0 : col_r - 1;
+		}
+		else if (key_5)
+		{
+			if (state == MODELLING)
+				col_g = col_g == 0 ? 0 : col_g - 1;
+		}
+		else if (key_6)
+		{
+			if (state == MODELLING)
+				col_b = col_b == 0 ? 0 : col_b - 1;
+		}
+
 	}
 	void Crafter::Render()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   		glUseProgram(shaderProgram);
+  		if (state == MODELLING)
+  		{
+  			glBindBuffer(GL_ARRAY_BUFFER, vbo);
+  			glBindVertexArray(vao);
+  			glPointSize(4.0);
+  			glm::mat4 ortho_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+  			glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(ortho_matrix));
+  			glDrawArrays(GL_LINES, 0, total_points - 3);
+  			glDrawArrays(GL_POINTS, total_points - 3, index);
+  			glBindVertexArray(0);
+  			glBindBuffer(GL_ARRAY_BUFFER, 0);
+  		}
   		model->Render();
 	}
 
@@ -181,6 +304,8 @@ namespace cft
 	{
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, GL_TRUE);
+		else if (key_L || key_K)
+			return;
 		else if (key == GLFW_KEY_M && action == GLFW_PRESS)
 			key_M = true;
 		else if (key == GLFW_KEY_I && action == GLFW_PRESS)
@@ -209,8 +334,12 @@ namespace cft
 			key_D = false;
 		else if (key == GLFW_KEY_Z && action == GLFW_PRESS)
 			key_Z = true;
+		else if (key == GLFW_KEY_Z && action == GLFW_RELEASE)
+			key_Z = false;
 		else if (key == GLFW_KEY_X && action == GLFW_PRESS)
 			key_X = true;
+		else if (key == GLFW_KEY_X && action == GLFW_RELEASE)
+			key_X = false;
 		else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
 			key_up = true;
 		else if (key == GLFW_KEY_UP && action == GLFW_RELEASE)
@@ -239,6 +368,54 @@ namespace cft
 			key_shift = true;
 		else if (key == GLFW_KEY_LEFT_SHIFT && action == GLFW_RELEASE)
 			key_shift = false;
+		else if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+			key_1 = true;
+		else if (key == GLFW_KEY_1 && action == GLFW_RELEASE)
+		{
+			if (key_1)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_1 = false;
+		}
+		else if (key == GLFW_KEY_2 && action == GLFW_PRESS)
+			key_2 = true;
+		else if (key == GLFW_KEY_2 && action == GLFW_RELEASE)
+		{
+			if (key_2)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_2 = false;
+		}
+		else if (key == GLFW_KEY_3 && action == GLFW_PRESS)
+			key_3 = true;
+		else if (key == GLFW_KEY_3 && action == GLFW_RELEASE)
+		{
+			if (key_3)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_3 = false;
+		}
+		else if (key == GLFW_KEY_4 && action == GLFW_PRESS)
+			key_4 = true;
+		else if (key == GLFW_KEY_4 && action == GLFW_RELEASE)
+		{
+			if (key_4)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_4 = false;
+		}
+		else if (key == GLFW_KEY_5 && action == GLFW_PRESS)
+			key_5 = true;
+		else if (key == GLFW_KEY_5 && action == GLFW_RELEASE)
+		{
+			if (key_5)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_5 = false;
+		}
+		else if (key == GLFW_KEY_6 && action == GLFW_PRESS)
+			key_6 = true;
+		else if (key == GLFW_KEY_6 && action == GLFW_RELEASE)
+		{
+			if (key_6)
+				std::cout << "(R,G,B) = (" << col_r << "," << col_g << "," << col_b << ")" << std:: endl;
+			key_6 = false;
+		}
 	}
 	
 	void Crafter::MouseHandler(GLFWwindow* window, int button, int action, int mods)
@@ -280,8 +457,17 @@ namespace cft
 	bool Crafter::key_PgUp = false;
 	bool Crafter::key_PgDown = false;
 	bool Crafter::key_shift = false;
+	bool Crafter::key_1 = false;
+	bool Crafter::key_2 = false;
+	bool Crafter::key_3 = false;
+	bool Crafter::key_4 = false;
+	bool Crafter::key_5 = false;
+	bool Crafter::key_6 = false;
 	bool Crafter::button_left = false;
 	double Crafter::posx = 0;
 	double Crafter::posy = 0;
 	double Crafter::posz = screen_depth/2;
+	int Crafter::col_r = 128;
+	int Crafter::col_g = 128;
+	int Crafter::col_b = 128;
 }
