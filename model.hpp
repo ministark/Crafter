@@ -25,7 +25,7 @@ namespace cft
 		GLuint vbo, vao;	// The vertex buffer size initilize to max and sub buffer is used
 
 		// Holding references to various matrices in the shader
-		glm::mat4 ortho_matrix;
+		glm::mat4 view_matrix;
 		glm::mat4 modelview_matrix;
 		glm::mat4 rotation_matrix;
 		glm::mat4 transform;

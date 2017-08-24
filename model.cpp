@@ -11,6 +11,7 @@ namespace cft
 		shader = shaderProgram;
 		translate = glm::vec3(0,0,0);
 		rotation_matrix = glm::mat4(1.0f);
+		view_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 		xrot=0.0,yrot=0.0,zrot=0.0;
 		uModelViewMatrix = glGetUniformLocation( shader, "uModelViewMatrix");
 		glGenVertexArrays (1, &vao);
@@ -69,7 +70,6 @@ namespace cft
 		afile.open(file, std::ofstream::out);
 		for(int i = 0; i < total_vertices; ++i)
 		{
-			std::cout << "printing\n";
 			afile << vertices[i].x << " " << vertices[i].y << " " << vertices[i].z  << " " << colors[i].x << " " << colors[i].y << " " << colors[i].z << std::endl;
 		}
 		afile.close();
@@ -78,15 +78,16 @@ namespace cft
 	{
 		rotation_matrix = glm::mat4(1.0f);
 		translate = glm::vec3(0.0f,0.0f,0.0f);
+		view_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 	}
 	void Model::InitInspectionMode()
 	{
-
+		view_matrix = glm::perspective(glm::radians(45.0f), 4.0f/3.0f, 0.1f, 100.0f);
 	}
 	void Model::RecenterModel()
 	{
 		glm::vec4 h_centroid = glm::vec4(centroid.x,centroid.y,centroid.z,1.0f);
-		glm::vec4 h_recenter = ortho_matrix*rotation_matrix*h_centroid;
+		glm::vec4 h_recenter = view_matrix*rotation_matrix*h_centroid;
 		glm::vec3 recenter = glm::vec3(h_recenter.x/h_recenter.w,h_recenter.y/h_recenter.w,h_recenter.z/h_recenter.w); 
 		translate = -recenter;// For Now
 	}
@@ -145,9 +146,9 @@ namespace cft
 	    rotation_matrix1 = glm::rotate(rotation_matrix1, yrot, glm::vec3(0.0f,1.0f,0.0f));
 	    rotation_matrix1 = glm::rotate(rotation_matrix1, zrot, glm::vec3(0.0f,0.0f,1.0f));
 	    rotation_matrix = rotation_matrix1*rotation_matrix;
-		ortho_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+		//view_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 		transform = glm::translate(glm::mat4(1.0f),translate);
-  		modelview_matrix = ortho_matrix*transform*rotation_matrix;
+  		modelview_matrix = view_matrix*transform*rotation_matrix;
   		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
   		glDrawArrays(GL_TRIANGLES, 0, total_vertices);
   		glBindVertexArray(0);
