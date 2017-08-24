@@ -11,22 +11,22 @@
 namespace cft
 {
 	// Screen Size
-	const int screen_width = 1920;
-	const int screen_height = 1080;
-	const int screen_depth = 640;
+	const int screen_width = 1000;
+	const int screen_height = 1000;
+	const int screen_depth = 1000;
 	// Shaders 
 	const std::string vertex_shader = "vertex_shader.glsl";
 	const std::string fragment_shader = "fragment_shader.glsl";
 
 	// Maximum vertices in the model
-	const int max_vertices = 100;
+	const int max_vertices = 500;
 
 	// Grid Space in the model
 	const int line_gap = 20;
 
 	//Rotation and Translation
-	const float delta_rot = 0.01;
-	const float delta_trans = 0.01;
+	const float delta_rot = 0.001;
+	const float delta_trans = 0.001;
 
 	//Camera position
 	const float camera_x = 0.0f;
