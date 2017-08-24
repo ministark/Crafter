@@ -31,13 +31,19 @@ namespace cft
 		std::fstream afile;
 		afile.open(file,std::fstream::in | std::fstream::out);
 		float x, y, z, r, g, b;
+
+		centroid = glm::vec3(0.0f,0.0f,0.0f);
 		while(afile >> x >> y >> z >> r >> g >> b)
 		{	
 			vertices.push_back(glm::vec4(x, y, z, 1.0f));
 			colors.push_back(glm::vec4(r,g,b,1.0f));
 			++total_vertices;
+			centroid.x += x;
+			centroid.y += y;
+			centroid.z += z;
 		}
 		afile.close();
+		centroid /= total_vertices;
 
 		// Copy the data to the VBO
 		glBindBuffer(GL_ARRAY_BUFFER,vbo);
@@ -68,11 +74,23 @@ namespace cft
 		}
 		afile.close();
 	}
+	void Model::RecenterModel()
+	{
+		translate = glm::vec3(0.0f,0.0f,0.0f);// For Now
+	}
 	void Model::AddTriangle(glm::vec4 *v, glm::vec4 *c)
 	{
-		vertices.push_back(v[0]); vertices.push_back(v[1]); vertices.push_back(v[2]);
-		colors.push_back(c[0]); colors.push_back(c[1]); colors.push_back(c[2]);
+		centroid *= total_vertices;
+		for (int i=0; i<3; i++)
+		{
+			vertices.push_back(v[i]);
+			colors.push_back(c[i]);
+			centroid.x += v[i].x;
+			centroid.y += v[i].y;
+			centroid.z += v[i].z;
+		}
 		total_vertices += 3;
+		centroid /= total_vertices;
 		// Copying the Data
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBindVertexArray(vao);
@@ -92,13 +110,19 @@ namespace cft
 	}
 	void Model::RemoveTriangle(glm::vec4 *v, glm::vec4 *c)
 	{
-		v[2] = vertices.back(); vertices.pop_back();
-		v[1] = vertices.back(); vertices.pop_back();
-		v[0] = vertices.back(); vertices.pop_back();
-		c[2] = colors.back(); colors.pop_back();
-		c[1] = colors.back(); colors.pop_back();
-		c[0] = colors.back(); colors.pop_back();
+		if (total_vertices < 3)
+			return;
+		centroid *= total_vertices;
+		for (int i=2; i>=0; i--)
+		{
+			v[i] = vertices.back();vertices.pop_back();
+			c[i] = colors.back();colors.pop_back();
+			centroid.x -= v[i].x;
+			centroid.y -= v[i].y;
+			centroid.z -= v[i].z;
+		}
 		total_vertices -= 3;
+		centroid /= total_vertices;
 	}
 	void Model::Render()
 	{

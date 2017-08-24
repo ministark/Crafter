@@ -66,12 +66,11 @@ namespace cft
 		glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(total_points*sizeof(glm::vec4)) );
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
-
-
 		
 		//Initialize Variables
 		state = MODELLING;
 		index = 0;
+		
 		// Setting the model
 		model = new cft::Model(shaderProgram);
 	}
@@ -120,31 +119,36 @@ namespace cft
 			key_R = false;
 			if (state == INSPECTION)
 			{
-				//Move the origin
-				model->translate.x = 0;
-				model->translate.y = 0;
-				model->translate.z = 0;
+				model->RecenterModel();
 			}
 		}
 		else if (key_W)
 		{
 			if (state == INSPECTION)
+			{
 				model->translate.y += delta_trans;
+			}
 		}
 		else if (key_A)
 		{
 			if (state == INSPECTION)
+			{
 				model->translate.x -= delta_trans;
+			}
 		}
 		else if (key_S)
 		{
 			if (state == INSPECTION)
+			{
 				model->translate.y -= delta_trans;
+			}
 		}
 		else if (key_D)
 		{
 			if (state == INSPECTION)
+			{
 				model->translate.x += delta_trans;
+			}
 		}
 		else if (key_Z)
 		{
@@ -162,6 +166,7 @@ namespace cft
 			else if (state == INSPECTION)
 			{
 				model->translate.z -= delta_trans;
+				
 			}
 		}
 		else if (key_up)

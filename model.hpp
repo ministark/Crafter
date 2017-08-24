@@ -36,11 +36,13 @@ namespace cft
 	public:
 		GLfloat xrot,yrot,zrot;
 		glm::vec3 translate;
+		glm::vec3 centroid;
 
 		Model();
 		Model(GLuint shaderProgram);
 		void LoadModel(std::string file);
 		void SaveModel(std::string file);
+		void RecenterModel();
 		void AddTriangle(glm::vec4 *v, glm::vec4 *c);	// Creates a triangle in the order 0 1 2 anti clockwise
 		void RemoveTriangle(glm::vec4 *v, glm::vec4 *c);	// Removes the most  recently added traingle and stores it in the array
 		void Render();
