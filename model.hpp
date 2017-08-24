@@ -44,6 +44,7 @@ namespace cft
 		void AddTriangle(glm::vec4 *v, glm::vec4 *c);	// Creates a triangle in the order 0 1 2 anti clockwise
 		void RemoveTriangle(glm::vec4 *v, glm::vec4 *c);	// Removes the most  recently added traingle and stores it in the array
 		void Render();
+		void PerspectiveRender();
 	};
 }
 #endif

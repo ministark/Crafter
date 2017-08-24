@@ -103,4 +103,18 @@ namespace cft
   		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
   		glDrawArrays(GL_TRIANGLES, 0, total_vertices);
 	}
+	void Model::PerspectiveRender()
+	{
+		glm::mat4 view = glm::lookAt(glm::vec3(0.0f,0.0f,10.0f),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.0f,1.0f,0.0f));	
+		glm::mat4 rotation_matrix1;
+		rotation_matrix1 = glm::rotate(glm::mat4(1.0f), xrot, glm::vec3(1.0f,0.0f,0.0f));
+	    rotation_matrix1 = glm::rotate(rotation_matrix1, yrot, glm::vec3(0.0f,1.0f,0.0f));
+	    rotation_matrix1 = glm::rotate(rotation_matrix1, zrot, glm::vec3(0.0f,0.0f,1.0f));
+	    rotation_matrix = rotation_matrix1*rotation_matrix;
+		ortho_matrix = glm::perspective(glm::radians(45.0f), 1.0f,  0.1f, 100.0f);
+		transform = glm::translate(glm::mat4(1.0f),translate);
+  		modelview_matrix = ortho_matrix*view*transform*rotation_matrix;
+  		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
+  		glDrawArrays(GL_TRIANGLES, 0, total_vertices);
+	}
 }
