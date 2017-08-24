@@ -76,7 +76,10 @@ namespace cft
 	}
 	void Model::RecenterModel()
 	{
-		translate = glm::vec3(0.0f,0.0f,0.0f);// For Now
+		glm::vec4 h_centroid = glm::vec4(centroid.x,centroid.y,centroid.z,1.0f);
+		glm::vec4 h_recenter = ortho_matrix*rotation_matrix*h_centroid;
+		glm::vec3 recenter = glm::vec3(h_recenter.x/h_recenter.w,h_recenter.y/h_recenter.w,h_recenter.z/h_recenter.w); 
+		translate = -recenter;// For Now
 	}
 	void Model::AddTriangle(glm::vec4 *v, glm::vec4 *c)
 	{
