@@ -6,8 +6,14 @@
 
 #define BUFFER_OFFSET( offset )   ((GLvoid*) (offset))
 
-
 #include <string>
+/**
+ * @file  config.hpp
+ * @brief  This stores all constants required to run the Crafter for simplicity of modifying
+ *
+ * 
+ */
+
 namespace cft
 {
 	// Screen Size

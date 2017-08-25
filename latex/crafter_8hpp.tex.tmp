@@ -1,0 +1,29 @@
+\hypertarget{crafter_8hpp}{}\section{crafter.\+hpp File Reference}
+\label{crafter_8hpp}\index{crafter.\+hpp@{crafter.\+hpp}}
+
+
+Class declaration for the program managing the state and models.  
+
+
+{\ttfamily \#include $<$G\+L/glew.\+h$>$}\\*
+{\ttfamily \#include $<$G\+L\+F\+W/glfw3.\+h$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}shader\+\_\+util.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}config.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}model.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}palette.\+hpp\char`\"{}}\\*
+Include dependency graph for crafter.\+hpp\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcft_1_1Crafter}{cft\+::\+Crafter}
+\begin{DoxyCompactList}\small\item\em Class that is basically the main program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class declaration for the program managing the state and models. 
+

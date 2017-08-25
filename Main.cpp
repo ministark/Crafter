@@ -3,10 +3,26 @@
 #include <iostream>
 #include "config.hpp"
 #include "crafter.hpp"
-// #include "gl_framework.hpp"
+
+/**
+\mainpage Modelling Utility
+
+This program is capable of creating raw models. Models are to be made using Modeling mode.
+While modeing Color could be selected using color palatte and triangle can be drawn of the 
+selected color. The inspection mode has features such as recentering about the centroid for
+viewing what has been modeled. The program also saves model in raw format and could load
+it for later use. Undo commands removes the last add vertices. Multiple use of undo retraces 
+the history of how the Model was created.
+*/
 
 using namespace std;
 
+/**
+ * @file   Main.cpp
+ * @brief  Main funciton which creates and passes the window to the Crafter
+ *
+ * 
+ */
 
 int main()
 {

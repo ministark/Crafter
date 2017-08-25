@@ -1,0 +1,201 @@
+\hypertarget{classcft_1_1Model}{}\section{cft\+:\+:Model Class Reference}
+\label{classcft_1_1Model}\index{cft\+::\+Model@{cft\+::\+Model}}
+
+
+Class that is abstraction of a 3\+D-\/\+Model.  
+
+
+
+
+{\ttfamily \#include $<$model.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcft_1_1Model_a3c0c1f66829e59fcab5786aac5086a4a}{Model} ()\hypertarget{classcft_1_1Model_a3c0c1f66829e59fcab5786aac5086a4a}{}\label{classcft_1_1Model_a3c0c1f66829e59fcab5786aac5086a4a}
+
+\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classcft_1_1Model_a1f3e508bf9546bc63970d2f9386093eb}{Model} (G\+Luint shader\+Program)
+\begin{DoxyCompactList}\small\item\em Overloaded constructor of the object. \end{DoxyCompactList}\item 
+void \hyperlink{classcft_1_1Model_a1f200fd7be2eee7ef2c7932d9fa62fc9}{Load\+Model} (std\+::string file)
+\begin{DoxyCompactList}\small\item\em Loads all the vertices of the model in a file. \end{DoxyCompactList}\item 
+void \hyperlink{classcft_1_1Model_ac1c81c55d6a29bfedaa156a65334b525}{Save\+Model} (std\+::string file)
+\begin{DoxyCompactList}\small\item\em Stores all the vertices of the model in a file. \end{DoxyCompactList}\item 
+void \hyperlink{classcft_1_1Model_a460583d0dbaffc9f25ee538b0110a457}{Init\+Modelling\+Mode} ()\hypertarget{classcft_1_1Model_a460583d0dbaffc9f25ee538b0110a457}{}\label{classcft_1_1Model_a460583d0dbaffc9f25ee538b0110a457}
+
+\begin{DoxyCompactList}\small\item\em Prepares the Matrices for orthogonal projection. \end{DoxyCompactList}\item 
+void \hyperlink{classcft_1_1Model_ace7b42bc64fdc1e7f41bb1d0b6e125c1}{Init\+Inspection\+Mode} ()\hypertarget{classcft_1_1Model_ace7b42bc64fdc1e7f41bb1d0b6e125c1}{}\label{classcft_1_1Model_ace7b42bc64fdc1e7f41bb1d0b6e125c1}
+
+\begin{DoxyCompactList}\small\item\em Prepares the Matrices for perspective projection and sets the camera. \end{DoxyCompactList}\item 
+void \hyperlink{classcft_1_1Model_a3199cede29c78675f69fc7d589667218}{Recenter\+Model} ()\hypertarget{classcft_1_1Model_a3199cede29c78675f69fc7d589667218}{}\label{classcft_1_1Model_a3199cede29c78675f69fc7d589667218}
+
+\begin{DoxyCompactList}\small\item\em Recenters the \hyperlink{classcft_1_1Model}{Model} to its centroid. \end{DoxyCompactList}\item 
+void \hyperlink{classcft_1_1Model_aab5427ba9dbd7694c8b42453b63ac157}{Add\+Triangle} (glm\+::vec4 $\ast$v, glm\+::vec4 $\ast$c)
+\begin{DoxyCompactList}\small\item\em Adds a triangle in the model. \end{DoxyCompactList}\item 
+void \hyperlink{classcft_1_1Model_ac706c44d6bb864ca80449e963f9dbc22}{Remove\+Triangle} (glm\+::vec4 $\ast$v, glm\+::vec4 $\ast$c)
+\begin{DoxyCompactList}\small\item\em Adds a triangle in the model. \end{DoxyCompactList}\item 
+void \hyperlink{classcft_1_1Model_a0e9799445aacdd8d4ace2465dbc6f350}{Render} ()\hypertarget{classcft_1_1Model_a0e9799445aacdd8d4ace2465dbc6f350}{}\label{classcft_1_1Model_a0e9799445aacdd8d4ace2465dbc6f350}
+
+\begin{DoxyCompactList}\small\item\em Binds the vertex buffers and Draws the \hyperlink{classcft_1_1Model}{Model}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+G\+Lfloat \hyperlink{classcft_1_1Model_acbb04bd0c86255df2b5beb20b746d454}{xrot}\hypertarget{classcft_1_1Model_acbb04bd0c86255df2b5beb20b746d454}{}\label{classcft_1_1Model_acbb04bd0c86255df2b5beb20b746d454}
+
+\begin{DoxyCompactList}\small\item\em Values to rotate the object every frame. \end{DoxyCompactList}\item 
+G\+Lfloat \hyperlink{classcft_1_1Model_a03ad51f746ea311de670b3963b30ca11}{yrot}\hypertarget{classcft_1_1Model_a03ad51f746ea311de670b3963b30ca11}{}\label{classcft_1_1Model_a03ad51f746ea311de670b3963b30ca11}
+
+\begin{DoxyCompactList}\small\item\em Values to rotate the object every frame. \end{DoxyCompactList}\item 
+G\+Lfloat \hyperlink{classcft_1_1Model_a77a1d55e1de845a548a00f3a037cc846}{zrot}\hypertarget{classcft_1_1Model_a77a1d55e1de845a548a00f3a037cc846}{}\label{classcft_1_1Model_a77a1d55e1de845a548a00f3a037cc846}
+
+\begin{DoxyCompactList}\small\item\em Values to rotate the object every frame. \end{DoxyCompactList}\item 
+glm\+::vec3 \hyperlink{classcft_1_1Model_a8a73f59bc372ee82bd680a4fedb4c245}{translate}\hypertarget{classcft_1_1Model_a8a73f59bc372ee82bd680a4fedb4c245}{}\label{classcft_1_1Model_a8a73f59bc372ee82bd680a4fedb4c245}
+
+\begin{DoxyCompactList}\small\item\em Matrix for translation. \end{DoxyCompactList}\item 
+glm\+::vec3 \hyperlink{classcft_1_1Model_a7c3ffd13ca3897bc54b5a5f68e48635c}{centroid}\hypertarget{classcft_1_1Model_a7c3ffd13ca3897bc54b5a5f68e48635c}{}\label{classcft_1_1Model_a7c3ffd13ca3897bc54b5a5f68e48635c}
+
+\begin{DoxyCompactList}\small\item\em Centroid of the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classcft_1_1Model_a88fa7ed2fc1df377eae4a8f5ebec5573}{total\+\_\+vertices}\hypertarget{classcft_1_1Model_a88fa7ed2fc1df377eae4a8f5ebec5573}{}\label{classcft_1_1Model_a88fa7ed2fc1df377eae4a8f5ebec5573}
+
+\begin{DoxyCompactList}\small\item\em Store the total number of the vertices. \end{DoxyCompactList}\item 
+std\+::vector$<$ glm\+::vec4 $>$ \hyperlink{classcft_1_1Model_a807aeb1a9028c5dba4cff151d8e3eeb7}{vertices}\hypertarget{classcft_1_1Model_a807aeb1a9028c5dba4cff151d8e3eeb7}{}\label{classcft_1_1Model_a807aeb1a9028c5dba4cff151d8e3eeb7}
+
+\begin{DoxyCompactList}\small\item\em Store the vertices of the model. \end{DoxyCompactList}\item 
+std\+::vector$<$ glm\+::vec4 $>$ \hyperlink{classcft_1_1Model_acebb2d746a7f386c145c4c63c636cc8a}{colors}\hypertarget{classcft_1_1Model_acebb2d746a7f386c145c4c63c636cc8a}{}\label{classcft_1_1Model_acebb2d746a7f386c145c4c63c636cc8a}
+
+\begin{DoxyCompactList}\small\item\em Store the Color of vertices. \end{DoxyCompactList}\item 
+G\+Luint \hyperlink{classcft_1_1Model_a25d4b411fc51d3e92a6afb62dfc7c70b}{vbo}\hypertarget{classcft_1_1Model_a25d4b411fc51d3e92a6afb62dfc7c70b}{}\label{classcft_1_1Model_a25d4b411fc51d3e92a6afb62dfc7c70b}
+
+\begin{DoxyCompactList}\small\item\em The vertex buffer which stores the vertices of the model. \end{DoxyCompactList}\item 
+G\+Luint \hyperlink{classcft_1_1Model_a5e6908dcb906d1ba8a79181be7e4ddce}{vao}\hypertarget{classcft_1_1Model_a5e6908dcb906d1ba8a79181be7e4ddce}{}\label{classcft_1_1Model_a5e6908dcb906d1ba8a79181be7e4ddce}
+
+\begin{DoxyCompactList}\small\item\em The array object which stores all the binding of vertex buffer. \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{classcft_1_1Model_aed40a6c3ab633a2de87f066d7e2ed5ce}{view\+\_\+matrix}\hypertarget{classcft_1_1Model_aed40a6c3ab633a2de87f066d7e2ed5ce}{}\label{classcft_1_1Model_aed40a6c3ab633a2de87f066d7e2ed5ce}
+
+\begin{DoxyCompactList}\small\item\em Stores the view matrix i.\+e transformation to camera coordinate. \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{classcft_1_1Model_a89377ec3e5c9d2840323b09ad7d32fc6}{projection\+\_\+matrix}\hypertarget{classcft_1_1Model_a89377ec3e5c9d2840323b09ad7d32fc6}{}\label{classcft_1_1Model_a89377ec3e5c9d2840323b09ad7d32fc6}
+
+\begin{DoxyCompactList}\small\item\em Stores the projection matrix to reduce a dimension. \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{classcft_1_1Model_a67e3c1d4c9db01015040d279c82ea08a}{modelview\+\_\+matrix}\hypertarget{classcft_1_1Model_a67e3c1d4c9db01015040d279c82ea08a}{}\label{classcft_1_1Model_a67e3c1d4c9db01015040d279c82ea08a}
+
+\begin{DoxyCompactList}\small\item\em Stores the transformation of the model. \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{classcft_1_1Model_ae734ccf60224cd323840ad561639110b}{rotation\+\_\+matrix}\hypertarget{classcft_1_1Model_ae734ccf60224cd323840ad561639110b}{}\label{classcft_1_1Model_ae734ccf60224cd323840ad561639110b}
+
+\begin{DoxyCompactList}\small\item\em Stores the Rotation of the model. \end{DoxyCompactList}\item 
+glm\+::mat4 \hyperlink{classcft_1_1Model_a13fdbe9081361f1cb953e3732e45045a}{transform}\hypertarget{classcft_1_1Model_a13fdbe9081361f1cb953e3732e45045a}{}\label{classcft_1_1Model_a13fdbe9081361f1cb953e3732e45045a}
+
+\begin{DoxyCompactList}\small\item\em Stores the translation of the object. \end{DoxyCompactList}\item 
+G\+Luint \hyperlink{classcft_1_1Model_afee6e788975d7109251c4a53e466fc56}{u\+Model\+View\+Matrix}\hypertarget{classcft_1_1Model_afee6e788975d7109251c4a53e466fc56}{}\label{classcft_1_1Model_afee6e788975d7109251c4a53e466fc56}
+
+\begin{DoxyCompactList}\small\item\em A pointer to the location of the u\+Model\+View\+Matrix in the shader. \end{DoxyCompactList}\item 
+G\+Luint \hyperlink{classcft_1_1Model_abf5e28a2f2ae754aa00f5fc92c983dc5}{shader}\hypertarget{classcft_1_1Model_abf5e28a2f2ae754aa00f5fc92c983dc5}{}\label{classcft_1_1Model_abf5e28a2f2ae754aa00f5fc92c983dc5}
+
+\begin{DoxyCompactList}\small\item\em Handle to the complied shader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class that is abstraction of a 3\+D-\/\+Model. 
+
+This class stores the vertices of the model along with the color values. It also exposes variables to translate and rotate the object. The matrix stores different Matrices like projection and transform. It has functions to load and store the 3\+D-\/\+Model in a file. Other functions to add and remove triangles from the model 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{cft\+::\+Model@{cft\+::\+Model}!Model@{Model}}
+\index{Model@{Model}!cft\+::\+Model@{cft\+::\+Model}}
+\subsubsection[{\texorpdfstring{Model(\+G\+Luint shader\+Program)}{Model(GLuint shaderProgram)}}]{\setlength{\rightskip}{0pt plus 5cm}cft\+::\+Model\+::\+Model (
+\begin{DoxyParamCaption}
+\item[{G\+Luint}]{shader\+Program}
+\end{DoxyParamCaption}
+)}\hypertarget{classcft_1_1Model_a1f3e508bf9546bc63970d2f9386093eb}{}\label{classcft_1_1Model_a1f3e508bf9546bc63970d2f9386093eb}
+
+
+Overloaded constructor of the object. 
+
+This initilizes the vertex buffers, vector, and various Matrices 
+\begin{DoxyParams}{Parameters}
+{\em shader\+Program} & a handle to shader to save a copy for the model \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{cft\+::\+Model@{cft\+::\+Model}!Add\+Triangle@{Add\+Triangle}}
+\index{Add\+Triangle@{Add\+Triangle}!cft\+::\+Model@{cft\+::\+Model}}
+\subsubsection[{\texorpdfstring{Add\+Triangle(glm\+::vec4 $\ast$v, glm\+::vec4 $\ast$c)}{AddTriangle(glm::vec4 *v, glm::vec4 *c)}}]{\setlength{\rightskip}{0pt plus 5cm}void cft\+::\+Model\+::\+Add\+Triangle (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec4 $\ast$}]{v, }
+\item[{glm\+::vec4 $\ast$}]{c}
+\end{DoxyParamCaption}
+)}\hypertarget{classcft_1_1Model_aab5427ba9dbd7694c8b42453b63ac157}{}\label{classcft_1_1Model_aab5427ba9dbd7694c8b42453b63ac157}
+
+
+Adds a triangle in the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & The Array of vertices should be of size 3 \\
+\hline
+{\em c} & The Array of color should be of size 3 \\
+\hline
+\end{DoxyParams}
+\index{cft\+::\+Model@{cft\+::\+Model}!Load\+Model@{Load\+Model}}
+\index{Load\+Model@{Load\+Model}!cft\+::\+Model@{cft\+::\+Model}}
+\subsubsection[{\texorpdfstring{Load\+Model(std\+::string file)}{LoadModel(std::string file)}}]{\setlength{\rightskip}{0pt plus 5cm}void cft\+::\+Model\+::\+Load\+Model (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{file}
+\end{DoxyParamCaption}
+)}\hypertarget{classcft_1_1Model_a1f200fd7be2eee7ef2c7932d9fa62fc9}{}\label{classcft_1_1Model_a1f200fd7be2eee7ef2c7932d9fa62fc9}
+
+
+Loads all the vertices of the model in a file. 
+
+Loads the vertices and their color from raw format in the file specified to the vectors and vertex buffers 
+\begin{DoxyParams}{Parameters}
+{\em file} & The path where the model has to be Loaded form \\
+\hline
+\end{DoxyParams}
+\index{cft\+::\+Model@{cft\+::\+Model}!Remove\+Triangle@{Remove\+Triangle}}
+\index{Remove\+Triangle@{Remove\+Triangle}!cft\+::\+Model@{cft\+::\+Model}}
+\subsubsection[{\texorpdfstring{Remove\+Triangle(glm\+::vec4 $\ast$v, glm\+::vec4 $\ast$c)}{RemoveTriangle(glm::vec4 *v, glm::vec4 *c)}}]{\setlength{\rightskip}{0pt plus 5cm}void cft\+::\+Model\+::\+Remove\+Triangle (
+\begin{DoxyParamCaption}
+\item[{glm\+::vec4 $\ast$}]{v, }
+\item[{glm\+::vec4 $\ast$}]{c}
+\end{DoxyParamCaption}
+)}\hypertarget{classcft_1_1Model_ac706c44d6bb864ca80449e963f9dbc22}{}\label{classcft_1_1Model_ac706c44d6bb864ca80449e963f9dbc22}
+
+
+Adds a triangle in the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & The Array of vertices that have been removed \\
+\hline
+{\em c} & The Array of color corresponding to the vertices that have been removed \\
+\hline
+\end{DoxyParams}
+\index{cft\+::\+Model@{cft\+::\+Model}!Save\+Model@{Save\+Model}}
+\index{Save\+Model@{Save\+Model}!cft\+::\+Model@{cft\+::\+Model}}
+\subsubsection[{\texorpdfstring{Save\+Model(std\+::string file)}{SaveModel(std::string file)}}]{\setlength{\rightskip}{0pt plus 5cm}void cft\+::\+Model\+::\+Save\+Model (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{file}
+\end{DoxyParamCaption}
+)}\hypertarget{classcft_1_1Model_ac1c81c55d6a29bfedaa156a65334b525}{}\label{classcft_1_1Model_ac1c81c55d6a29bfedaa156a65334b525}
+
+
+Stores all the vertices of the model in a file. 
+
+Stores the vertices and their color in raw format in the file specified from the vertices vector 
+\begin{DoxyParams}{Parameters}
+{\em file} & The path where the model has to be stored \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{model_8hpp}{model.\+hpp}\item 
+model.\+cpp\end{DoxyCompactItemize}
