@@ -196,11 +196,12 @@ namespace cft
 		else if (key_left)
 		{
 			if (state == INSPECTION)
-			model->yrot += delta_rot;	
+				model->yrot += delta_rot;	
 		}
 		else if (key_right)
 		{
-			model->yrot += -delta_rot;
+			if (state == INSPECTION)
+				model->yrot += -delta_rot;
 		}
 		else if (key_PgUp)
 		{
