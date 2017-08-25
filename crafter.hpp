@@ -10,35 +10,71 @@
 #include "model.hpp"
 #include "palette.hpp"
 
+/**
+ * @file   crafter.hpp
+ * @brief  Class declaration for the program managing the state and models
+ *
+ * 
+ */
 namespace cft
 {
+	/**
+  	*  	@brief Class that is basically the main program. 
+  	*
+  	* 	This class has various input handler and hand various functions changing state
+  	*	variables accordingly. State variable defines the behaviour of the rendering and 
+  	*	modification of the model or loading and saving of the model. It has two modes 
+  	*	Modelling and Inspection modes. Modelling mode lets you create model by generating
+  	*	vertices. Inspection lets you view your model in perspective projection 
+  	*/ 
 	class Crafter
 	{
-	private:
-		GLFWwindow *window;	// Holds the reference to the window
+		/** @brief Store the handle for GLFW Window */
+		GLFWwindow *window;
 		
-		GLuint shaderProgram;// Reference to the shader
+		/** @brief Store the handle for shader program */
+		GLuint shaderProgram;
+
+		//@{
+		 /** @brief The vertex buffer and array buffers which stores the vertices of the model and other references */
 		GLuint vbo, vao; 
+		//@}
+
+		/** @brief Pointer pointing to modeling matrix in the shader */
 		GLuint uModelViewMatrix;
 
+		//@{
+		/** @brief Variable for displaying points marked on the screen during modeling mode */
 		glm::vec4 vertices[3];
 		glm::vec4 color[3];
 		glm::vec4 *points;
 		glm::vec4 *point_color;
+		//}@
 		
+		//@{
+		/** @brief Varible for displaying the grid during the Modelling mode */
 		int state,index,total_lines,total_points;
-		
+		//@}
+
+		/** @brief The current model in focus */
 		Model *model;
+
+		/** @brief Color palette to choose color from */
 		Palette *palette;
 	public:
+		/** @brief Empty constructor should be made private to force to use overloaded constructor */
 		Crafter();
 
-		// Rendering
-		void Init(GLFWwindow *window); // Initializes the Engine for rendering
-		void Render();
+		/** @brief Initializes all the buffers and variables and set the handlers */
+		void Init(GLFWwindow *window);
+
+		/** @brief Updates all the variable and state and sets the matrices accordingly */
 		void Update();
+		/** @brief Renders the grid, pallete and model in modelling mode and only model in inspection mode */
+		void Render();
 		
-		// Handlers are static as non static member functions couldn't be passed as arguments
+		// @{
+		/** @brief Handlers are static as non static member functions couldn't be passed as arguments so are the variable storing the state*/
 		static void KeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 		static void MouseHandler(GLFWwindow* window, int button, int action, int mods);
 		static void CursorHandler(GLFWwindow* window, double x, double y);
@@ -50,7 +86,7 @@ namespace cft
 		static bool button_left;
 		static double posx,posy,posz;
 		static int col_r,col_g,col_b;
-
+		//@}
 	};
 }
 #endif
