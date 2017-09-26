@@ -11,6 +11,7 @@ namespace cft
 		shader = shaderProgram;
 		translate = glm::vec3(0,0,0);centroid = glm::vec3(0,0,0);
 		rotation_matrix = glm::mat4(1.0f);
+		scene_matrix = glm::mat4(1.0f);
 		projection_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 		xrot=0.0,yrot=0.0,zrot=0.0;
 		uModelViewMatrix = glGetUniformLocation( shader, "uModelViewMatrix");
@@ -87,10 +88,7 @@ namespace cft
 	}
 	void Model::RecenterModel()
 	{
-		glm::vec4 h_centroid = glm::vec4(centroid.x,centroid.y,centroid.z,1.0f);
-		glm::vec4 h_recenter = projection_matrix*rotation_matrix*h_centroid;
-		glm::vec3 recenter = glm::vec3(h_recenter.x/h_recenter.w,h_recenter.y/h_recenter.w,h_recenter.z/h_recenter.w); 
-		translate = -recenter;
+		translate = -centroid;
 	}
 	void Model::AddTriangle(glm::vec4 *v, glm::vec4 *c)
 	{

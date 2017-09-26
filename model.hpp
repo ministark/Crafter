@@ -71,6 +71,9 @@ namespace cft
 		glm::vec3 centroid;
 		//@}
 
+		/** @brief Stores the Scene matrix stores the changes done to model */
+		glm::mat4 scene_matrix;
+
 		/** @brief Empty Constructor */
 		Model();
 
