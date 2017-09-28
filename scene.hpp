@@ -56,6 +56,7 @@ namespace cft
 
 
 		glm::vec4 *point,*point_color;
+		int line_points;
 		int total_points;
 
 		/** @brief All the models*/
