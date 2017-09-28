@@ -3,7 +3,7 @@ namespace cft
 {
 	glm::mat4 Scene::WCSToVCS()
 	{
-		return glm::translate(glm::mat4(1.0f),-Eye);;
+		return glm::translate(glm::mat4(1.0f),-Eye);
 	}
 
 	glm::mat4 Scene::VCSToCCS()

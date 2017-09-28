@@ -42,9 +42,9 @@ namespace cft
 
 		//@{
 		/** @brief Variable for the frustum, Eye, Lookat, and up vector */
-		glm::vec4 Eye;
-		glm::vec4 LookAt;
-		glm::vec4 LookUp;
+		glm::vec3 Eye;
+		glm::vec3 LookAt;
+		glm::vec3 LookUp;
 		double L, R, B, T, N, F;
 		//}@
 
