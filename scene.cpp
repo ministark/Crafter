@@ -91,7 +91,7 @@ namespace cft
 		    rotation_matrix1 = glm::rotate(rotation_matrix1, ry, glm::vec3(0.0f,1.0f,0.0f));
 		    rotation_matrix1 = glm::rotate(rotation_matrix1, rz, glm::vec3(0.0f,0.0f,1.0f));
 		    models[i]->rotation_matrix = rotation_matrix1;
-		    models[i]->InitInspectionMode();
+		    models[i]->InitModellingMode();
 		}
 
 		afile >> Eye.x >> Eye.y >> Eye.z;
@@ -126,7 +126,7 @@ namespace cft
 		point[22] = glm::vec4(R,B,-N,1.0f);
 		point[23] = glm::vec4(fR,fB,-F,1.0f);
 		for (int i=0; i<24; i++)
-			point_color[i] = glm::vec4(0.0f,1.0f,1.0f,1.0f);
+			point_color [i] = glm::vec4(0.0f,1.0f,1.0f,1.0f);
 		glm::mat4 transform_matrix = WCSToVCS();
 		for (int i=0; i<24; i++)
 		{
@@ -238,7 +238,7 @@ namespace cft
 		delta_rotation_matrix = glm::rotate(glm::mat4(1.0f), xrot, glm::vec3(1.0f,0.0f,0.0f));
 	    delta_rotation_matrix = glm::rotate(delta_rotation_matrix, yrot, glm::vec3(0.0f,1.0f,0.0f));
 	    delta_rotation_matrix = glm::rotate(delta_rotation_matrix, zrot, glm::vec3(0.0f,0.0f,1.0f));
-	    rotation_matrix = rotation_matrix*delta_rotation_matrix;
+	    rotation_matrix = delta_rotation_matrix*rotation_matrix;
 	    glm::mat4 translation_matrix = glm::translate(glm::mat4(1.0f),translate);
 	    glm::mat4 model_scene_matrix = translation_matrix*rotation_matrix*scene_matrix;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -246,8 +246,8 @@ namespace cft
   		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBindVertexArray(vao);
 		glPointSize(4.0);
-		glm::mat4 ortho_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
-		glm::mat4 view_matrix = ortho_matrix*scene_matrix;
+		glm::mat4 ortho_matrix = glm::ortho(cft::left, cft::right, cft::top, cft::bottom, cft::near, cft::far);
+		glm::mat4 view_matrix = ortho_matrix*model_scene_matrix;
 		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(view_matrix));
 		glDrawArrays(GL_LINES, 0, total_points);
 		glBindVertexArray(0);

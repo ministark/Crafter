@@ -31,8 +31,8 @@ namespace cft
 	const int line_gap = 20;
 
 	//Rotation and Translation
-	const float delta_rot = 0.01;
-	const float delta_trans = 0.01;
+	const float delta_rot = 0.001;
+	const float delta_trans = 0.001;
 
 	//Camera position
 	const float camera_x = 0.0f;
@@ -44,6 +44,15 @@ namespace cft
 	const float ymin = 0.0f;
 	const float xmax = screen_width;
 	const float ymax = 200.0f;
+
+	//Ortho
+	const float left 	=	-2.0; 
+	const float right 	=	2.0;
+	const float top 	= 	-2.0;
+	const float bottom 	=	2.0;
+	const float near 	= 	-20.0;
+	const float far 	=	20.0;
+
 
 
 }

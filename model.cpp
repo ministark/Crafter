@@ -12,7 +12,7 @@ namespace cft
 		scaling = glm::vec3(1,1,1);
 		translate = glm::vec3(0,0,0);centroid = glm::vec3(0,0,0);
 		rotation_matrix = glm::mat4(1.0f);
-		projection_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+		projection_matrix = glm::ortho(cft::left, cft::right, cft::top, cft::bottom, cft::near, cft::far);
 		xrot=0.0,yrot=0.0,zrot=0.0;
 		uModelViewMatrix = glGetUniformLocation( shader, "uModelViewMatrix");
 		glGenVertexArrays (1, &vao);
@@ -79,7 +79,7 @@ namespace cft
 	{
 		rotation_matrix = glm::mat4(1.0f);
 		translate = glm::vec3(0.0f,0.0f,0.0f);
-		projection_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+		projection_matrix = glm::ortho(cft::left, cft::right, cft::top, cft::bottom, cft::near, cft::far);
 	}
 	void Model::InitInspectionMode()
 	{
