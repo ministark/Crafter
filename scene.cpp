@@ -65,29 +65,13 @@ namespace cft
 
   		uModelViewMatrix = glGetUniformLocation( shaderProgram, "uModelViewMatrix");
 
+  		total_points = 25;
+  		point = new glm::vec4[25];
+  		point_color = new glm::vec4[25];
+
   		LoadScene("myscene.scn");
 	}
 
-	
-	void Scene::Render()
-	{
-		glm::mat4 delta_rotation_matrix;
-		delta_rotation_matrix = glm::rotate(glm::mat4(1.0f), xrot, glm::vec3(1.0f,0.0f,0.0f));
-	    delta_rotation_matrix = glm::rotate(delta_rotation_matrix, yrot, glm::vec3(0.0f,1.0f,0.0f));
-	    delta_rotation_matrix = glm::rotate(delta_rotation_matrix, zrot, glm::vec3(0.0f,0.0f,1.0f));
-	    rotation_matrix = rotation_matrix*delta_rotation_matrix;
-	    glm::mat4 translation_matrix = glm::translate(glm::mat4(1.0f),translate);
-	    glm::mat4 model_scene_matrix = translation_matrix*rotation_matrix*scene_matrix;
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  		glUseProgram(shaderProgram);
-		for (int i = 0; i < 3; ++i)
-		{
-			models[i]->Render(model_scene_matrix);
-		}
-		xrot = 0.0f;
-		yrot = 0.0f;
-		zrot = 0.0f;
-	}
 
 	void Scene::LoadScene(std::string file)
 	{
@@ -103,7 +87,7 @@ namespace cft
 			GLfloat rx, ry, rz;	afile >> rx >> ry >> rz;
 			afile >> models[i]->translate.x  >> models[i]->translate.y >> models[i]->translate.z;
 			glm::mat4 rotation_matrix1;
-			rotation_matrix1 = glm::rotate(glm::mat4(1.0f), rx, glm::vec3(1.0f,0.0f,0.0f));
+			rotation_matrix1 = glm::rotate(glm::mat4(1.00f), rx, glm::vec3(1.0f,0.0f,0.0f));
 		    rotation_matrix1 = glm::rotate(rotation_matrix1, ry, glm::vec3(0.0f,1.0f,0.0f));
 		    rotation_matrix1 = glm::rotate(rotation_matrix1, rz, glm::vec3(0.0f,0.0f,1.0f));
 		    models[i]->rotation_matrix = rotation_matrix1;
@@ -116,6 +100,53 @@ namespace cft
 		afile >> L >> R >> B >> T;
 		afile >> N >> F;
 		afile.close();
+		double fL = L*(F/N),fR = R*(F/N),fB = B*(F/N),fT = T*(F/N);
+		point[0] = glm::vec4(L,T,-N,1.0f);
+		point[1] = glm::vec4(R,T,-N,1.0f);
+		point[2] = glm::vec4(L,T,-N,1.0f);
+		point[3] = glm::vec4(L,B,-N,1.0f);
+		point[4] = glm::vec4(R,B,-N,1.0f);
+		point[5] = glm::vec4(L,B,-N,1.0f);
+		point[6] = glm::vec4(R,B,-N,1.0f);
+		point[7] = glm::vec4(R,T,-N,1.0f);
+		point[8] = glm::vec4(fL,fT,-F,1.0f);
+		point[9] = glm::vec4(fR,fT,-F,1.0f);
+		point[10] = glm::vec4(fL,fT,-F,1.0f);
+		point[11] = glm::vec4(fL,fB,-F,1.0f);
+		point[12] = glm::vec4(fR,fB,-F,1.0f);
+		point[13] = glm::vec4(fL,fB,-F,1.0f);
+		point[14] = glm::vec4(fR,fB,-F,1.0f);
+		point[15] = glm::vec4(fR,fT,-F,1.0f);
+		point[16] = glm::vec4(L,T,-N,1.0f);
+		point[17] = glm::vec4(fL,fT,-F,1.0f);
+		point[18] = glm::vec4(R,T,-N,1.0f);
+		point[19] = glm::vec4(fR,fT,-F,1.0f);
+		point[20] = glm::vec4(L,B,-N,1.0f);
+		point[21] = glm::vec4(fL,fB,-F,1.0f);
+		point[22] = glm::vec4(R,B,-N,1.0f);
+		point[23] = glm::vec4(fR,fB,-F,1.0f);
+		for (int i=0; i<24; i++)
+			point_color[i] = glm::vec4(0.0f,1.0f,1.0f,1.0f);
+		glm::mat4 transform_matrix = WCSToVCS();
+		for (int i=0; i<24; i++)
+		{
+			point[i] = transform_matrix*point[i];
+		}
+		glGenVertexArrays (1, &vao);
+  		glBindVertexArray (vao);
+		glGenBuffers (1, &vbo);
+  		glBindBuffer (GL_ARRAY_BUFFER, vbo);
+  		glBufferData (GL_ARRAY_BUFFER, 2*total_points*sizeof(glm::vec4), 0, GL_STATIC_DRAW);
+  		glBufferSubData( GL_ARRAY_BUFFER, 0, total_points*sizeof(glm::vec4), point );
+  		glBufferSubData( GL_ARRAY_BUFFER, total_points*sizeof(glm::vec4), total_points*sizeof(glm::vec4), point_color );
+  		GLuint vPosition = glGetAttribLocation( shaderProgram, "vPosition" );
+		glEnableVertexAttribArray( vPosition );
+		glVertexAttribPointer( vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0) );
+		GLuint vColor = glGetAttribLocation( shaderProgram, "vColor" ); 
+		glEnableVertexAttribArray( vColor );
+		glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(total_points*sizeof(glm::vec4)) );
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
 	}	
 	void Scene::Update()
 	{
@@ -201,6 +232,35 @@ namespace cft
 		}
 	}
 
+	void Scene::Render()
+	{
+		glm::mat4 delta_rotation_matrix;
+		delta_rotation_matrix = glm::rotate(glm::mat4(1.0f), xrot, glm::vec3(1.0f,0.0f,0.0f));
+	    delta_rotation_matrix = glm::rotate(delta_rotation_matrix, yrot, glm::vec3(0.0f,1.0f,0.0f));
+	    delta_rotation_matrix = glm::rotate(delta_rotation_matrix, zrot, glm::vec3(0.0f,0.0f,1.0f));
+	    rotation_matrix = rotation_matrix*delta_rotation_matrix;
+	    glm::mat4 translation_matrix = glm::translate(glm::mat4(1.0f),translate);
+	    glm::mat4 model_scene_matrix = translation_matrix*rotation_matrix*scene_matrix;
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  		glUseProgram(shaderProgram);
+  		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBindVertexArray(vao);
+		glPointSize(4.0);
+		glm::mat4 ortho_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+		glm::mat4 view_matrix = ortho_matrix*scene_matrix;
+		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(view_matrix));
+		glDrawArrays(GL_LINES, 0, total_points);
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		for (int i = 0; i < 3; ++i)
+		{
+			models[i]->Render(model_scene_matrix);
+		}
+		xrot = 0.0f;
+		yrot = 0.0f;
+		zrot = 0.0f;
+	}
+
 	void Scene::KeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods) 
 	{
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -262,6 +322,7 @@ namespace cft
 		else if (key == GLFW_KEY_X && action == GLFW_RELEASE)
 			key_x = false;
 	}
+
 
 	void Scene::MouseHandler(GLFWwindow* window, int button, int action, int mods)
 	{
