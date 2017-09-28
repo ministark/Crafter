@@ -3,12 +3,25 @@ namespace cft
 {
 	glm::mat4 Scene::WCSToVCS()
 	{
-		return glm::translate(glm::mat4(1.0f),-Eye);
+		glm::vec3 n = glm::normalize(-LookAt+Eye);
+		glm::vec3 u = glm::normalize(glm::cross(LookUp,n));
+		glm::vec3 v =glm::cross(n,u);
+		return glm::mat4({
+			{u.x,v.x,n.x,0},
+			{u.y,v.y,n.y,0},
+			{u.z,v.z,n.z,0},
+			{-Eye.x,-Eye.y,-Eye.z,1}
+			});
 	}
 
 	glm::mat4 Scene::VCSToCCS()
 	{
-		return glm::mat4(1.0f);
+		return glm::mat4({
+			{(2*N)/(R-L),0,0,0},
+			{0,(2*N)/(T-B),0,0},
+			{(R+L)/(R-L),(T+B)/(T-B),(-F-N)/(F-N),-1},
+			{0,0,(-2*F*N)/(F-N),0}
+		});
 	}
 
 	glm::mat4 Scene::CCSToNDCS()
@@ -89,10 +102,9 @@ namespace cft
 
 		afile >> Eye.x >> Eye.y >> Eye.z;
 		afile >> LookAt.x >> LookAt.y >> LookAt.z;
-		afile >> LookUp.x >> LookUp.z >> LookUp.z;
+		afile >> LookUp.x >> LookUp.y >> LookUp.z;
 		afile >> L >> R >> B >> T;
 		afile >> N >> F;
-	
 		afile.close();
 	}	
 	void Scene::UpdateScene(glm::mat4 scene_matrix)
