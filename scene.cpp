@@ -95,34 +95,47 @@ namespace cft
 	
 		afile.close();
 	}	
-
+	void Scene::UpdateScene(glm::mat4 scene_matrix)
+	{
+		int len = models.size();
+		for (int i=0; i<len; i++)
+			models[i]->scene_matrix = scene_matrix;
+	}
 	void Scene::Update()
 	{
 
 		if (key_1)
 		{
-	
+			glm::mat4 scene_matrix = glm::mat4(1.0f);
+			scene_matrix *= WCSToVCS();
+			key_1 = false;
+
 		}
 		else if (key_2)
 		{
-
+			glm::mat4 scene_matrix = glm::mat4(1.0f);
+			scene_matrix *= WCSToVCS();
+			scene_matrix *= VCSToCCS();		
+			key_2 = false;	
 		}
 		else if (key_3)
 		{
-
+			glm::mat4 scene_matrix = glm::mat4(1.0f);
+			scene_matrix *= WCSToVCS();
+			scene_matrix *= VCSToCCS();
+			scene_matrix *= CCSToNDCS();
+			key_3 = false;
 		}
 		else if (key_4)
-		{
-
+		{	
+			glm::mat4 scene_matrix = glm::mat4(1.0f);
+			scene_matrix *= WCSToVCS();
+			scene_matrix *= VCSToCCS();
+			scene_matrix *= CCSToNDCS();
+			scene_matrix *= NDCSToDCS();
+			key_4 = false;
 		}
-		else if (key_5)
-		{
-
-		}
-		else if (key_6)
-		{
-
-		}
+		
 	}
 
 	void Scene::KeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods) 
@@ -131,40 +144,16 @@ namespace cft
 			glfwSetWindowShouldClose(window, GL_TRUE);
 		else if (key == GLFW_KEY_1 && action == GLFW_PRESS)
 			key_1 = true;
-		else if (key == GLFW_KEY_1 && action == GLFW_RELEASE)
-		{
-			key_1 = false;
-		}
+		
 		else if (key == GLFW_KEY_2 && action == GLFW_PRESS)
 			key_2 = true;
-		else if (key == GLFW_KEY_2 && action == GLFW_RELEASE)
-		{
-			key_2 = false;
-		}
+		
 		else if (key == GLFW_KEY_3 && action == GLFW_PRESS)
 			key_3 = true;
-		else if (key == GLFW_KEY_3 && action == GLFW_RELEASE)
-		{
-			key_3 = false;
-		}
+		
 		else if (key == GLFW_KEY_4 && action == GLFW_PRESS)
 			key_4 = true;
-		else if (key == GLFW_KEY_4 && action == GLFW_RELEASE)
-		{
-			key_4 = false;
-		}
-		else if (key == GLFW_KEY_5 && action == GLFW_PRESS)
-			key_5 = true;
-		else if (key == GLFW_KEY_5 && action == GLFW_RELEASE)
-		{
-			key_5 = false;
-		}
-		else if (key == GLFW_KEY_6 && action == GLFW_PRESS)
-			key_6 = true;
-		else if (key == GLFW_KEY_6 && action == GLFW_RELEASE)
-		{
-			key_6 = false;
-		}
+		
 	}
 
 	void Scene::MouseHandler(GLFWwindow* window, int button, int action, int mods)

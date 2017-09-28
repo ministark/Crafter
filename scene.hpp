@@ -59,9 +59,12 @@ namespace cft
 		/** @brief Initializes all the buffers and variables and set the handlers */
 		void Init(GLFWwindow *window);
 
+		void UpdateScene(glm::mat4 scene_matrix);
+	
 		/** @brief Updates all the variable and state and sets the matrices accordingly */
 		void Update();
 		/** @brief Renders the grid, pallete and model in modelling mode and only model in inspection mode */
+	
 		void Render();
 		
 		/** @brief Loads the scene file and updates all the variable*/
@@ -84,6 +87,8 @@ namespace cft
 		glm::mat4 CCSToNDCS();
 		glm::mat4 NDCSToDCS();
 		//@}
+
+
 
 	};
 }
