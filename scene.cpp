@@ -31,7 +31,12 @@ namespace cft
 
 	glm::mat4 Scene::NDCSToDCS()
 	{
-		return glm::mat4(1.0f);
+		return glm::mat4({
+			{1,0,0,0},
+			{0,1,0,0},
+			{0,0,0,0},
+			{0,0,0,1}
+		});
 	}
 	Scene::Scene()
 	{
@@ -127,7 +132,7 @@ namespace cft
 		point[23] = glm::vec4(fR,fB,-F,1.0f);
 		for (int i=0; i<24; i++)
 			point_color [i] = glm::vec4(0.0f,1.0f,1.0f,1.0f);
-		glm::mat4 transform_matrix = glm::mat4(1.0f);
+		glm::mat4 transform_matrix = glm::inverse(WCSToVCS());
 		for (int i=0; i<24; i++)
 		{
 			point[i] = transform_matrix*point[i];
@@ -153,33 +158,23 @@ namespace cft
 
 		if (key_1)
 		{
-			scene_matrix = glm::mat4(1.0f);
-			scene_matrix *= WCSToVCS();
+			scene_matrix = glm::mat4(1.0f)*WCSToVCS();
 			key_1 = false;
 
 		}
 		else if (key_2)
 		{
-			scene_matrix = glm::mat4(1.0f);
-			scene_matrix *= WCSToVCS();
-			scene_matrix *= VCSToCCS();
+			scene_matrix = glm::mat4(1.0f)*VCSToCCS()*WCSToVCS();
 			key_2 = false;	
 		}
 		else if (key_3)
 		{
-			scene_matrix = glm::mat4(1.0f);
-			scene_matrix *= WCSToVCS();
-			scene_matrix *= VCSToCCS();
-			scene_matrix *= CCSToNDCS();
+			scene_matrix = glm::mat4(1.0f)*CCSToNDCS()*VCSToCCS()*WCSToVCS();
 			key_3 = false;
 		}
 		else if (key_4)
 		{	
-			scene_matrix = glm::mat4(1.0f);
-			scene_matrix *= WCSToVCS();
-			scene_matrix *= VCSToCCS();
-			scene_matrix *= CCSToNDCS();
-			scene_matrix *= NDCSToDCS();
+			scene_matrix = glm::mat4(1.0f)*NDCSToDCS()*CCSToNDCS()*VCSToCCS()*WCSToVCS();
 			key_4 = false;
 		}
 		else if (key_w)
