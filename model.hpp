@@ -46,16 +46,11 @@ namespace cft
 		 /** @brief The array object which stores all the binding of vertex buffer */
 		GLuint vao;
 
-		 /** @brief Stores the view matrix i.e transformation to camera coordinate */
-		glm::mat4 view_matrix;
 		 /** @brief Stores the projection matrix to reduce a dimension */
 		glm::mat4 projection_matrix;
-		 /** @brief Stores the transformation of the model */
+		 /** @brief Stores the final transformation of the model */
 		glm::mat4 modelview_matrix;
-		 /** @brief Stores the Rotation of the model */
-		glm::mat4 rotation_matrix;
-		 /** @brief Stores the translation of the object */
-		glm::mat4 transform;
+
 		 /** @brief A pointer to the location of the uModelViewMatrix in the shader */
 		GLuint uModelViewMatrix;
 		 /** @brief Handle to the complied shader */
@@ -63,14 +58,17 @@ namespace cft
 
 	public:
 		//@{
-		 /** @brief Values to rotate the object every frame */
+		 /** @brief Values to rotate the object every frame and initial setup*/
 		GLfloat xrot,yrot,zrot;
 		 /** @brief Matrix for translation */
 		glm::vec3 translate;
+		 /** @brief Matrix for Scaling */
+		glm::vec3 scaling;
 		/** @brief Centroid of the object */
 		glm::vec3 centroid;
 		//@}
-
+		/** @brief Stores the Rotation of the model */
+		glm::mat4 rotation_matrix;
 		/** @brief Stores the Scene matrix stores the changes done to model */
 		glm::mat4 scene_matrix;
 

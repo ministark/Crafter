@@ -9,6 +9,7 @@ namespace cft
 	{
 		total_vertices = 0;
 		shader = shaderProgram;
+		scaling = glm::vec3(1,1,1);
 		translate = glm::vec3(0,0,0);centroid = glm::vec3(0,0,0);
 		rotation_matrix = glm::mat4(1.0f);
 		scene_matrix = glm::mat4(1.0f);
@@ -83,7 +84,7 @@ namespace cft
 	}
 	void Model::InitInspectionMode()
 	{
-		view_matrix = glm::lookAt(glm::vec3(camera_x,cft::camera_y,cft::camera_z),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.0f,1.0f,0.0f));	
+		glm::mat4 view_matrix = glm::lookAt(glm::vec3(camera_x,cft::camera_y,cft::camera_z),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.0f,1.0f,0.0f));	
 		projection_matrix = glm::perspective(glm::radians(45.0f), (float)screen_width/screen_height, 0.01f, 50.0f)*view_matrix;
 	}
 	void Model::RecenterModel()
@@ -146,8 +147,10 @@ namespace cft
 	    rotation_matrix1 = glm::rotate(rotation_matrix1, yrot, glm::vec3(0.0f,1.0f,0.0f));
 	    rotation_matrix1 = glm::rotate(rotation_matrix1, zrot, glm::vec3(0.0f,0.0f,1.0f));
 	    rotation_matrix = rotation_matrix1*rotation_matrix;
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f),translate);
 		transform = glm::translate(glm::mat4(1.0f),translate);
-  		modelview_matrix = projection_matrix*transform*rotation_matrix*transform_rotation*scene_matrix;
+
+  		modelview_matrix = projection_matrix*transform*rotation_matrix*transform_rotation*scene_matrix*glm::scale(glm::mat4(1.0f), scaling);
   		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
   		glDrawArrays(GL_TRIANGLES, 0, total_vertices);
   		glBindVertexArray(0);
