@@ -48,6 +48,12 @@ namespace cft
 		double L, R, B, T, N, F;
 		//}@
 
+		glm::vec3 translate;
+		glm::mat4 rotation_matrix;
+		GLfloat xrot,yrot,zrot;
+
+		glm::mat4 scene_matrix;
+
 		/** @brief All the models*/
 		std::vector<Model*> models;
 
@@ -58,8 +64,6 @@ namespace cft
 
 		/** @brief Initializes all the buffers and variables and set the handlers */
 		void Init(GLFWwindow *window);
-
-		void UpdateScene(glm::mat4 scene_matrix);
 	
 		/** @brief Updates all the variable and state and sets the matrices accordingly */
 		void Update();
@@ -77,7 +81,8 @@ namespace cft
 		static void CursorHandler(GLFWwindow* window, double x, double y);
 		static void ResizeHandler(GLFWwindow* window, int width, int height);
 		static void ErrorHandler(int error, const char* description);
-		static bool key_1,key_2,key_3,key_4,key_5,key_6;
+		static bool key_1,key_2,key_3,key_4;
+		static bool key_up,key_left,key_down,key_right,key_pgup,key_pgdwn,key_w,key_a,key_s,key_d,key_z,key_x;
 		//@}
 
 		// @{

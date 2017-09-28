@@ -319,7 +319,7 @@ namespace cft
   			glBindBuffer(GL_ARRAY_BUFFER, 0);
   			palette->Render();
   		}
-  		model->Render();
+  		model->Render(glm::mat4(1.0f));
 	}
 
 	void Crafter::KeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods) 
