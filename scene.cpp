@@ -1,6 +1,25 @@
 #include "scene.hpp"
 namespace cft
 {
+	glm::mat4 Scene::WCSToVCS()
+	{
+		return glm::translate(glm::mat4(1.0f),-Eye);;
+	}
+
+	glm::mat4 Scene::VCSToCCS()
+	{
+		return glm::mat4(1.0f);
+	}
+
+	glm::mat4 Scene::CCSToNDCS()
+	{
+		return glm::mat4(1.0f);
+	}
+
+	glm::mat4 Scene::NDCSToDCS()
+	{
+		return glm::mat4(1.0f);
+	}
 	Scene::Scene()
 	{
 

@@ -76,6 +76,15 @@ namespace cft
 		static void ErrorHandler(int error, const char* description);
 		static bool key_1,key_2,key_3,key_4,key_5,key_6;
 		//@}
+
+		// @{
+		/** @brief All the function returning the releveant matrix*/
+		glm::mat4 WCSToVCS();
+		glm::mat4 VCSToCCS();
+		glm::mat4 CCSToNDCS();
+		glm::mat4 NDCSToDCS();
+		//@}
+
 	};
 }
 #endif
