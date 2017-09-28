@@ -108,6 +108,7 @@ namespace cft
 		{
 			glm::mat4 scene_matrix = glm::mat4(1.0f);
 			scene_matrix *= WCSToVCS();
+			UpdateScene(scene_matrix);
 			key_1 = false;
 
 		}
@@ -116,6 +117,7 @@ namespace cft
 			glm::mat4 scene_matrix = glm::mat4(1.0f);
 			scene_matrix *= WCSToVCS();
 			scene_matrix *= VCSToCCS();		
+			UpdateScene(scene_matrix);
 			key_2 = false;	
 		}
 		else if (key_3)
@@ -124,6 +126,7 @@ namespace cft
 			scene_matrix *= WCSToVCS();
 			scene_matrix *= VCSToCCS();
 			scene_matrix *= CCSToNDCS();
+			UpdateScene(scene_matrix);
 			key_3 = false;
 		}
 		else if (key_4)
@@ -133,6 +136,7 @@ namespace cft
 			scene_matrix *= VCSToCCS();
 			scene_matrix *= CCSToNDCS();
 			scene_matrix *= NDCSToDCS();
+			UpdateScene(scene_matrix);
 			key_4 = false;
 		}
 		
