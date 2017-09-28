@@ -69,8 +69,7 @@ namespace cft
 		//@}
 		/** @brief Stores the Rotation of the model */
 		glm::mat4 rotation_matrix;
-		/** @brief Stores the Scene matrix stores the changes done to model */
-		glm::mat4 scene_matrix;
+		
 
 		/** @brief Empty Constructor */
 		Model();
@@ -135,7 +134,7 @@ namespace cft
 		*	@brief Binds the vertex buffers and Draws the Model
 		*
 		*/	
-		void Render();
+		void Render(glm::mat4 scene_matrix);
 	};
 }
 #endif

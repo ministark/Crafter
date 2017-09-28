@@ -71,12 +71,22 @@ namespace cft
 	
 	void Scene::Render()
 	{
+		glm::mat4 delta_rotation_matrix;
+		delta_rotation_matrix = glm::rotate(glm::mat4(1.0f), xrot, glm::vec3(1.0f,0.0f,0.0f));
+	    delta_rotation_matrix = glm::rotate(delta_rotation_matrix, yrot, glm::vec3(0.0f,1.0f,0.0f));
+	    delta_rotation_matrix = glm::rotate(delta_rotation_matrix, zrot, glm::vec3(0.0f,0.0f,1.0f));
+	    rotation_matrix = rotation_matrix*delta_rotation_matrix;
+	    glm::mat4 translation_matrix = glm::translate(glm::mat4(1.0f),translate);
+	    glm::mat4 model_scene_matrix = translation_matrix*rotation_matrix*scene_matrix;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   		glUseProgram(shaderProgram);
 		for (int i = 0; i < 3; ++i)
 		{
-			models[i]->Render();
+			models[i]->Render(model_scene_matrix);
 		}
+		xrot = 0.0f;
+		yrot = 0.0f;
+		zrot = 0.0f;
 	}
 
 	void Scene::LoadScene(std::string file)
@@ -107,51 +117,88 @@ namespace cft
 		afile >> N >> F;
 		afile.close();
 	}	
-	void Scene::UpdateScene(glm::mat4 scene_matrix)
-	{
-		int len = models.size();
-		for (int i=0; i<len; i++)
-			models[i]->scene_matrix = scene_matrix;
-	}
 	void Scene::Update()
 	{
 
 		if (key_1)
 		{
-			glm::mat4 scene_matrix = glm::mat4(1.0f);
+			scene_matrix = glm::mat4(1.0f);
 			scene_matrix *= WCSToVCS();
-			UpdateScene(scene_matrix);
 			key_1 = false;
 
 		}
 		else if (key_2)
 		{
-			glm::mat4 scene_matrix = glm::mat4(1.0f);
+			scene_matrix = glm::mat4(1.0f);
 			scene_matrix *= WCSToVCS();
-			scene_matrix *= VCSToCCS();		
-			UpdateScene(scene_matrix);
+			scene_matrix *= VCSToCCS();
 			key_2 = false;	
 		}
 		else if (key_3)
 		{
-			glm::mat4 scene_matrix = glm::mat4(1.0f);
+			scene_matrix = glm::mat4(1.0f);
 			scene_matrix *= WCSToVCS();
 			scene_matrix *= VCSToCCS();
 			scene_matrix *= CCSToNDCS();
-			UpdateScene(scene_matrix);
 			key_3 = false;
 		}
 		else if (key_4)
 		{	
-			glm::mat4 scene_matrix = glm::mat4(1.0f);
+			scene_matrix = glm::mat4(1.0f);
 			scene_matrix *= WCSToVCS();
 			scene_matrix *= VCSToCCS();
 			scene_matrix *= CCSToNDCS();
 			scene_matrix *= NDCSToDCS();
-			UpdateScene(scene_matrix);
 			key_4 = false;
 		}
-		
+		else if (key_w)
+		{
+			translate.y -= delta_trans;
+		}
+		else if (key_a)
+		{
+			translate.x -= delta_trans;
+		}
+		else if (key_s)
+		{
+			translate.y += delta_trans;
+		}
+		else if (key_d)
+		{
+			translate.x += delta_trans;
+		}
+		else if (key_z)
+		{
+			translate.z += delta_trans;
+		}
+		else if (key_x)
+		{
+			translate.z -= delta_trans;
+		}
+		else if (key_up)
+		{
+			xrot = delta_rot;
+		}
+		else if (key_down)
+		{
+			xrot = -delta_rot;
+		}
+		else if (key_left)
+		{
+			yrot = delta_rot;
+		}
+		else if (key_right)
+		{
+			yrot = -delta_rot;
+		}
+		else if (key_pgup)
+		{
+			zrot = delta_rot;
+		}
+		else if (key_pgdwn)
+		{
+			zrot = -delta_rot;
+		}
 	}
 
 	void Scene::KeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods) 
@@ -160,16 +207,60 @@ namespace cft
 			glfwSetWindowShouldClose(window, GL_TRUE);
 		else if (key == GLFW_KEY_1 && action == GLFW_PRESS)
 			key_1 = true;
-		
 		else if (key == GLFW_KEY_2 && action == GLFW_PRESS)
 			key_2 = true;
-		
 		else if (key == GLFW_KEY_3 && action == GLFW_PRESS)
 			key_3 = true;
-		
 		else if (key == GLFW_KEY_4 && action == GLFW_PRESS)
 			key_4 = true;
-		
+		else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
+			key_up = true;
+		else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
+			key_down = true;
+		else if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
+			key_left = true;
+		else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
+			key_right = true;
+		else if (key == GLFW_KEY_PAGE_UP && action == GLFW_PRESS)
+			key_pgup = true;
+		else if (key == GLFW_KEY_PAGE_DOWN && action == GLFW_PRESS)
+			key_pgdwn = true;
+		else if (key == GLFW_KEY_UP && action == GLFW_RELEASE)
+			key_up = false;
+		else if (key == GLFW_KEY_DOWN && action == GLFW_RELEASE)
+			key_down = false;
+		else if (key == GLFW_KEY_LEFT && action == GLFW_RELEASE)
+			key_left = false;
+		else if (key == GLFW_KEY_RIGHT && action == GLFW_RELEASE)
+			key_right = false;
+		else if (key == GLFW_KEY_PAGE_UP && action == GLFW_RELEASE)
+			key_pgup = false;
+		else if (key == GLFW_KEY_PAGE_DOWN && action == GLFW_RELEASE)
+			key_pgdwn = false;
+		else if (key == GLFW_KEY_W && action == GLFW_PRESS)
+			key_w = true;
+		else if (key == GLFW_KEY_A && action == GLFW_PRESS)
+			key_a = true;
+		else if (key == GLFW_KEY_S && action == GLFW_PRESS)
+			key_s = true; 
+		else if (key == GLFW_KEY_D && action == GLFW_PRESS)
+			key_d = true;
+		else if (key == GLFW_KEY_W && action == GLFW_RELEASE)
+			key_w = false;
+		else if (key == GLFW_KEY_A && action == GLFW_RELEASE)
+			key_a = false;
+		else if (key == GLFW_KEY_S && action == GLFW_RELEASE)
+			key_s = false; 
+		else if (key == GLFW_KEY_D && action == GLFW_RELEASE)
+			key_d = false;
+		else if (key == GLFW_KEY_Z && action == GLFW_PRESS)
+			key_z = true;
+		else if (key == GLFW_KEY_Z && action == GLFW_RELEASE)
+			key_z = false;
+		else if (key == GLFW_KEY_X && action == GLFW_PRESS)
+			key_x = true;
+		else if (key == GLFW_KEY_X && action == GLFW_RELEASE)
+			key_x = false;
 	}
 
 	void Scene::MouseHandler(GLFWwindow* window, int button, int action, int mods)
@@ -195,6 +286,17 @@ namespace cft
 	bool Scene::key_2 = false;
 	bool Scene::key_3 = false;
 	bool Scene::key_4 = false;
-	bool Scene::key_5 = false;
-	bool Scene::key_6 = false;
+	bool Scene::key_up = false;
+	bool Scene::key_down = false;
+	bool Scene::key_left = false;
+	bool Scene::key_right = false;
+	bool Scene::key_pgup = false;
+	bool Scene::key_pgdwn = false;
+	bool Scene::key_w = false;
+	bool Scene::key_a = false;
+	bool Scene::key_s = false;
+	bool Scene::key_d = false;
+	bool Scene::key_z = false;
+	bool Scene::key_x = false;
+
 }

@@ -12,7 +12,6 @@ namespace cft
 		scaling = glm::vec3(1,1,1);
 		translate = glm::vec3(0,0,0);centroid = glm::vec3(0,0,0);
 		rotation_matrix = glm::mat4(1.0f);
-		scene_matrix = glm::mat4(1.0f);
 		projection_matrix = glm::ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 		xrot=0.0,yrot=0.0,zrot=0.0;
 		uModelViewMatrix = glGetUniformLocation( shader, "uModelViewMatrix");
@@ -137,7 +136,7 @@ namespace cft
 		total_vertices -= 3;
 		centroid /= total_vertices;
 	}
-	void Model::Render()
+	void Model::Render(glm::mat4 scene_matrix = glm::mat4(1.0f))
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBindVertexArray(vao);
