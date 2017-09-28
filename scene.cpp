@@ -127,7 +127,7 @@ namespace cft
 		point[23] = glm::vec4(fR,fB,-F,1.0f);
 		for (int i=0; i<24; i++)
 			point_color [i] = glm::vec4(0.0f,1.0f,1.0f,1.0f);
-		glm::mat4 transform_matrix = WCSToVCS();
+		glm::mat4 transform_matrix = glm::mat4(1.0f);
 		for (int i=0; i<24; i++)
 		{
 			point[i] = transform_matrix*point[i];
