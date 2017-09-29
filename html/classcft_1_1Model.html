@@ -87,6 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classcft_1_1Model-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -132,30 +133,38 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:ac706c44d6bb864ca80449e963f9dbc22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#ac706c44d6bb864ca80449e963f9dbc22">RemoveTriangle</a> (glm::vec4 *v, glm::vec4 *c)</td></tr>
 <tr class="memdesc:ac706c44d6bb864ca80449e963f9dbc22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a triangle in the model.  <a href="#ac706c44d6bb864ca80449e963f9dbc22">More...</a><br /></td></tr>
 <tr class="separator:ac706c44d6bb864ca80449e963f9dbc22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e9799445aacdd8d4ace2465dbc6f350"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e9799445aacdd8d4ace2465dbc6f350"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#a0e9799445aacdd8d4ace2465dbc6f350">Render</a> ()</td></tr>
-<tr class="memdesc:a0e9799445aacdd8d4ace2465dbc6f350"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binds the vertex buffers and Draws the <a class="el" href="classcft_1_1Model.html" title="Class that is abstraction of a 3D-Model. ">Model</a>. <br /></td></tr>
-<tr class="separator:a0e9799445aacdd8d4ace2465dbc6f350"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8465027b499db36cf5b478b9394348f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8465027b499db36cf5b478b9394348f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#ac8465027b499db36cf5b478b9394348f">Render</a> (glm::mat4 scene_matrix)</td></tr>
+<tr class="memdesc:ac8465027b499db36cf5b478b9394348f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binds the vertex buffers and Draws the <a class="el" href="classcft_1_1Model.html" title="Class that is abstraction of a 3D-Model. ">Model</a>. <br /></td></tr>
+<tr class="separator:ac8465027b499db36cf5b478b9394348f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:ae734ccf60224cd323840ad561639110b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae734ccf60224cd323840ad561639110b"></a>
+glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#ae734ccf60224cd323840ad561639110b">rotation_matrix</a></td></tr>
+<tr class="memdesc:ae734ccf60224cd323840ad561639110b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the Rotation of the model. <br /></td></tr>
+<tr class="separator:ae734ccf60224cd323840ad561639110b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:acbb04bd0c86255df2b5beb20b746d454"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbb04bd0c86255df2b5beb20b746d454"></a>
 GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#acbb04bd0c86255df2b5beb20b746d454">xrot</a></td></tr>
-<tr class="memdesc:acbb04bd0c86255df2b5beb20b746d454"><td class="mdescLeft">&#160;</td><td class="mdescRight">Values to rotate the object every frame. <br /></td></tr>
+<tr class="memdesc:acbb04bd0c86255df2b5beb20b746d454"><td class="mdescLeft">&#160;</td><td class="mdescRight">Values to rotate the object every frame and initial setup. <br /></td></tr>
 <tr class="separator:acbb04bd0c86255df2b5beb20b746d454"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03ad51f746ea311de670b3963b30ca11"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03ad51f746ea311de670b3963b30ca11"></a>
 GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#a03ad51f746ea311de670b3963b30ca11">yrot</a></td></tr>
-<tr class="memdesc:a03ad51f746ea311de670b3963b30ca11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Values to rotate the object every frame. <br /></td></tr>
+<tr class="memdesc:a03ad51f746ea311de670b3963b30ca11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Values to rotate the object every frame and initial setup. <br /></td></tr>
 <tr class="separator:a03ad51f746ea311de670b3963b30ca11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77a1d55e1de845a548a00f3a037cc846"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77a1d55e1de845a548a00f3a037cc846"></a>
 GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#a77a1d55e1de845a548a00f3a037cc846">zrot</a></td></tr>
-<tr class="memdesc:a77a1d55e1de845a548a00f3a037cc846"><td class="mdescLeft">&#160;</td><td class="mdescRight">Values to rotate the object every frame. <br /></td></tr>
+<tr class="memdesc:a77a1d55e1de845a548a00f3a037cc846"><td class="mdescLeft">&#160;</td><td class="mdescRight">Values to rotate the object every frame and initial setup. <br /></td></tr>
 <tr class="separator:a77a1d55e1de845a548a00f3a037cc846"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a73f59bc372ee82bd680a4fedb4c245"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a73f59bc372ee82bd680a4fedb4c245"></a>
 glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#a8a73f59bc372ee82bd680a4fedb4c245">translate</a></td></tr>
 <tr class="memdesc:a8a73f59bc372ee82bd680a4fedb4c245"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matrix for translation. <br /></td></tr>
 <tr class="separator:a8a73f59bc372ee82bd680a4fedb4c245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a797c1a16b0d7b41f9d41f455a7ac0b6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a797c1a16b0d7b41f9d41f455a7ac0b6a"></a>
+glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#a797c1a16b0d7b41f9d41f455a7ac0b6a">scaling</a></td></tr>
+<tr class="memdesc:a797c1a16b0d7b41f9d41f455a7ac0b6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Matrix for Scaling. <br /></td></tr>
+<tr class="separator:a797c1a16b0d7b41f9d41f455a7ac0b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c3ffd13ca3897bc54b5a5f68e48635c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c3ffd13ca3897bc54b5a5f68e48635c"></a>
 glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#a7c3ffd13ca3897bc54b5a5f68e48635c">centroid</a></td></tr>
 <tr class="memdesc:a7c3ffd13ca3897bc54b5a5f68e48635c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Centroid of the object. <br /></td></tr>
@@ -183,26 +192,14 @@ GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#a5e6908dcb906d1ba8a79181be7e4ddce">vao</a></td></tr>
 <tr class="memdesc:a5e6908dcb906d1ba8a79181be7e4ddce"><td class="mdescLeft">&#160;</td><td class="mdescRight">The array object which stores all the binding of vertex buffer. <br /></td></tr>
 <tr class="separator:a5e6908dcb906d1ba8a79181be7e4ddce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed40a6c3ab633a2de87f066d7e2ed5ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aed40a6c3ab633a2de87f066d7e2ed5ce"></a>
-glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#aed40a6c3ab633a2de87f066d7e2ed5ce">view_matrix</a></td></tr>
-<tr class="memdesc:aed40a6c3ab633a2de87f066d7e2ed5ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the view matrix i.e transformation to camera coordinate. <br /></td></tr>
-<tr class="separator:aed40a6c3ab633a2de87f066d7e2ed5ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89377ec3e5c9d2840323b09ad7d32fc6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a89377ec3e5c9d2840323b09ad7d32fc6"></a>
 glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#a89377ec3e5c9d2840323b09ad7d32fc6">projection_matrix</a></td></tr>
 <tr class="memdesc:a89377ec3e5c9d2840323b09ad7d32fc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the projection matrix to reduce a dimension. <br /></td></tr>
 <tr class="separator:a89377ec3e5c9d2840323b09ad7d32fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67e3c1d4c9db01015040d279c82ea08a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67e3c1d4c9db01015040d279c82ea08a"></a>
 glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#a67e3c1d4c9db01015040d279c82ea08a">modelview_matrix</a></td></tr>
-<tr class="memdesc:a67e3c1d4c9db01015040d279c82ea08a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the transformation of the model. <br /></td></tr>
+<tr class="memdesc:a67e3c1d4c9db01015040d279c82ea08a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the final transformation of the model. <br /></td></tr>
 <tr class="separator:a67e3c1d4c9db01015040d279c82ea08a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae734ccf60224cd323840ad561639110b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae734ccf60224cd323840ad561639110b"></a>
-glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#ae734ccf60224cd323840ad561639110b">rotation_matrix</a></td></tr>
-<tr class="memdesc:ae734ccf60224cd323840ad561639110b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the Rotation of the model. <br /></td></tr>
-<tr class="separator:ae734ccf60224cd323840ad561639110b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13fdbe9081361f1cb953e3732e45045a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13fdbe9081361f1cb953e3732e45045a"></a>
-glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#a13fdbe9081361f1cb953e3732e45045a">transform</a></td></tr>
-<tr class="memdesc:a13fdbe9081361f1cb953e3732e45045a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the translation of the object. <br /></td></tr>
-<tr class="separator:a13fdbe9081361f1cb953e3732e45045a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afee6e788975d7109251c4a53e466fc56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afee6e788975d7109251c4a53e466fc56"></a>
 GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcft_1_1Model.html#afee6e788975d7109251c4a53e466fc56">uModelViewMatrix</a></td></tr>
 <tr class="memdesc:afee6e788975d7109251c4a53e466fc56"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the location of the uModelViewMatrix in the shader. <br /></td></tr>

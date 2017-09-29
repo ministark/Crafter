@@ -1,13 +1,11 @@
 var searchData=
 [
-  ['palette',['Palette',['../classcft_1_1Palette.html',1,'cft']]],
-  ['palette',['palette',['../classcft_1_1Crafter.html#a358b5590166bf9ed437462a922b806f5',1,'cft::Crafter::palette()'],['../classcft_1_1Palette.html#aad50af355716e9be3c297c8c9ebc1d3a',1,'cft::Palette::Palette()'],['../classcft_1_1Palette.html#a065411dc110b5ee0f82348fef6170b2d',1,'cft::Palette::Palette(GLuint shaderProgram)']]],
-  ['palette_2ehpp',['palette.hpp',['../palette_8hpp.html',1,'']]],
-  ['pickcolor',['PickColor',['../classcft_1_1Palette.html#a0678d1dec043a41ca06e16bf71172b62',1,'cft::Palette']]],
-  ['point_5fcolor',['point_color',['../classcft_1_1Crafter.html#a57ad393984170475d18f64af191ba414',1,'cft::Crafter']]],
-  ['points',['points',['../classcft_1_1Crafter.html#a4c305e74e5e73b9a29a54d4f3d2a27ee',1,'cft::Crafter']]],
-  ['posx',['posx',['../classcft_1_1Crafter.html#a5c2adcdf34e2dd99cefc0ae9d8ad6af0',1,'cft::Crafter']]],
-  ['posy',['posy',['../classcft_1_1Crafter.html#a1ddfd1c078cfee931cdf01f66bfee489',1,'cft::Crafter']]],
-  ['posz',['posz',['../classcft_1_1Crafter.html#a18a6178af00edeb349988756322db7a4',1,'cft::Crafter']]],
-  ['projection_5fmatrix',['projection_matrix',['../classcft_1_1Model.html#a89377ec3e5c9d2840323b09ad7d32fc6',1,'cft::Model::projection_matrix()'],['../classcft_1_1Palette.html#a36b93828ab0f3cc6de2b472055d30852',1,'cft::Palette::projection_matrix()']]]
+  ['modelling_20utility',['Modelling Utility',['../index.html',1,'']]],
+  ['main_2ecpp',['Main.cpp',['../Main_8cpp.html',1,'']]],
+  ['model',['Model',['../classcft_1_1Model.html#a3c0c1f66829e59fcab5786aac5086a4a',1,'cft::Model::Model()'],['../classcft_1_1Model.html#a1f3e508bf9546bc63970d2f9386093eb',1,'cft::Model::Model(GLuint shaderProgram)'],['../classcft_1_1Crafter.html#a42504406d07a4114368ffdcf6de2b33f',1,'cft::Crafter::model()']]],
+  ['model',['Model',['../classcft_1_1Model.html',1,'cft']]],
+  ['model_2ehpp',['model.hpp',['../model_8hpp.html',1,'']]],
+  ['models',['models',['../classcft_1_1Scene.html#af28db916199219b8deceb5f1de0a1da7',1,'cft::Scene']]],
+  ['modelview_5fmatrix',['modelview_matrix',['../classcft_1_1Model.html#a67e3c1d4c9db01015040d279c82ea08a',1,'cft::Model']]],
+  ['mousehandler',['MouseHandler',['../classcft_1_1Crafter.html#acc54c5bd962b9c7a259a76589052e08e',1,'cft::Crafter::MouseHandler()'],['../classcft_1_1Scene.html#aaa02e5aeb0097c1a39a66880a467c1e3',1,'cft::Scene::MouseHandler()']]]
 ];

@@ -40,6 +40,9 @@ const std\+::string {\bfseries cft\+::vertex\+\_\+shader} = \char`\"{}vertex\+\_
 const std\+::string {\bfseries cft\+::fragment\+\_\+shader} = \char`\"{}fragment\+\_\+shader.\+glsl\char`\"{}\hypertarget{config_8hpp_aacf92fa3cbf6fca965d9050d2729951f}{}\label{config_8hpp_aacf92fa3cbf6fca965d9050d2729951f}
 
 \item 
+const std\+::string {\bfseries cft\+::scene\+\_\+vertex\+\_\+shader} = \char`\"{}scene\+\_\+vertex\+\_\+shader.\+glsl\char`\"{}\hypertarget{config_8hpp_a55e7e5756c00c1b70fcb1d08bd5d6aad}{}\label{config_8hpp_a55e7e5756c00c1b70fcb1d08bd5d6aad}
+
+\item 
 const int {\bfseries cft\+::max\+\_\+vertices} = 500\hypertarget{config_8hpp_a1f4441e0e7e486d11acb518486d2dc3a}{}\label{config_8hpp_a1f4441e0e7e486d11acb518486d2dc3a}
 
 \item 
@@ -71,6 +74,24 @@ const float {\bfseries cft\+::xmax} = screen\+\_\+width\hypertarget{config_8hpp_
 
 \item 
 const float {\bfseries cft\+::ymax} = 200.\+0f\hypertarget{config_8hpp_a0df139d99cc9012054fa0134a5edb657}{}\label{config_8hpp_a0df139d99cc9012054fa0134a5edb657}
+
+\item 
+const float {\bfseries cft\+::left} = -\/2.\+0\hypertarget{config_8hpp_a0be85df1e845da3ec4add0975dc69a43}{}\label{config_8hpp_a0be85df1e845da3ec4add0975dc69a43}
+
+\item 
+const float {\bfseries cft\+::right} = 2.\+0\hypertarget{config_8hpp_a335b6e470ad30d50b1b36cb79d8024ea}{}\label{config_8hpp_a335b6e470ad30d50b1b36cb79d8024ea}
+
+\item 
+const float {\bfseries cft\+::top} = -\/2.\+0\hypertarget{config_8hpp_adbef824162abfdc67afa23f0db5b7e45}{}\label{config_8hpp_adbef824162abfdc67afa23f0db5b7e45}
+
+\item 
+const float {\bfseries cft\+::bottom} = 2.\+0\hypertarget{config_8hpp_aa9b19490c250ba45ee22c9a8b4daad51}{}\label{config_8hpp_aa9b19490c250ba45ee22c9a8b4daad51}
+
+\item 
+const float {\bfseries cft\+::near} = -\/20.\+0\hypertarget{config_8hpp_a82c2d80f8c579e215b6e862cf2a3aa9e}{}\label{config_8hpp_a82c2d80f8c579e215b6e862cf2a3aa9e}
+
+\item 
+const float {\bfseries cft\+::far} = 20.\+0\hypertarget{config_8hpp_aa660a48a7a31b836e9193f80b4e5a589}{}\label{config_8hpp_aa660a48a7a31b836e9193f80b4e5a589}
 
 \end{DoxyCompactItemize}
 

@@ -34,25 +34,33 @@ void \hyperlink{classcft_1_1Model_aab5427ba9dbd7694c8b42453b63ac157}{Add\+Triang
 \begin{DoxyCompactList}\small\item\em Adds a triangle in the model. \end{DoxyCompactList}\item 
 void \hyperlink{classcft_1_1Model_ac706c44d6bb864ca80449e963f9dbc22}{Remove\+Triangle} (glm\+::vec4 $\ast$v, glm\+::vec4 $\ast$c)
 \begin{DoxyCompactList}\small\item\em Adds a triangle in the model. \end{DoxyCompactList}\item 
-void \hyperlink{classcft_1_1Model_a0e9799445aacdd8d4ace2465dbc6f350}{Render} ()\hypertarget{classcft_1_1Model_a0e9799445aacdd8d4ace2465dbc6f350}{}\label{classcft_1_1Model_a0e9799445aacdd8d4ace2465dbc6f350}
+void \hyperlink{classcft_1_1Model_ac8465027b499db36cf5b478b9394348f}{Render} (glm\+::mat4 scene\+\_\+matrix)\hypertarget{classcft_1_1Model_ac8465027b499db36cf5b478b9394348f}{}\label{classcft_1_1Model_ac8465027b499db36cf5b478b9394348f}
 
 \begin{DoxyCompactList}\small\item\em Binds the vertex buffers and Draws the \hyperlink{classcft_1_1Model}{Model}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\+::mat4 \hyperlink{classcft_1_1Model_ae734ccf60224cd323840ad561639110b}{rotation\+\_\+matrix}\hypertarget{classcft_1_1Model_ae734ccf60224cd323840ad561639110b}{}\label{classcft_1_1Model_ae734ccf60224cd323840ad561639110b}
+
+\begin{DoxyCompactList}\small\item\em Stores the Rotation of the model. \end{DoxyCompactList}\end{DoxyCompactItemize}
 {\bf }\par
 \begin{DoxyCompactItemize}
 \item 
 G\+Lfloat \hyperlink{classcft_1_1Model_acbb04bd0c86255df2b5beb20b746d454}{xrot}\hypertarget{classcft_1_1Model_acbb04bd0c86255df2b5beb20b746d454}{}\label{classcft_1_1Model_acbb04bd0c86255df2b5beb20b746d454}
 
-\begin{DoxyCompactList}\small\item\em Values to rotate the object every frame. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Values to rotate the object every frame and initial setup. \end{DoxyCompactList}\item 
 G\+Lfloat \hyperlink{classcft_1_1Model_a03ad51f746ea311de670b3963b30ca11}{yrot}\hypertarget{classcft_1_1Model_a03ad51f746ea311de670b3963b30ca11}{}\label{classcft_1_1Model_a03ad51f746ea311de670b3963b30ca11}
 
-\begin{DoxyCompactList}\small\item\em Values to rotate the object every frame. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Values to rotate the object every frame and initial setup. \end{DoxyCompactList}\item 
 G\+Lfloat \hyperlink{classcft_1_1Model_a77a1d55e1de845a548a00f3a037cc846}{zrot}\hypertarget{classcft_1_1Model_a77a1d55e1de845a548a00f3a037cc846}{}\label{classcft_1_1Model_a77a1d55e1de845a548a00f3a037cc846}
 
-\begin{DoxyCompactList}\small\item\em Values to rotate the object every frame. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Values to rotate the object every frame and initial setup. \end{DoxyCompactList}\item 
 glm\+::vec3 \hyperlink{classcft_1_1Model_a8a73f59bc372ee82bd680a4fedb4c245}{translate}\hypertarget{classcft_1_1Model_a8a73f59bc372ee82bd680a4fedb4c245}{}\label{classcft_1_1Model_a8a73f59bc372ee82bd680a4fedb4c245}
 
 \begin{DoxyCompactList}\small\item\em Matrix for translation. \end{DoxyCompactList}\item 
+glm\+::vec3 \hyperlink{classcft_1_1Model_a797c1a16b0d7b41f9d41f455a7ac0b6a}{scaling}\hypertarget{classcft_1_1Model_a797c1a16b0d7b41f9d41f455a7ac0b6a}{}\label{classcft_1_1Model_a797c1a16b0d7b41f9d41f455a7ac0b6a}
+
+\begin{DoxyCompactList}\small\item\em Matrix for Scaling. \end{DoxyCompactList}\item 
 glm\+::vec3 \hyperlink{classcft_1_1Model_a7c3ffd13ca3897bc54b5a5f68e48635c}{centroid}\hypertarget{classcft_1_1Model_a7c3ffd13ca3897bc54b5a5f68e48635c}{}\label{classcft_1_1Model_a7c3ffd13ca3897bc54b5a5f68e48635c}
 
 \begin{DoxyCompactList}\small\item\em Centroid of the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -75,21 +83,12 @@ G\+Luint \hyperlink{classcft_1_1Model_a25d4b411fc51d3e92a6afb62dfc7c70b}{vbo}\hy
 G\+Luint \hyperlink{classcft_1_1Model_a5e6908dcb906d1ba8a79181be7e4ddce}{vao}\hypertarget{classcft_1_1Model_a5e6908dcb906d1ba8a79181be7e4ddce}{}\label{classcft_1_1Model_a5e6908dcb906d1ba8a79181be7e4ddce}
 
 \begin{DoxyCompactList}\small\item\em The array object which stores all the binding of vertex buffer. \end{DoxyCompactList}\item 
-glm\+::mat4 \hyperlink{classcft_1_1Model_aed40a6c3ab633a2de87f066d7e2ed5ce}{view\+\_\+matrix}\hypertarget{classcft_1_1Model_aed40a6c3ab633a2de87f066d7e2ed5ce}{}\label{classcft_1_1Model_aed40a6c3ab633a2de87f066d7e2ed5ce}
-
-\begin{DoxyCompactList}\small\item\em Stores the view matrix i.\+e transformation to camera coordinate. \end{DoxyCompactList}\item 
 glm\+::mat4 \hyperlink{classcft_1_1Model_a89377ec3e5c9d2840323b09ad7d32fc6}{projection\+\_\+matrix}\hypertarget{classcft_1_1Model_a89377ec3e5c9d2840323b09ad7d32fc6}{}\label{classcft_1_1Model_a89377ec3e5c9d2840323b09ad7d32fc6}
 
 \begin{DoxyCompactList}\small\item\em Stores the projection matrix to reduce a dimension. \end{DoxyCompactList}\item 
 glm\+::mat4 \hyperlink{classcft_1_1Model_a67e3c1d4c9db01015040d279c82ea08a}{modelview\+\_\+matrix}\hypertarget{classcft_1_1Model_a67e3c1d4c9db01015040d279c82ea08a}{}\label{classcft_1_1Model_a67e3c1d4c9db01015040d279c82ea08a}
 
-\begin{DoxyCompactList}\small\item\em Stores the transformation of the model. \end{DoxyCompactList}\item 
-glm\+::mat4 \hyperlink{classcft_1_1Model_ae734ccf60224cd323840ad561639110b}{rotation\+\_\+matrix}\hypertarget{classcft_1_1Model_ae734ccf60224cd323840ad561639110b}{}\label{classcft_1_1Model_ae734ccf60224cd323840ad561639110b}
-
-\begin{DoxyCompactList}\small\item\em Stores the Rotation of the model. \end{DoxyCompactList}\item 
-glm\+::mat4 \hyperlink{classcft_1_1Model_a13fdbe9081361f1cb953e3732e45045a}{transform}\hypertarget{classcft_1_1Model_a13fdbe9081361f1cb953e3732e45045a}{}\label{classcft_1_1Model_a13fdbe9081361f1cb953e3732e45045a}
-
-\begin{DoxyCompactList}\small\item\em Stores the translation of the object. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Stores the final transformation of the model. \end{DoxyCompactList}\item 
 G\+Luint \hyperlink{classcft_1_1Model_afee6e788975d7109251c4a53e466fc56}{u\+Model\+View\+Matrix}\hypertarget{classcft_1_1Model_afee6e788975d7109251c4a53e466fc56}{}\label{classcft_1_1Model_afee6e788975d7109251c4a53e466fc56}
 
 \begin{DoxyCompactList}\small\item\em A pointer to the location of the u\+Model\+View\+Matrix in the shader. \end{DoxyCompactList}\item 

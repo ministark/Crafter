@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['vao',['vao',['../classcft_1_1Crafter.html#aca03f78f43b66c8e1196fbcf19a4b844',1,'cft::Crafter::vao()'],['../classcft_1_1Model.html#a5e6908dcb906d1ba8a79181be7e4ddce',1,'cft::Model::vao()'],['../classcft_1_1Palette.html#a8cca4a7b356941465e8ab8fb38af5b81',1,'cft::Palette::vao()']]],
-  ['vbo',['vbo',['../classcft_1_1Crafter.html#a3770da487be185aaf19b8946998e45fb',1,'cft::Crafter::vbo()'],['../classcft_1_1Model.html#a25d4b411fc51d3e92a6afb62dfc7c70b',1,'cft::Model::vbo()'],['../classcft_1_1Palette.html#a447d9c12f33c299c7880eac807249c12',1,'cft::Palette::vbo()']]],
-  ['vertices',['vertices',['../classcft_1_1Crafter.html#afcc8528696d7bf63d8e5a4a9f05dce55',1,'cft::Crafter::vertices()'],['../classcft_1_1Model.html#a807aeb1a9028c5dba4cff151d8e3eeb7',1,'cft::Model::vertices()'],['../classcft_1_1Palette.html#adbbd989d29cd5cb118fa26af1630fe97',1,'cft::Palette::vertices()']]],
-  ['view_5fmatrix',['view_matrix',['../classcft_1_1Model.html#aed40a6c3ab633a2de87f066d7e2ed5ce',1,'cft::Model']]]
+  ['r',['R',['../classcft_1_1Scene.html#aaa9961bf231dcaad78516b419341e6f4',1,'cft::Scene']]],
+  ['rotation_5fmatrix',['rotation_matrix',['../classcft_1_1Model.html#ae734ccf60224cd323840ad561639110b',1,'cft::Model::rotation_matrix()'],['../classcft_1_1Scene.html#a54aeaffbd20e825e850ef38c1586e257',1,'cft::Scene::rotation_matrix()']]]
 ];

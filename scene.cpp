@@ -32,10 +32,10 @@ namespace cft
 	glm::mat4 Scene::NDCSToDCS()
 	{
 		return glm::mat4({
-			{1,0,0,0},
-			{0,1,0,0},
-			{0,0,0,0},
-			{0,0,0,1}
+			{(R-L)/2,0,0,0},
+			{0,(T-B)/2,0,0},
+			{0,0,1/10,0},
+			{(L+R)/2,(T+B)/2,1/10,1}
 		});
 	}
 	Scene::Scene()
@@ -64,11 +64,13 @@ namespace cft
 
 		// Setting up the shaders
 		std::vector<GLuint> shaderList;
- 		shaderList.push_back(cft::LoadShaderGL(GL_VERTEX_SHADER, cft::vertex_shader));
+ 		shaderList.push_back(cft::LoadShaderGL(GL_VERTEX_SHADER, cft::scene_vertex_shader));
   		shaderList.push_back(cft::LoadShaderGL(GL_FRAGMENT_SHADER, cft::fragment_shader));
   		shaderProgram = cft::CreateProgramGL(shaderList);
 
   		uModelViewMatrix = glGetUniformLocation( shaderProgram, "uModelViewMatrix");
+  		shader_state = glGetUniformLocation( shaderProgram, "CCSToNDCS");
+  		cshader_state = 0;
 
   		total_points = 32;
   		line_points = 32;
@@ -88,6 +90,7 @@ namespace cft
 		{
 			afile >> raw_model;
 			models.push_back(new Model(shaderProgram));
+		    models[i]->InitModellingMode();
 			models[i]->LoadModel(raw_model);
 			afile >> models[i]->scaling.x  >> models[i]->scaling.y >> models[i]->scaling.z;
 			GLfloat rx, ry, rz;	afile >> rx >> ry >> rz;
@@ -97,7 +100,6 @@ namespace cft
 		    rotation_matrix1 = glm::rotate(rotation_matrix1, ry, glm::vec3(0.0f,1.0f,0.0f));
 		    rotation_matrix1 = glm::rotate(rotation_matrix1, rz, glm::vec3(0.0f,0.0f,1.0f));
 		    models[i]->rotation_matrix = rotation_matrix1;
-		    models[i]->InitModellingMode();
 		}
 
 		afile >> Eye.x >> Eye.y >> Eye.z;
@@ -180,26 +182,33 @@ namespace cft
 		{
 			scene_matrix = glm::mat4(1.0f)*WCSToVCS();
 			key_1 = false;
+			cshader_state = 0;
+
 
 		}
 		else if (key_2)
 		{
 			scene_matrix = glm::mat4(1.0f)*VCSToCCS()*WCSToVCS();
 			key_2 = false;	
+			cshader_state = 0;
+
 		}
 		else if (key_3)
 		{
 			scene_matrix = glm::mat4(1.0f)*CCSToNDCS()*VCSToCCS()*WCSToVCS();
 			key_3 = false;
+			cshader_state = 1;
 		}
 		else if (key_4)
 		{	
 			scene_matrix = glm::mat4(1.0f)*NDCSToDCS()*CCSToNDCS()*VCSToCCS()*WCSToVCS();
 			key_4 = false;
+			cshader_state = 1;
+			
 		}
 		else if (key_w)
 		{
-			translate.y -= delta_trans;
+			translate.y += delta_trans;
 		}
 		else if (key_a)
 		{
@@ -207,7 +216,7 @@ namespace cft
 		}
 		else if (key_s)
 		{
-			translate.y += delta_trans;
+			translate.y -= delta_trans;
 		}
 		else if (key_d)
 		{
@@ -264,6 +273,7 @@ namespace cft
 		glm::mat4 ortho_matrix = glm::ortho(cft::left, cft::right, cft::top, cft::bottom, cft::near, cft::far);
 		glm::mat4 view_matrix = ortho_matrix*model_scene_matrix;
 		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(view_matrix));
+		glUniform1i(shader_state, cshader_state);
 		glDrawArrays(GL_LINES, 0, line_points);
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);

@@ -10,8 +10,11 @@ digraph "config.hpp"
   Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 [label="model.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$model_8hpp.html",tooltip="Class declaration for the Model. "];
   Node4 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="palette.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$palette_8hpp.html",tooltip="Class declaration for the Color Palette. "];
-  Node5 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="scene.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$scene_8hpp_source.html"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="palette.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$palette_8hpp.html",tooltip="Class declaration for the Color Palette. "];
+  Node6 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

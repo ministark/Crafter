@@ -32,6 +32,7 @@ namespace cft
 		/** @brief Store the handle for shader program */
 		GLuint shaderProgram;
 
+
 		//@{
 		 /** @brief The vertex buffer and array buffers which stores the vertices of the frustum and eye */
 		GLuint vbo, vao; 
@@ -39,6 +40,12 @@ namespace cft
 
 		/** @brief Pointer pointing to modeling matrix in the shader */
 		GLuint uModelViewMatrix;
+
+		GLuint shader_state;
+
+		int cshader_state;
+
+
 
 		//@{
 		/** @brief Variable for the frustum, Eye, Lookat, and up vector */
