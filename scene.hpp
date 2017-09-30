@@ -62,9 +62,11 @@ namespace cft
 		glm::mat4 scene_matrix;
 
 
-		glm::vec4 *point,*point_color;
+		glm::vec4 *point,*point_color,eye_point,eye_color;
 		int line_points;
 		int total_points;
+
+		float zoomv = 0;
 
 		/** @brief All the models*/
 		std::vector<Model*> models;

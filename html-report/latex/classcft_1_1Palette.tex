@@ -1,0 +1,112 @@
+\hypertarget{classcft_1_1Palette}{}\section{cft\+:\+:Palette Class Reference}
+\label{classcft_1_1Palette}\index{cft\+::\+Palette@{cft\+::\+Palette}}
+
+
+Class that displays a Rectangle Color-\/\+Palette to choose from.  
+
+
+
+
+{\ttfamily \#include $<$palette.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcft_1_1Palette_aad50af355716e9be3c297c8c9ebc1d3a}{Palette} ()\hypertarget{classcft_1_1Palette_aad50af355716e9be3c297c8c9ebc1d3a}{}\label{classcft_1_1Palette_aad50af355716e9be3c297c8c9ebc1d3a}
+
+\begin{DoxyCompactList}\small\item\em Empty constructor should be made private to force to use overloaded constructor. \end{DoxyCompactList}\item 
+\hyperlink{classcft_1_1Palette_a065411dc110b5ee0f82348fef6170b2d}{Palette} (G\+Luint shader\+Program)
+\begin{DoxyCompactList}\small\item\em Overloaded constructor of the object. \end{DoxyCompactList}\item 
+void \hyperlink{classcft_1_1Palette_af2f48d937d0994f4c52817bf74d95148}{Render} ()\hypertarget{classcft_1_1Palette_af2f48d937d0994f4c52817bf74d95148}{}\label{classcft_1_1Palette_af2f48d937d0994f4c52817bf74d95148}
+
+\begin{DoxyCompactList}\small\item\em Binds the vertex buffers and Draws the \hyperlink{classcft_1_1Model}{Model}. \end{DoxyCompactList}\item 
+bool \hyperlink{classcft_1_1Palette_a0678d1dec043a41ca06e16bf71172b62}{Pick\+Color} (double x, double y, glm\+::vec4 $\ast$col)
+\begin{DoxyCompactList}\small\item\em Binds the vertex buffers and Draws the \hyperlink{classcft_1_1Model}{Model}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+glm\+::vec4 \hyperlink{classcft_1_1Palette_adbbd989d29cd5cb118fa26af1630fe97}{vertices} \mbox{[}6\mbox{]}\hypertarget{classcft_1_1Palette_adbbd989d29cd5cb118fa26af1630fe97}{}\label{classcft_1_1Palette_adbbd989d29cd5cb118fa26af1630fe97}
+
+\begin{DoxyCompactList}\small\item\em Vertices of the Rectangle and the corresponding color. \end{DoxyCompactList}\item 
+glm\+::vec4 \hyperlink{classcft_1_1Palette_ac7d6e318cfc1797de00fa8e1a6f53951}{colors} \mbox{[}6\mbox{]}\hypertarget{classcft_1_1Palette_ac7d6e318cfc1797de00fa8e1a6f53951}{}\label{classcft_1_1Palette_ac7d6e318cfc1797de00fa8e1a6f53951}
+
+\begin{DoxyCompactList}\small\item\em Vertices of the Rectangle and the corresponding color. \end{DoxyCompactList}\item 
+G\+Luint \hyperlink{classcft_1_1Palette_a447d9c12f33c299c7880eac807249c12}{vbo}\hypertarget{classcft_1_1Palette_a447d9c12f33c299c7880eac807249c12}{}\label{classcft_1_1Palette_a447d9c12f33c299c7880eac807249c12}
+
+\begin{DoxyCompactList}\small\item\em Vertices of the Rectangle and the corresponding color. \end{DoxyCompactList}\item 
+G\+Luint \hyperlink{classcft_1_1Palette_a8cca4a7b356941465e8ab8fb38af5b81}{vao}\hypertarget{classcft_1_1Palette_a8cca4a7b356941465e8ab8fb38af5b81}{}\label{classcft_1_1Palette_a8cca4a7b356941465e8ab8fb38af5b81}
+
+\begin{DoxyCompactList}\small\item\em Vertices of the Rectangle and the corresponding color. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+{\bf }\par
+\begin{DoxyCompactItemize}
+\item 
+glm\+::mat4 \hyperlink{classcft_1_1Palette_a36b93828ab0f3cc6de2b472055d30852}{projection\+\_\+matrix}\hypertarget{classcft_1_1Palette_a36b93828ab0f3cc6de2b472055d30852}{}\label{classcft_1_1Palette_a36b93828ab0f3cc6de2b472055d30852}
+
+\begin{DoxyCompactList}\small\item\em Matrices and reference to shader for passing them to the shaders. \end{DoxyCompactList}\item 
+G\+Luint \hyperlink{classcft_1_1Palette_ac9e04f2c291ab32581a11a34b9d33d1a}{u\+Model\+View\+Matrix}\hypertarget{classcft_1_1Palette_ac9e04f2c291ab32581a11a34b9d33d1a}{}\label{classcft_1_1Palette_ac9e04f2c291ab32581a11a34b9d33d1a}
+
+\begin{DoxyCompactList}\small\item\em Matrices and reference to shader for passing them to the shaders. \end{DoxyCompactList}\item 
+G\+Luint \hyperlink{classcft_1_1Palette_a0ae16c4a19279907de42709e31c08c9b}{shader}\hypertarget{classcft_1_1Palette_a0ae16c4a19279907de42709e31c08c9b}{}\label{classcft_1_1Palette_a0ae16c4a19279907de42709e31c08c9b}
+
+\begin{DoxyCompactList}\small\item\em Matrices and reference to shader for passing them to the shaders. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+
+\subsection{Detailed Description}
+Class that displays a Rectangle Color-\/\+Palette to choose from. 
+
+This class renders a rectangle on screen. Clicking on that rectangle returns a color value depending on the position of the Click 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{cft\+::\+Palette@{cft\+::\+Palette}!Palette@{Palette}}
+\index{Palette@{Palette}!cft\+::\+Palette@{cft\+::\+Palette}}
+\subsubsection[{\texorpdfstring{Palette(\+G\+Luint shader\+Program)}{Palette(GLuint shaderProgram)}}]{\setlength{\rightskip}{0pt plus 5cm}cft\+::\+Palette\+::\+Palette (
+\begin{DoxyParamCaption}
+\item[{G\+Luint}]{shader\+Program}
+\end{DoxyParamCaption}
+)}\hypertarget{classcft_1_1Palette_a065411dc110b5ee0f82348fef6170b2d}{}\label{classcft_1_1Palette_a065411dc110b5ee0f82348fef6170b2d}
+
+
+Overloaded constructor of the object. 
+
+This initilizes the vertex buffers, vector, and Matrices 
+\begin{DoxyParams}{Parameters}
+{\em shader\+Program} & a handle to shader to save a copy for the model \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{cft\+::\+Palette@{cft\+::\+Palette}!Pick\+Color@{Pick\+Color}}
+\index{Pick\+Color@{Pick\+Color}!cft\+::\+Palette@{cft\+::\+Palette}}
+\subsubsection[{\texorpdfstring{Pick\+Color(double x, double y, glm\+::vec4 $\ast$col)}{PickColor(double x, double y, glm::vec4 *col)}}]{\setlength{\rightskip}{0pt plus 5cm}bool cft\+::\+Palette\+::\+Pick\+Color (
+\begin{DoxyParamCaption}
+\item[{double}]{x, }
+\item[{double}]{y, }
+\item[{glm\+::vec4 $\ast$}]{col}
+\end{DoxyParamCaption}
+)}\hypertarget{classcft_1_1Palette_a0678d1dec043a41ca06e16bf71172b62}{}\label{classcft_1_1Palette_a0678d1dec043a41ca06e16bf71172b62}
+
+
+Binds the vertex buffers and Draws the \hyperlink{classcft_1_1Model}{Model}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Mouse X when it was pressed \\
+\hline
+{\em y} & Mouse Y when it was pressed \\
+\hline
+{\em col} & It sets the color based on the position of the click \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Checks whether the mouse click was inside the rectangle and returns true 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{palette_8hpp}{palette.\+hpp}\item 
+palette.\+cpp\end{DoxyCompactItemize}

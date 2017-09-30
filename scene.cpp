@@ -72,7 +72,7 @@ namespace cft
   		shader_state = glGetUniformLocation( shaderProgram, "CCSToNDCS");
   		cshader_state = 0;
 
-  		total_points = 32;
+  		total_points = 33;
   		line_points = 32;
   		point = new glm::vec4[total_points];
   		point_color = new glm::vec4[total_points];
@@ -141,7 +141,6 @@ namespace cft
 		point[29] = glm::vec4(Eye.x,Eye.y,Eye.z,1.0f);
 		point[30] = glm::vec4(L,B,-N,1.0f);
 		point[31] = glm::vec4(Eye.x,Eye.y,Eye.z,1.0f);
-		// point[32] = glm::vec4(Eye.x,Eye.y,Eye.z,1.0f);
 		glm::mat4 transform_matrix = glm::inverse(WCSToVCS());
 
 		for (int i=0; i<24; i++)
@@ -154,18 +153,17 @@ namespace cft
 		{
 			if(i%2==0)
 				point[i] = transform_matrix*point[i];
-			point_color[i] = glm::vec4(1.0f,1.0f,0.0f,1.0f);
+			point_color[i] = glm::vec4(1.0f,0.0f,1.0f,1.0f);
 		}
-
+		point[32] = glm::vec4(Eye.x,Eye.y,Eye.z,1.0f);
+		point_color[32] = glm::vec4(1.0f,1.0f,1.0f,1.0f);
 		glGenVertexArrays (1, &vao);
   		glBindVertexArray (vao);
 		glGenBuffers (1, &vbo);
   		glBindBuffer (GL_ARRAY_BUFFER, vbo);
-  		glBufferData (GL_ARRAY_BUFFER, 2*line_points*sizeof(glm::vec4), 0, GL_STATIC_DRAW);
-  		glBufferSubData( GL_ARRAY_BUFFER, 0, line_points*sizeof(glm::vec4), point );
-  		glBufferSubData( GL_ARRAY_BUFFER, line_points*sizeof(glm::vec4), line_points*sizeof(glm::vec4), point_color );
-  		// glBufferSubData( GL_ARRAY_BUFFER, 2*line_points*sizeof(glm::vec4), sizeof(glm::vec4), &point[32]);
-  		// glBufferSubData( GL_ARRAY_BUFFER, (2*line_points+1)*sizeof(glm::vec4), sizeof(glm::vec4), &point_color[32]);
+  		glBufferData (GL_ARRAY_BUFFER, 2*total_points*sizeof(glm::vec4), 0, GL_STATIC_DRAW);
+  		glBufferSubData( GL_ARRAY_BUFFER, 0, total_points*sizeof(glm::vec4), point );
+  		glBufferSubData( GL_ARRAY_BUFFER, total_points*sizeof(glm::vec4), total_points*sizeof(glm::vec4), point_color );
   		GLuint vPosition = glGetAttribLocation( shaderProgram, "vPosition" );
 		glEnableVertexAttribArray( vPosition );
 		glVertexAttribPointer( vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0) );
@@ -224,11 +222,15 @@ namespace cft
 		}
 		else if (key_z)
 		{
-			translate.z += delta_trans;
+			zoomv += delta_trans;
+			if (zoomv > 2.0f)
+				zoomv = 2.0f;
 		}
 		else if (key_x)
 		{
-			translate.z -= delta_trans;
+			zoomv -= delta_trans;
+			if (zoomv < 0.0f)
+				zoomv = 0.0f;
 		}
 		else if (key_up)
 		{
@@ -270,16 +272,17 @@ namespace cft
   		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBindVertexArray(vao);
 		glPointSize(4.0);
-		glm::mat4 ortho_matrix = glm::ortho(cft::left, cft::right, cft::top, cft::bottom, cft::near, cft::far);
+		glm::mat4 ortho_matrix = glm::ortho(cft::left + zoomv, cft::right - zoomv, cft::top + zoomv, cft::bottom - zoomv, cft::near, cft::far);
 		glm::mat4 view_matrix = ortho_matrix*model_scene_matrix;
 		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(view_matrix));
 		glUniform1i(shader_state, cshader_state);
 		glDrawArrays(GL_LINES, 0, line_points);
+		glDrawArrays(GL_POINTS, line_points, 1);
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		for (int i = 0; i < 3; ++i)
 		{
-			models[i]->Render(model_scene_matrix);
+			models[i]->Render(view_matrix);
 		}
 		xrot = 0.0f;
 		yrot = 0.0f;

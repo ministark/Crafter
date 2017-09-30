@@ -148,8 +148,7 @@ namespace cft
 	    rotation_matrix = rotation_matrix1*rotation_matrix;
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f),translate);
 		transform = glm::translate(glm::mat4(1.0f),translate);
-
-  		modelview_matrix = projection_matrix*scene_matrix*transform*rotation_matrix*transform_rotation*glm::scale(glm::mat4(1.0f), scaling);
+		modelview_matrix = scene_matrix*transform*rotation_matrix*transform_rotation*glm::scale(glm::mat4(1.0f), scaling);
   		glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
   		glDrawArrays(GL_TRIANGLES, 0, total_vertices);
   		glBindVertexArray(0);
