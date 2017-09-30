@@ -8,8 +8,9 @@ var searchData=
   ['color',['color',['../classcft_1_1Crafter.html#ac05469c2f55a2988e145225a2d982292',1,'cft::Crafter']]],
   ['colors',['colors',['../classcft_1_1Model.html#acebb2d746a7f386c145c4c63c636cc8a',1,'cft::Model::colors()'],['../classcft_1_1Palette.html#ac7d6e318cfc1797de00fa8e1a6f53951',1,'cft::Palette::colors()']]],
   ['config_2ehpp',['config.hpp',['../config_8hpp.html',1,'']]],
-  ['crafter',['Crafter',['../classcft_1_1Crafter.html#a57796fe2de2fe073c8a7ef14e2a57d21',1,'cft::Crafter']]],
   ['crafter',['Crafter',['../classcft_1_1Crafter.html',1,'cft']]],
+  ['crafter',['Crafter',['../classcft_1_1Crafter.html#a57796fe2de2fe073c8a7ef14e2a57d21',1,'cft::Crafter']]],
   ['crafter_2ehpp',['crafter.hpp',['../crafter_8hpp.html',1,'']]],
+  ['cshader_5fstate',['cshader_state',['../classcft_1_1Scene.html#a4eedebe81bff5c376ec42b39d34c4f6b',1,'cft::Scene']]],
   ['cursorhandler',['CursorHandler',['../classcft_1_1Crafter.html#a95820140f31bbea4f9aa2d70bf2bc9a1',1,'cft::Crafter::CursorHandler()'],['../classcft_1_1Scene.html#ab95660d6aa71906634bb7ee61c6c00d1',1,'cft::Scene::CursorHandler()']]]
 ];

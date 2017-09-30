@@ -1,0 +1,7 @@
+<map id="config.hpp" name="config.hpp">
+<area shape="rect" id="node2" href="$crafter_8hpp.html" title="Class declaration for the program managing the state and models. " alt="" coords="54,155,138,181"/>
+<area shape="rect" id="node3" href="$Main_8cpp.html" title="Main funciton which creates and passes the window to the Crafter. " alt="" coords="5,229,80,256"/>
+<area shape="rect" id="node4" href="$model_8hpp.html" title="Class declaration for the Model. " alt="" coords="191,80,273,107"/>
+<area shape="rect" id="node5" href="$scene_8hpp_source.html" title="scene.hpp" alt="" coords="229,155,312,181"/>
+<area shape="rect" id="node6" href="$palette_8hpp.html" title="Class declaration for the Color Palette. " alt="" coords="79,80,166,107"/>
+</map>

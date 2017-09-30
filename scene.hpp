@@ -18,7 +18,7 @@
 namespace cft
 {
 	/**
-  	*  	@brief Class that is basically the main program. 
+  	*  	@brief Class that handles the simulation of Modeling-Viewing Pipeline
   	*
   	* 	This class has various input handler and various functions changing state variables accordingly
   	*	for changing pipeline stages. State variable defines the behaviour of the rendering of the models. 
@@ -41,10 +41,11 @@ namespace cft
 		/** @brief Pointer pointing to modeling matrix in the shader */
 		GLuint uModelViewMatrix;
 
+		//@{
+		/** @brief Variables to pass on the simulation state to the shader */
 		GLuint shader_state;
-
 		int cshader_state;
-
+		//@}
 
 
 		//@{
@@ -53,20 +54,26 @@ namespace cft
 		glm::vec3 LookAt;
 		glm::vec3 LookUp;
 		double L, R, B, T, N, F;
-		//}@
+		//@}
 
+		//@{
+		/** @brief Variables for translating and rotating the scene */
 		glm::vec3 translate;
 		glm::mat4 rotation_matrix;
 		GLfloat xrot,yrot,zrot;
+		float zoomv;
+		//@}
 
+		/** @brief Matrix to simulate the stage of Modeling-Viewing Pipeline*/
 		glm::mat4 scene_matrix;
 
 
-		glm::vec4 *point,*point_color,eye_point,eye_color;
+		//@{
+		/** @brief Variables for drawing the frustum and the eye*/
+		glm::vec4 *point,*point_color;
 		int line_points;
 		int total_points;
-
-		float zoomv = 0;
+		//@}
 
 		/** @brief All the models*/
 		std::vector<Model*> models;

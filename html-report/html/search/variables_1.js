@@ -5,5 +5,6 @@ var searchData=
   ['col_5fg',['col_g',['../classcft_1_1Crafter.html#af2635f8b801c0fc7b51445da759c4523',1,'cft::Crafter']]],
   ['col_5fr',['col_r',['../classcft_1_1Crafter.html#a6d2febc7e21fc2c197a4d7d0b3558d96',1,'cft::Crafter']]],
   ['color',['color',['../classcft_1_1Crafter.html#ac05469c2f55a2988e145225a2d982292',1,'cft::Crafter']]],
-  ['colors',['colors',['../classcft_1_1Model.html#acebb2d746a7f386c145c4c63c636cc8a',1,'cft::Model::colors()'],['../classcft_1_1Palette.html#ac7d6e318cfc1797de00fa8e1a6f53951',1,'cft::Palette::colors()']]]
+  ['colors',['colors',['../classcft_1_1Model.html#acebb2d746a7f386c145c4c63c636cc8a',1,'cft::Model::colors()'],['../classcft_1_1Palette.html#ac7d6e318cfc1797de00fa8e1a6f53951',1,'cft::Palette::colors()']]],
+  ['cshader_5fstate',['cshader_state',['../classcft_1_1Scene.html#a4eedebe81bff5c376ec42b39d34c4f6b',1,'cft::Scene']]]
 ];

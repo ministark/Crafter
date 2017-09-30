@@ -6,6 +6,7 @@ var searchData=
   ['scene',['Scene',['../classcft_1_1Scene.html#a9805c35029c9ce04b4a962f17dfd20d1',1,'cft::Scene']]],
   ['scene_5fmatrix',['scene_matrix',['../classcft_1_1Scene.html#a1e1bc4dc1046eb7d799bf24e5ea13e93',1,'cft::Scene']]],
   ['shader',['shader',['../classcft_1_1Model.html#abf5e28a2f2ae754aa00f5fc92c983dc5',1,'cft::Model::shader()'],['../classcft_1_1Palette.html#a0ae16c4a19279907de42709e31c08c9b',1,'cft::Palette::shader()']]],
+  ['shader_5fstate',['shader_state',['../classcft_1_1Scene.html#a2004a0d53bcd06f76bb4e3cc86290b06',1,'cft::Scene']]],
   ['shaderprogram',['shaderProgram',['../classcft_1_1Crafter.html#a9c0adedc2bd7aeb3a1415eb47ea11e04',1,'cft::Crafter::shaderProgram()'],['../classcft_1_1Scene.html#a33b8e992a20a9a5ed8efc9c9f9959591',1,'cft::Scene::shaderProgram()']]],
   ['state',['state',['../classcft_1_1Crafter.html#af938d739229975ec35d64ee76e683bc4',1,'cft::Crafter']]]
 ];

@@ -72,6 +72,12 @@ namespace cft
   		shader_state = glGetUniformLocation( shaderProgram, "CCSToNDCS");
   		cshader_state = 0;
 
+  		translate = glm::vec3(0.0f,0.0f,0.0f);
+  		rotation_matrix = glm::mat4(1.0f);
+  		zoomv = 0.0f;
+
+
+
   		total_points = 33;
   		line_points = 32;
   		point = new glm::vec4[total_points];

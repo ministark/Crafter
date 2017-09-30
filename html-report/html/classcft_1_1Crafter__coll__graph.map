@@ -1,0 +1,4 @@
+<map id="cft::Crafter" name="cft::Crafter">
+<area shape="rect" id="node2" href="$classcft_1_1Palette.html" title="Class that displays a Rectangle Color&#45;Palette to choose from. " alt="" coords="5,5,92,32"/>
+<area shape="rect" id="node3" href="$classcft_1_1Model.html" title="Class that is abstraction of a 3D&#45;Model. " alt="" coords="117,5,197,32"/>
+</map>
